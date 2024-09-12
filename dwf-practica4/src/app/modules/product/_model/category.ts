@@ -1,10 +1,10 @@
 export class Category {
-    id: number;
-    category: string;
-    tag: string;
-    status: number;
+    id: number = 0;
+    category: string = "";
+    tag: string = "";
+    status: number = 0;
 
-    constructor(id:number, category:string, tag:string, status:number) {
+    constructor(id: number, category: string, tag: string, status: number) {
         this.id = id;
         this.category = category;
         this.tag = tag;
