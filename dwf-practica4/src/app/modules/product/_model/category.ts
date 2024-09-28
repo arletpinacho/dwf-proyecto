@@ -1,5 +1,5 @@
 export class Category {
-    id: number = 0;
+    category_id: number = 0;
     category: string = "";
     tag: string = "";
     status: number = 0;
