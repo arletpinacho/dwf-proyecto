@@ -11,9 +11,9 @@ export class CategoryService {
   getCategories(): Category[] {
     let categories: Category[] = [];
 
-    let category:Category = new Category(1, "Mujeres", "moda-muejeres-03", 1); categories.push(category);
-    category = new Category(2, "Hombres", "moda-hombres-01", 0); categories.push(category);
-    category = new Category(3, "Accesorios", "accesorios-02", 1); categories.push(category);
+    categories.push(new Category(1, "Mujeres", "moda-muejeres-03", 1));
+    categories.push(new Category(2, "Hombres", "moda-hombres-01", 0));
+    categories.push(new Category(3, "Accesorios", "accesorios-02", 1));
 
     return categories;
   }
