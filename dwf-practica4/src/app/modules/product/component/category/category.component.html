@@ -3,16 +3,19 @@
     <!-- Tabla categorías -->
     <div class="card m-4"> 
       <!-- header tabla -->
-      <div class="card-header">
-        <h3 class="m-2">Categorías</h3>
-      </div>
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h3 class="m-0">Categorías</h3>
+        <button type="button" class="btn btn-dark" (click)="showModalForm()">
+            Nueva categoría
+        </button>
+    </div>
       <!-- tabla -->
       <div class="card-body">
         <table class="table table-striped">
           <!-- encabezados de la tabla -->
           <thead>
             <tr class="table-dark">
-              <th scope="col" >Id</th>
+              <th scope="col" >No.</th>
               <th scope="col">Categoría</th>
               <th scope="col">Tag</th>
               <th scope="col">Estatus</th>
@@ -20,14 +23,19 @@
           </thead>
           <!-- contenido de la tabla -->
           <tbody>
-            
             @for (category of categories; track category.id; let i = $index) {
-                <tr>
-                    <th>{{ category.id }}</th>
-                    <td>{{ category.category }}</td>
-                    <td>{{ category.tag }}</td>
-                    <td>{{ category.status }}</td>
-                </tr>
+              <tr>
+                <th>{{ i+1 }}</th>
+                <td>{{ category.category }}</td>
+                <td>{{ category.tag }}</td>
+                <td>
+                  @if (category.status == 1) {
+                    {{ "Disponible" }}
+                  }@else {
+                    {{ "Agotado" }}
+                  }
+                </td>
+              </tr>
             }
           </tbody>
         </table>
@@ -37,4 +45,43 @@
         <small>Tienda en línea</small>
       </div>
     </div>
+</div>
+
+<!-- Modal para agregar categorías -->
+<div class="modal fade" id="addCategoryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addCategoryModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <!-- header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="addCategoryLabel">Agregar categoría</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!-- body-->
+      <div class="modal-body">
+        <!-- form -->
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="inputCategory" class="form-label">Categoría<span class="input-required">*</span></label>
+            <input type="text" class="form-control" id="inputCategory" formControlName="category" placeholder="Nombre de la categoría"
+            [ngClass]="{'is-invalid': form.controls['category'].errors && submitted}">
+            @if (form.controls['category'].errors && submitted) {
+              <small class="input-error-message">Favor de ingresar un nombre de categoría válido</small>
+            }
+          </div>
+          <div class="mb-3">
+            <label for="inputTag" class="form-label">Tag<span class="input-required">*</span></label>
+            <input type="text" class="form-control" id="inputTag" formControlName="tag" placeholder="Acrónimo para la categoría"
+            [ngClass]="{'is-invalid': form.controls['tag'].errors && submitted}">
+            
+            @if (form.controls['tag'].errors && submitted) {
+              <small class="input-error-message">Favor de ingresar un código de categoría válido</small>
+            }
+          </div>
+          <div class="form-button">
+          <button type="submit" class="btn btn-primary bt-save">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
+</div>
