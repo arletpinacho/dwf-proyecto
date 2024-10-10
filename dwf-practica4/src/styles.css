@@ -1,5 +1,18 @@
 @charset "UTF-8";
-/* Ajustes del tamaño del contenido de la página*/
+  /* Ajustes del tamaño del contenido de la página */
+  .body-content{
+    max-width: 1280px;
+    margin: auto;
+    margin-top: 16px;
+  }
+
+  /* navbar */
+  .navbar-content{
+    max-width: 1280px;
+    margin: auto;
+  }
+
+  /* save button (form)*/
   .form-button{
     margin: 24px;
     text-align: right;
@@ -7,6 +20,11 @@
   .bt-save{
     width: 200px;
   }
+  .btn-new{
+    float: right;
+  }
+
+  /* input */
   .input-required{
     color: #da5c58;
   }
@@ -15,11 +33,16 @@
     color: #da5c58;
     margin: 4px;
   }
-  .body-content{
-    max-width: 1280px;
-    margin: auto;
-    margin-top: 16px;
+
+  /* images  */
+  .img-loading{
+    width: 100px;
+    height: 100px;
   }
+  .table-empty{
+    padding: 24px;
+  }
+
   
 /*!
  * Bootswatch v5.3.3 (https://bootswatch.com)

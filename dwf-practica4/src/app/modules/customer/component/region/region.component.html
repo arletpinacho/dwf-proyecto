@@ -1,0 +1,124 @@
+<div class="body-content">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col">
+            <h4>Regiones</h4>
+          </div>
+          <div class="col">
+          <button type="button" class="btn btn-primary btn-new" (click)="showModalForm()">
+            Agregar región
+          </button>
+          </div>
+        </div>
+      
+      </div>
+      <div class="card-body">     
+
+        <!-- loading  -->
+        
+        @if(loading) {
+          <div class="text-center" >
+            <img src="assets/loading.gif" class="img-loading" alt="">
+          </div>
+        }
+        
+        @if(!loading && regions.length == 0){
+          <div class="text-center table-empty">
+              <h4>No cuentas con regiones registradas</h4>
+          </div>
+        }@else {
+          <table class="table table-striped">
+            <thead>
+              <tr class="table-primary">
+                <th scope="col">No.</th>
+                <th scope="col">Región</th>
+                <th scope="col">Tag</th>
+                <th scope="col">Estatus</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for(region of regions; track region.region_id; let i = $index) {
+                  <tr>
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ region.region }}</td>
+                      <td>{{ region.tag }}</td>
+                      <td>
+                          @if (region.status == 1) {
+                              {{ "Activo" }}
+                          }@else {
+                              {{ "Inactivo" }}
+                          }
+                      </td>
+                  </tr>
+              }
+              
+            </tbody>
+          </table>
+        }
+           
+        
+      </div>
+      <div class="card-footer text-end">
+        <small>{{ current_date | date: 'dd/MMM/yyyy, h:mm a' }}</small>
+      </div>
+    </div>
+  </div>
+
+<!-- modal  -->
+
+<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="modalForm">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      
+      <!-- header  -->
+
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar región</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- body  -->
+      
+      <div class="modal-body">
+        
+        <!-- form  -->
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          
+          <!-- region  -->
+
+          <div class="mb-3">
+            <label for="region" class="form-label">Región <span class="input-required">*</span></label>
+            <input type="text" class="form-control" formControlName="region" placeholder="Nombre de la región"
+              [ngClass]="{'is-invalid': form.controls['region'].errors && submitted}">
+
+            @if (form.controls['region'].errors && submitted) {
+                <small class="input-error-message">Favor de ingresar un nombre de región válido</small>
+            }
+           
+          </div>
+        
+          <!-- tag  -->
+
+          <div class="mb-3">
+            <label for="tag" class="form-label">Código <span class="input-required">*</span></label>
+            <input type="text" class="form-control" formControlName="tag" placeholder="Código de la región"
+              [ngClass]="{'is-invalid': form.controls['tag'].errors && submitted}">
+            
+            @if (form.controls['tag'].errors && submitted) {
+              <small class="input-error-message">Favor de ingresar un código de región válido</small>
+            }
+          </div>
+        
+          <!-- button  -->
+
+          <div class="form-button">
+            <button type="submit" class="btn btn-primary btn-save">Guardar</button>
+          </div>
+        
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

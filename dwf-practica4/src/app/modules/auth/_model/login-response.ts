@@ -1,4 +1,4 @@
-export class Login{
+export class LoginResponse{    
     token: string = '';
     rol: string = '';
     user: string = '';
