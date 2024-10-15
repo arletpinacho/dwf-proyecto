@@ -24,6 +24,12 @@
     float: right;
   }
 
+  /* drop down button*/
+  .dropdown-button{
+    border: none;
+    background-color: transparent;
+  }
+
   /* input */
   .input-required{
     color: #da5c58;

@@ -3,7 +3,7 @@ import { NavItem } from './nav-item/nav-item';
 export const navItems: NavItem[] = [
     {
         displayName: 'Categoría',
-         route: '/categoria',         
+         route: '/category',         
     },
     {
         displayName: 'Region',

@@ -6,43 +6,80 @@
       <div class="card-header d-flex justify-content-between align-items-center">
         <h4 class="m-0">Categorías</h4>
         <button type="button" class="btn btn-primary btn-new" (click)="showModalForm()">
-            Nueva categoría
+          <i class="ph ph-plus-circle"></i> Nueva categoría
         </button>
       </div>
       <!-- tabla -->
       <div class="card-body">
-        <table class="table table-striped">
-          <!-- encabezados de la tabla -->
-          <thead>
-            <tr class="table-primary">
-              <th scope="col" >No.</th>
-              <th scope="col">Categoría</th>
-              <th scope="col">Tag</th>
-              <th scope="col">Estatus</th>
-            </tr>
-          </thead>
-          <!-- contenido de la tabla -->
-          <tbody>
-            @for (category of categories; track category.id; let i = $index) {
-              <tr>
-                <th>{{ i+1 }}</th>
-                <td>{{ category.category }}</td>
-                <td>{{ category.tag }}</td>
-                <td>
-                  @if (category.status == 1) {
-                    {{ "Disponible" }}
-                  }@else {
-                    {{ "Agotado" }}
-                  }
-                </td>
+        <!-- loading  -->
+        @if(loading) {
+          <div class="text-center" >
+            <img src="assets/loading.gif" class="img-loading" alt="">
+          </div>
+        }
+        @if(!loading && categories.length == 0) {
+          <div class="text-center table-empty">
+            <h4>No cuentas con categorías registradas</h4>
+          </div>
+        } @else {
+          <table class="table table-striped">
+            <!-- encabezados de la tabla -->
+            <thead>
+              <tr class="table-primary">
+                <th scope="col" >No.</th>
+                <th scope="col">Categoría</th>
+                <th scope="col">Tag</th>
+                <th scope="col">Estatus</th>
+                <th scope="col">Opciones</th>
               </tr>
-            }
-          </tbody>
-        </table>
+            </thead>
+            <!-- contenido de la tabla -->
+            <tbody>
+              @for (category of categories; track category.id; let i = $index) {
+                <tr>
+                  <th>{{ i+1 }}</th>
+                  <td>{{ category.category }}</td>
+                  <td>{{ category.tag }}</td>
+                  <td>
+                    @if (category.status == 1) {
+                      {{ "Disponible" }}
+                    }@else {
+                      {{ "Agotado" }}
+                    }
+                  </td>
+                  <td>
+                    <div class="dropdown">
+                      <!-- dots button  -->
+                      <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
+                      </button>
+                      <!-- options -->
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" (click)="updateCategory(category)">
+                          <i class="ph ph-note-pencil icon-text-ul"></i>Editar
+                        </a>
+                        @if (category.status == 0) {
+                          <a class="dropdown-item enable-item" (click)="activateCategory(category.id)">
+                            <i class="ph ph-check-circle icon-text-ul"></i>Activar
+                          </a>
+                        }
+                        @if (category.status == 1) {
+                          <a class="dropdown-item disable-item" (click)="deleteCategory(category.id)">
+                            <i class="ph ph-x-circle icon-text-ul"></i>Desactivar
+                          </a>
+                        }
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              }
+              </tbody>
+            </table>
+          }
       </div>
       <!-- Pie de página de la tabla -->
-      <div class="card-footer">
-        <small>Tienda en línea</small>
+      <div class="card-footer text-end">
+        <small>{{ current_date | date: 'dd/MMM/yyyy, h:mm a' }}</small>
       </div>
     </div>
 </div>
