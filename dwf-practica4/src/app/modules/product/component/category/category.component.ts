@@ -43,26 +43,38 @@ export class CategoryComponent {
 
   // activates the category
   activateCategory(id: number) {
-    this.categoryService.activateCategory(id).subscribe({
-      next: (v) => {
-        this.swal.successMessage(v.message);
-        this.getCategories();
-      }, error: (e) => {
-        console.log(e);
-        this.swal.errorMessage(e.error.message);
+    this.swal.confirmMessage.fire({
+      title: "Por favor confirma que quieres cambiar el estatus a DISPONIBLE",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.categoryService.activateCategory(id).subscribe({
+          next: (v) => {
+            this.swal.successMessage("El estatus se ha actualizado exitosamente.");
+            this.getCategories();
+          }, error: (e) => {
+            console.log(e);
+            this.swal.errorMessage(e.error.message);
+          }
+        });
       }
     });
   }
 
-  // deletes the category
+  // disables the category
   deleteCategory(id: number) {
-    this.categoryService.deleteCategory(id).subscribe({
-      next: (v) => {
-        this.swal.successMessage(v.message);
-        this.getCategories();
-      }, error: (e) => {
-        console.log(e);
-        this.swal.errorMessage(e.error.message);
+    this.swal.confirmMessage.fire({
+      title: "Por favor confirma que quieres cambiar el estatus a AGOTADO",
+    }).then((result) => {
+      if (result.isConfirmed) {
+      this.categoryService.deleteCategory(id).subscribe({
+        next: (v) => {
+          this.swal.successMessage("El estatus se ha actualizado exitosamente.");
+          this.getCategories();
+        }, error: (e) => {
+          console.log(e);
+          this.swal.errorMessage(e.error.message);
+        }
+      });
       }
     });
   }

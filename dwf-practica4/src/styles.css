@@ -30,6 +30,28 @@
     background-color: transparent;
   }
 
+  /* swal messages  */
+  .swal-title{
+    font-size: 24px;
+  }
+
+
+  .swal-icon{
+    font-size: 12px;
+  }
+
+
+  .swal-cancel-button{
+    width: 120px;
+    margin: 12px;
+  }
+
+
+  .swal-confirm-button{
+    width: 120px;
+    margin: 12px;
+  }
+
   /* input */
   .input-required{
     color: #da5c58;
