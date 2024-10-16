@@ -28,7 +28,7 @@ export class CategoryService {
     return this.http.delete(api_dwb_uri + this.source + "/" + category_id);
   }
 
-  getCategory(category_id: any): Observable<any>{
+  getCategory(category_id: number): Observable<any>{
     return this.http.get(api_dwb_uri + this.source + "/" + category_id);
   }
 

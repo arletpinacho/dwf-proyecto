@@ -121,7 +121,7 @@ export class CategoryComponent {
         this.resetVariables();
       }, error: (e) => {
         console.log(e);
-        this.swal.errorMessage(e.error.message);
+        this.swal.errorMessage(e.message); ////REVISAR
       }
     });
   }
@@ -130,8 +130,10 @@ export class CategoryComponent {
   updateCategory(category: Category) {
     this.resetVariables();
     this.showModalForm();
+    this.category_id = category.category_id;
 
-    this.category_id = category.id;
+    this.swal.successMessage("categoría=" + category.category_id);
+
     this.form.controls['category'].setValue(category.category);
     this.form.controls['tag'].setValue(category.tag);
   }
