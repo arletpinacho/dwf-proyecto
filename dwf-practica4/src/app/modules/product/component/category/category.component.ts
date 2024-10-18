@@ -44,7 +44,7 @@ export class CategoryComponent {
   // activates the category
   activateCategory(id: number) {
     this.swal.confirmMessage.fire({
-      title: "Por favor confirma que quieres cambiar el estatus a DISPONIBLE",
+      title: "¿Quieres cambiar el estatus a disponible?",
     }).then((result) => {
       if (result.isConfirmed) {
         this.categoryService.activateCategory(id).subscribe({
@@ -63,7 +63,7 @@ export class CategoryComponent {
   // disables the category
   deleteCategory(id: number) {
     this.swal.confirmMessage.fire({
-      title: "Por favor confirma que quieres cambiar el estatus a AGOTADO",
+      title: "¿Quieres cambiar el estatus a agotado?",
     }).then((result) => {
       if (result.isConfirmed) {
       this.categoryService.deleteCategory(id).subscribe({

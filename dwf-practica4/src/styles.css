@@ -12,44 +12,24 @@
     margin: auto;
   }
 
+  /* buttons */
+  .btn i{
+    margin-right: 10px;
+  }
+  .btn-noneb {
+    border: none !important;
+  }
+  
   /* save button (form)*/
   .form-button{
     margin: 24px;
     text-align: right;
   }
   .bt-save{
-    width: 200px;
+    width: 150px;
   }
   .btn-new{
     float: right;
-  }
-
-  /* drop down button*/
-  .dropdown-button{
-    border: none;
-    background-color: transparent;
-  }
-
-  /* swal messages  */
-  .swal-title{
-    font-size: 24px;
-  }
-
-
-  .swal-icon{
-    font-size: 12px;
-  }
-
-
-  .swal-cancel-button{
-    width: 120px;
-    margin: 12px;
-  }
-
-
-  .swal-confirm-button{
-    width: 120px;
-    margin: 12px;
   }
 
   /* input */
@@ -69,6 +49,45 @@
   }
   .table-empty{
     padding: 24px;
+  }
+
+  /*dropdowm*/
+  /* drop down button*/
+  .dropdown-button{
+    border: none;
+    background-color: transparent;
+  }
+  .dropdown-item{
+    color: black !important;
+    cursor: pointer;
+  }
+  /* edit option*/
+  .edit-item:hover{
+    background-color: #43ade9 !important;
+  }
+  /* enable option*/
+  .enable-item:hover{
+    background-color: #69da58 !important;
+  }
+  /* disable option*/
+  .disable-item:hover{
+    background-color: #da5c58 !important;
+  }
+
+  /* swal messages  */
+  .swal-title{
+    font-size: 24px;
+  }
+  .swal-icon{
+    font-size: 12px;
+  }
+  .swal-cancel-button{
+    width: 120px;
+    margin: 12px;
+  }
+  .swal-confirm-button{
+    width: 120px;
+    margin: 12px;
   }
 
   /*!
