@@ -1,20 +1,20 @@
 <!-- Contenido -->
 <div class="body-content">
     <!-- Tabla categorías -->
-    <div class="card m-4"> 
+    <div class="card"> 
       <!-- header tabla -->
       <div class="card-header d-flex justify-content-between align-items-center">
-        <h3 class="m-0">Categorías</h3>
-        <button type="button" class="btn btn-dark" (click)="showModalForm()">
+        <h4 class="m-0">Categorías</h4>
+        <button type="button" class="btn btn-primary btn-new" (click)="showModalForm()">
             Nueva categoría
         </button>
-    </div>
+      </div>
       <!-- tabla -->
       <div class="card-body">
         <table class="table table-striped">
           <!-- encabezados de la tabla -->
           <thead>
-            <tr class="table-dark">
+            <tr class="table-primary">
               <th scope="col" >No.</th>
               <th scope="col">Categoría</th>
               <th scope="col">Tag</th>
@@ -60,6 +60,7 @@
       <div class="modal-body">
         <!-- form -->
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <!-- input for the new category name -->
           <div class="mb-3">
             <label for="inputCategory" class="form-label">Categoría<span class="input-required">*</span></label>
             <input type="text" class="form-control" id="inputCategory" formControlName="category" placeholder="Nombre de la categoría"
@@ -68,6 +69,7 @@
               <small class="input-error-message">Favor de ingresar un nombre de categoría válido</small>
             }
           </div>
+          <!-- input for the new tag -->
           <div class="mb-3">
             <label for="inputTag" class="form-label">Tag<span class="input-required">*</span></label>
             <input type="text" class="form-control" id="inputTag" formControlName="tag" placeholder="Acrónimo para la categoría"
