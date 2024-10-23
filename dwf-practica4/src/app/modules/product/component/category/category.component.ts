@@ -23,6 +23,7 @@ export class CategoryComponent {
   loading = false; // loading request
   current_date = new Date(); // hora y fecha actual
   category_id = -1; // current category id
+  update = 0;
 
   // form New Categories
   form = this.formBuilder.group({
@@ -141,6 +142,7 @@ export class CategoryComponent {
   // Opens the modal to update the category
   updateCategory(category: Category) {
     this.resetVariables();
+    this.update = 1;
     this.showModalForm();
     this.category_id = category.category_id;
     this.form.controls['category'].setValue(category.category);
@@ -156,6 +158,12 @@ export class CategoryComponent {
   // shows the modal
   showModalForm() {
     this.resetVariables();
+    if (this.update == 1) {
+      $("#addCategoryModal").find('.modal-title').text('Editar categoría');
+    } else {
+      $("#addCategoryModal").find('.modal-title').text('Agregar categoría');
+    }
+    this.update = 0;
     $("#addCategoryModal").modal("show");
   }
 
