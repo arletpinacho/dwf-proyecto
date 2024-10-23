@@ -58,7 +58,7 @@
     background-color: transparent;
   }
   .dropdown-item{
-    color: black !important;
+    /* color: black !important; */
     cursor: pointer;
   }
   /* edit option*/
