@@ -67,7 +67,6 @@ export class RegionComponent {
     this.loading = true;
     this.regionService.getRegions().subscribe({
       next: (v) => {
-        // console.log(v);
         this.regions = v;
         this.loading = false;
       },
@@ -76,7 +75,6 @@ export class RegionComponent {
         this.loading = false;
       }
     });
-
   }
 
   // modal 

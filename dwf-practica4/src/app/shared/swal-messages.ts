@@ -28,4 +28,18 @@ export class SwalMessages{
             timer: 2000
         });
     }
+
+    // shows confirmation message
+    confirmMessage = Swal.mixin({
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonText: `Cancelar`,
+        confirmButtonText: "Confirmar",
+        customClass: {
+            title: 'swal-title',
+            icon: 'swal-icon',
+            confirmButton: 'btn btn-noneb btn-primary swal-confirm-button',
+            cancelButton: 'btn  btn-noneb btn-danger swal-cancel-button',
+        },
+    });
 }

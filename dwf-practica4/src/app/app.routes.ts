@@ -15,7 +15,7 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     { 
-        path: "categoria", 
+        path: "category", 
         component: CategoryComponent 
     },
     {
