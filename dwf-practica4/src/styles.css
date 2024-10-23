@@ -58,7 +58,7 @@
     background-color: transparent;
   }
   .dropdown-item{
-    /* color: black !important; */
+    color: var(--bs-body-color) !important;
     cursor: pointer;
   }
   /* edit option*/
