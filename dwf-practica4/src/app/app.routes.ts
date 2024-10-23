@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 
+import { ProductImageComponent } from './modules/product/component/product-image/product-image.component';
 import { CategoryComponent } from './modules/product/component/category/category.component';
 import { RegionComponent } from './modules/customer/component/region/region.component';
 //import { MainComponent } from './modules/layout/component/main/main';
@@ -17,6 +18,10 @@ export const routes: Routes = [
     { 
         path: "category", 
         component: CategoryComponent 
+    },
+    {
+        path: 'product-image',
+        component: ProductImageComponent
     },
     {
         path: 'region',
