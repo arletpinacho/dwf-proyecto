@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Product } from '../../_model/product';
+import { ProductService } from '../../_service/product.service';
 import { ProductImage } from '../../_model/product-image';
 import { ProductImageService } from '../../_service/product-image.service';
 import { SharedModule } from '../../../../shared/shared-module';
@@ -26,20 +28,21 @@ export class ProductImageComponent {
   current_date = new Date(); 
   product_id = -1; // current product id
 
-  // form Edit Product Image
+  // Product form
   form = this.formBuilder.group({
-    gtin: ["", [Validators.required]],
     product: ["", [Validators.required]],
-    price: ["", [Validators.required]],
-    stock: ["", [Validators.required]],
-    category_id: ["", [Validators.required]],
+    gtin: ["", [Validators.required, Validators.pattern('^[0-9]{13}$')]],
     description: ["", [Validators.required]],
+    price: [0, [Validators.required, Validators.pattern('^[0-9]*$')]],
+    stock: [0, [Validators.required, Validators.pattern('^[0-9]*$')]],
+    category_id: [0, [Validators.required]],
   });
 
   swal: SwalMessages = new SwalMessages(); // swal messages
   constructor (
     private formBuilder: FormBuilder,
     private pimageService: ProductImageService,
+    private productService: ProductService,
     private router: Router 
   ){}
 
@@ -78,7 +81,7 @@ export class ProductImageComponent {
 
   // Updates the product
   onSubmit() {
-    this.poductService.updateProduct(this.form.value, this.product_id).subscribe( {
+    this.productService.updateProduct(this.form.value, this.product_id).subscribe( {
       next: (v) => {
         this.getProductImages();
         this.hideModalForm();
