@@ -51,12 +51,12 @@ export class ProductComponent {
 
   disableProduct(id: number){
     this.swal.confirmMessage.fire({
-      title: "Favor de confirmar la eliminación",
+      title: "¿Quieres cambiar el estatus a desactivado?",
     }).then((result) => {
       if (result.isConfirmed) {
         this.productService.disableProduct(id).subscribe({
           next: (v) => {
-            this.swal.successMessage(v.message);
+            this.swal.successMessage("El estatus se ha actualizado exitosamente.");
             this.getProducts();
           },
           error: (e) => {
@@ -70,12 +70,12 @@ export class ProductComponent {
 
   enableProduct(id: number){
     this.swal.confirmMessage.fire({
-      title: "Favor de confirmar la activación",
+      title: "¿Quieres cambiar el estatus a activo?",
     }).then((result) => {
       if (result.isConfirmed) {
         this.productService.enableProduct(id).subscribe({
           next: (v) => {
-            this.swal.successMessage(v.message);
+            this.swal.successMessage("El estatus se ha actualizado exitosamente.");
             this.getProducts();
           },
           error: (e) => {

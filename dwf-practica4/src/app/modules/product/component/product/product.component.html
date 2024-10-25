@@ -56,15 +56,24 @@
                             <!-- menu options -->
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                               <a class="dropdown-item" (click)="showProduct(product.gtin)">
-                                <i class="ph ph-eye icon-text-ul"></i>Ver detalles
+                                <span class="icon-text-button margin-right-ver-detalles">
+                                  <i class="ph ph-eye"></i> <!-- Icono de ojo -->
+                              </span>
+                              <span>Ver detalles</span>
                               </a>
                               @if(product.status != 0){
                                 <a class="dropdown-item disable-item" (click)="disableProduct(product.product_id)">
-                                  <i class="ph ph-x-circle icon-text-ul"></i>Desactivar
+                                  <span class="icon-text-button margin-right-activar">
+                                    <i class="ph ph-x-circle icon-text-ul"></i>
+                                  </span>
+                                  <span>Desactivar</span>
                                 </a>
                               }@else {
                                 <a class="dropdown-item enable-item" (click)="enableProduct(product.product_id)">
-                                  <i class="ph ph-check-circle icon-text-ul"></i>Activar
+                                  <span class="icon-text-button margin-right-activar">
+                                    <i class="ph ph-check-circle icon-text-ul"></i>
+                                  </span>
+                                  <span>Activar</span>
                                 </a>
                               }
                             </div>

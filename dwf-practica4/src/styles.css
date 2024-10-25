@@ -6,6 +6,46 @@
     margin-top: 80px;
   }
 
+  /* Botón para editar producto */
+  .modal-header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+  .modal-close-button {
+      border: none; 
+      background: none;
+      cursor: pointer; 
+      margin-left: auto; 
+      font-size: 30px;
+  }
+
+  /* Margen para icónos*/
+  .margin-right-ver-detalles {
+    margin-right: 5px; 
+  }
+
+  .margin-right-activar {
+    margin-right: 3px; 
+  }
+
+  .ph-trash {
+    position: absolute; 
+    top: 10px; 
+    right: 10px; 
+    color: white; 
+    background-color: rgba(0, 0, 0, 0.5); 
+    border-radius: 50%; 
+    padding: 5px;
+    z-index: 10;
+    margin-left: auto; 
+}
+
+  .con-text-button {
+    margin-left: auto;
+  }
+
   /* navbar */
   .navbar-content{
     max-width: 1280px;

@@ -95,6 +95,7 @@ export class ProductImageComponent {
       next: (v) => {
         this.product = v;
         this.loading = false;
+        this.getProductImages(); //Cargamos las imagenes que pueda tener el producto.
       },
       error: (e) => {
         console.error(e.error.message);
@@ -148,15 +149,16 @@ export class ProductImageComponent {
     this.form.controls['description'].setValue(this.product.description);
   }
 
-  uploadProductImage(image: string){
+  uploadProductImage(image: string) {
     let productImage: ProductImage = new ProductImage();
     productImage.product_id = this.product.product_id;
     productImage.image = image;
+    console.log("Uploading Product Image: ", productImage);
     // enviamos la imagen a la API
     this.productImageService.uploadProductImage(productImage).subscribe({
       next: (v) => {
         this.swal.successMessage(v.message);
-        this.getProduct();
+        this.getProductImages(); // Actualizar las imágenes después de la carga
       },
       error: (e) => {
         console.error(e);
@@ -164,6 +166,7 @@ export class ProductImageComponent {
       }
     });
   }
+
 
   // modals 
 
