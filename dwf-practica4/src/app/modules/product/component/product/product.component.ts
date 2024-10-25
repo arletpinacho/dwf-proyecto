@@ -6,6 +6,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { SwalMessages } from '../../../../shared/swal-messages';
 import { CategoryService } from '../../_service/category.service';
 import { ProductService } from '../../_service/product.service';
+import { Router } from '@angular/router';
 
 declare var $: any; // JQuery
 
@@ -41,6 +42,7 @@ export class ProductComponent {
     private categoryService: CategoryService,
     private productService: ProductService,
     private formBuilder: FormBuilder,
+    private router: Router
   ){}
 
   ngOnInit(){
@@ -127,6 +129,10 @@ export class ProductComponent {
     this.getActiveCategories();
     this.form.reset();
     this.submitted = false;
+  }
+
+  showProduct(gtin:string) {
+    this.router.navigate(['product/' + gtin]);
   }
 
   hideModalForm(){

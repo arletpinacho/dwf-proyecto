@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { api_dwb_uri } from '../../../shared/api-dwb-uri';
-
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 

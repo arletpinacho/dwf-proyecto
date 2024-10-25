@@ -8,6 +8,7 @@ import { LoginComponent } from './modules/auth/component/login/login.component';
 import { RegisterComponent } from './modules/auth/component/register/register.component';
 import { SecuredComponent } from './modules/auth/component/secured/secured.component';
 import { authenticationGuard } from './modules/auth/authentication.guard';
+import { ProductComponent } from './modules/product/component/product/product.component';
 
 export const routes: Routes = [
     {
@@ -19,8 +20,12 @@ export const routes: Routes = [
         path: "category", 
         component: CategoryComponent 
     },
-    {
-        path: 'product-image',
+    { 
+        path: "product",
+        component: ProductComponent
+    },
+    { 
+        path: "product/:gtin", 
         component: ProductImageComponent
     },
     {

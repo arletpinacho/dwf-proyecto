@@ -1,4 +1,5 @@
 export class Product{
+    category: string = "";
     product_id: number = 0;
     product: string = "";
     gtin: string = "";
