@@ -125,7 +125,7 @@ export class ProductImageComponent {
     if(this.form.invalid) return;
     this.submitted = false;
 
-    this.productService.createProduct(this.form.value).subscribe({
+    this.productService.updateProduct(this.form.value, this.product.product_id).subscribe({
       next: (v) => {
         this.swal.successMessage(v.message); // show message
         this.getProduct(); // reload products
