@@ -11,7 +11,7 @@
     display: flex;
     justify-content: space-between; 
     align-items: center; 
-}
+  }
 
   .modal-close-button {
       border: none; 
@@ -40,8 +40,19 @@
     padding: 5px;
     z-index: 10;
     margin-left: auto; 
-}
+  }
 
+  .ph-trash:hover {
+    background-color: red;
+  }
+
+  .btn-return {
+    cursor: pointer;
+  }
+
+  .btn-return:hover {
+    color: var(--bs-danger-text-emphasis);
+  }
   .con-text-button {
     margin-left: auto;
   }

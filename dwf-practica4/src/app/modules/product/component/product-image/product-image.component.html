@@ -1,20 +1,13 @@
 <div class="card">
-    <div class="card-header">
-        <div class="row">
-            <div class="col-md">
-                <span class="btn-return" (click)="redirect('product')">
-                    <i class="ph ph-arrow-circle-left icon-text-button"></i>
-                    Regresar
-                </span>
-            </div>
-
-            <div class="col-md" style="text-align: right;">
-                <span class="edit-product" (click)="updateProduct()">
-                    <i class="ph ph-note-pencil icon-text-button"></i>
-                    Editar producto
-                </span>
-            </div>
-        </div>
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <span class="btn-return" (click)="redirect('product')">
+            <i class="ph ph-arrow-circle-left icon-text-button"></i>
+            Regresar
+        </span>
+        <button type="button" class="btn btn-noneb btn-info btn-new" (click)="updateProduct()">
+            <i class="ph ph-note-pencil icon-text-button"></i>
+            Editar producto
+        </button>
     </div>
     <br>
 
@@ -22,7 +15,6 @@
         <div class="row">
 
             <!-- product image  -->
-
             <div class="col-md-4">
                 <div class="card">
                     <div *ngIf="productImgs.length > 1" id="carouselExampleIndicators" class="carousel slide"
@@ -75,14 +67,13 @@
                             <input type="file" (change)="fileChangeHandler($event)" id="uploadImage"
                                 style="display:none">
                             <i class="ph ph-note-pencil icon-text-button"></i>
-                            <p class="item-txt"> Editar imagen </p>
+                            <p class="item-txt"> Agregar imagen </p>
                         </label>
                     </div>
                 </div>
             </div>
 
             <!-- product data  -->
-
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body-product">
@@ -157,12 +148,12 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="gtin">GTIN <span class="color-red">*</span> </label>
+                                    <label for="gtin">GTIN <span class="input-required">*</span> </label>
                                     <input type="text" class="form-control" formControlName="gtin" id="gtin"
                                         placeholder="Código GTIN del producto..."
                                         [ngClass]="{'is-invalid': form.controls['gtin'].errors && submitted}">
                                     <div *ngIf="form.controls['gtin'].errors && submitted">
-                                        <small class="color-red">Favor de ingresar un GTIN válido</small>
+                                        <small class="input-required">Favor de ingresar un GTIN válido</small>
                                     </div>
                                 </div>
                             </div>
@@ -171,12 +162,12 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="product">Producto <span class="color-red">*</span> </label>
+                                    <label for="product">Producto <span class="input-required">*</span> </label>
                                     <input type="text" class="form-control" formControlName="product" id="product"
                                         placeholder="Nombre del producto..."
                                         [ngClass]="{'is-invalid': form.controls['product'].errors && submitted}">
                                     <div *ngIf="form.controls['product'].errors && submitted">
-                                        <small class="color-red">Favor de ingresar un nombre de producto válido</small>
+                                        <small class="input-required">Favor de ingresar un nombre de producto válido</small>
                                     </div>
                                 </div>
                             </div>
@@ -185,12 +176,12 @@
 
                             <div class="col-md-6">
                                 <div class="form-group" style="margin-top: 10px;">
-                                    <label for="price">Precio <span class="color-red">*</span> </label>
+                                    <label for="price">Precio <span class="input-required">*</span> </label>
                                     <input type="text" class="form-control" formControlName="price" id="price"
                                         placeholder="Precio del producto..."
                                         [ngClass]="{'is-invalid': form.controls['price'].errors && submitted}">
                                     <div *ngIf="form.controls['price'].errors && submitted">
-                                        <small class="color-red">Favor de ingresar un precio válido</small>
+                                        <small class="input-required">Favor de ingresar un precio válido</small>
                                     </div>
                                 </div>
                             </div>
@@ -199,12 +190,12 @@
 
                             <div class="col-md-6">
                                 <div class="form-group" style="margin-top: 10px;">
-                                    <label for="stock">Cantidad de productos <span class="color-red">*</span> </label>
+                                    <label for="stock">Cantidad de productos <span class="input-required">*</span> </label>
                                     <input type="text" class="form-control" formControlName="stock" id="stock"
                                         placeholder="Número de stock del producto..."
                                         [ngClass]="{'is-invalid': form.controls['stock'].errors && submitted}">
                                     <div *ngIf="form.controls['stock'].errors && submitted">
-                                        <small class="color-red">Favor de ingresar una cantidad de productos
+                                        <small class="input-required">Favor de ingresar una cantidad de productos
                                             válida</small>
                                     </div>
                                 </div>
@@ -214,7 +205,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group" style="margin-top: 10px;">
-                                    <label for="category_id">Categoría <span class="color-red">*</span> </label>
+                                    <label for="category_id">Categoría <span class="input-required">*</span> </label>
                                     <select class="form-select" formControlName="category_id" id="category_id"
                                         [ngClass]="{'is-invalid': form.controls['category_id'].errors && submitted}">
                                         <option [ngValue]=null hidden>Selecciona una categoría...</option>
@@ -225,7 +216,7 @@
                                         </ng-container>
                                     </select>
                                     <div *ngIf="form.controls['category_id'].errors && submitted">
-                                        <small class="color-red">Favor de seleccionar una categoría válida</small>
+                                        <small class="input-required">Favor de seleccionar una categoría válida</small>
                                     </div>
                                 </div>
                             </div>
@@ -233,13 +224,13 @@
                             <!-- description  -->
 
                             <div class="form-group" style="margin-top: 10px;">
-                                <label for="description">Descripción <span class="color-red">*</span> </label>
+                                <label for="description">Descripción <span class="input-required">*</span> </label>
                                 <textarea rows="2" class="form-control" formControlName="description" id="description"
                                     placeholder="Descripción del producto..."
                                     [ngClass]="{'is-invalid': form.controls['description'].errors && submitted}">
                   </textarea>
                                 <div *ngIf="form.controls['description'].errors && submitted">
-                                    <small class="color-red">Favor de ingresar una descripción válida</small>
+                                    <small class="input-required">Favor de ingresar una descripción válida</small>
                                 </div>
                             </div>
                         </div>
