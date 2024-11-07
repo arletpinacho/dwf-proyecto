@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { api_dwb_uri } from '../../../shared/api-dwb-uri';
 import { User } from '../_model/user';
 import { LoginResponse } from '../_model/login-response';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,8 @@ export class AuthenticationService {
   private token: string | null;
   private loggedInUsername: string | null;
   private jwtHelper = new JwtHelperService();
+  private rolSubject: BehaviorSubject<string> = new BehaviorSubject<string>(this.getUserRol());
+  public rol = this.rolSubject.asObservable();
 
   constructor(private http: HttpClient) { 
     this.token = '';
@@ -32,7 +35,8 @@ export class AuthenticationService {
     this.token = null;
     this.loggedInUsername = null;
     localStorage.removeItem('user');
-    localStorage.removeItem('token');    
+    localStorage.removeItem('token');  
+    this.rolSubject.next('NONE');  
   }
 
   public saveToken(token: string): void {
@@ -41,6 +45,7 @@ export class AuthenticationService {
   }
 
   public addUserToLocalCache(loginResponse: LoginResponse): void {
+    this.rolSubject.next(loginResponse.rol);  
     localStorage.setItem('user', JSON.stringify(loginResponse));
   }
 
@@ -75,5 +80,14 @@ export class AuthenticationService {
       return false;
     }
     return false;
+  }
+
+  public getUserRol(): string {
+    const user = localStorage.getItem("user");
+    if (user) {
+      let parsedUser = JSON.parse(user);
+      return parsedUser.rol === 'ADMIN' ? 'ADMIN' : 'USER'; 
+    }
+    return 'NONE';
   }
 }

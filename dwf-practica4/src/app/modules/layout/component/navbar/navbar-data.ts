@@ -1,30 +1,27 @@
 import { NavItem } from './nav-item/nav-item';
 
-export const navItems: NavItem[] = [
+/** items de la barra de navegación a los que solo tiene 
+acceso un usuario con rol ADMIN */
+export const adminNavItems: NavItem[] = [
     {
         displayName: 'Productos',
          route: '/product',         
     },
     {
-        displayName: 'Categoría',
+        displayName: 'Categorías',
          route: '/category',         
     },
     {
-        displayName: 'Region',
+        displayName: 'Regiones',
          route: '/region',         
-    },
-    {
-        displayName: 'Login',
-         route: '/login',       
+    }
+]
 
-    },
+/** items de la barra de navegación a los que solo tiene 
+acceso un usuario con rol USER */
+export const userNavItems: NavItem[] = [
     {
-        displayName: 'Registro',
-         route: '/register'
-         
-    },
-    {
-        displayName: 'Secured',
-         route: '/secured'
-    },
+        displayName: 'Productos',
+         route: '/products',         
+    }
 ]

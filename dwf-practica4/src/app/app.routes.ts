@@ -6,9 +6,10 @@ import { RegionComponent } from './modules/customer/component/region/region.comp
 import { LoginComponent } from './modules/auth/component/login/login.component';
 import { RegisterComponent } from './modules/auth/component/register/register.component';
 import { SecuredComponent } from './modules/auth/component/secured/secured.component';
-import { authenticationGuard } from './modules/auth/authentication.guard';
+import { adminGuard, authenticationGuard } from './modules/auth/authentication.guard';
 import { ProductComponent } from './modules/product/component/product/product.component';
 import { HomeComponent } from './modules/layout/component/home/home.component';
+import { InvoiceComponent } from './modules/invoice/component/invoice/invoice.component';
 
 export const routes: Routes = [
     { 
@@ -17,11 +18,13 @@ export const routes: Routes = [
     },
     { 
         path: "category", 
-        component: CategoryComponent 
+        component: CategoryComponent,
+        canActivate: [adminGuard]
     },
     { 
         path: "product",
-        component: ProductComponent
+        component: ProductComponent,
+        canActivate: [adminGuard]
     },
     { 
         path: "product/:gtin", 
@@ -29,7 +32,8 @@ export const routes: Routes = [
     },
     {
         path: 'region',
-        component: RegionComponent
+        component: RegionComponent,
+        canActivate: [adminGuard]
     },
     {
         path: 'login',
@@ -43,6 +47,10 @@ export const routes: Routes = [
         path: 'secured',
         component: SecuredComponent, 
         canActivate: [authenticationGuard]
+    },
+    { 
+        path: 'invoice',
+        component: InvoiceComponent
     }
 
 ];
