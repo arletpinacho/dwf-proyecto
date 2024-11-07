@@ -3,7 +3,11 @@
   .body-content{
     max-width: 1280px;
     margin: auto;
-    margin-top: 80px;
+  }
+  
+  .navbar-content{
+    max-width: 1280px;
+    margin: auto;
   }
 
   /* Botón para editar producto */

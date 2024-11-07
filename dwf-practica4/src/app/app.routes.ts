@@ -3,18 +3,17 @@ import { Routes } from '@angular/router';
 import { ProductImageComponent } from './modules/product/component/product-image/product-image.component';
 import { CategoryComponent } from './modules/product/component/category/category.component';
 import { RegionComponent } from './modules/customer/component/region/region.component';
-//import { MainComponent } from './modules/layout/component/main/main';
 import { LoginComponent } from './modules/auth/component/login/login.component';
 import { RegisterComponent } from './modules/auth/component/register/register.component';
 import { SecuredComponent } from './modules/auth/component/secured/secured.component';
 import { authenticationGuard } from './modules/auth/authentication.guard';
 import { ProductComponent } from './modules/product/component/product/product.component';
+import { HomeComponent } from './modules/layout/component/home/home.component';
 
 export const routes: Routes = [
-    {
-        path: '',
-        redirectTo: '/region',
-        pathMatch: 'full'
+    { 
+        path: "", 
+        component: HomeComponent 
     },
     { 
         path: "category", 
