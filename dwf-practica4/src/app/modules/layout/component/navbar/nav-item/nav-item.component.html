@@ -18,7 +18,7 @@
         <!-- menu options -->
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <ng-container *ngFor="let category of categories">
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="category/{{category.category_id}}">
               <span>{{category.category}}</span>
             </a>
           </ng-container>

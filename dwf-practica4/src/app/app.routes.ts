@@ -11,6 +11,7 @@ import { ProductComponent } from './modules/product/component/product/product.co
 import { HomeComponent } from './modules/layout/component/home/home.component';
 import { InvoiceComponent } from './modules/invoice/component/invoice/invoice.component';
 import { CartComponent } from './modules/invoice/component/cart/cart.component';
+import { ProductByCategoryComponent } from './modules/product/component/product-by-category/product-by-category.component';
 
 export const routes: Routes = [
     { 
@@ -21,6 +22,10 @@ export const routes: Routes = [
         path: "category", 
         component: CategoryComponent,
         canActivate: [adminGuard]
+    },
+    { 
+        path: "category/:id",
+        component: ProductByCategoryComponent
     },
     { 
         path: "product",
