@@ -9,7 +9,7 @@
       'cursor': 'pointer'
     }"
   >
-    <ng-container *ngIf="item.displayName == 'Productos'; else showLink">
+    <ng-container *ngIf="item.displayName == 'Productos' && rol == 'USER'; else showLink">
       <div class="dropdown">
         <!-- dots button  -->
         <button class="dropdown-button" id="dropdownMenuButtonP" data-bs-toggle="dropdown" aria-expanded="false" (click)="getCategories()">

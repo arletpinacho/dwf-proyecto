@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { CategoryService } from '../../../../product/_service/category.service';
 import { Category } from '../../../../product/_model/category';
 import { SharedModule } from '../../../../../shared/shared-module';
+import { AuthenticationService } from '../../../../auth/_service/authentication.service';
 
 
 
@@ -21,12 +22,19 @@ export class AppNavItemComponent implements OnChanges {
 
   categories: Category[] = [];
   loading = false;
+  rol: String = '';
 
   constructor( 
     private navService: NavService,
     private categoryService: CategoryService,
+    private authenticationService: AuthenticationService,
     public router: Router,
-  ) {}
+  ) {
+    
+    this.authenticationService.rol.subscribe((role: string) => {
+      this.rol = role;
+    });   
+  }
 
   getCategories(){
     this.categoryService.getCategories().subscribe({
