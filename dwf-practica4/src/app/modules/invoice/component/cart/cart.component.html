@@ -1,0 +1,54 @@
+<div class="body-content">
+    <div class="card m-4">
+      <!-- Card header -->
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h4>Mi carrito</h4>
+      </div>
+  
+      <!-- Card body -->
+      <div class="card-body">
+        <!-- loading  -->
+        @if(loading) {
+          <div class="text-center" >
+            <img src="assets/loading.gif" class="img-loading" alt="">
+          </div>
+        }
+        @if(!loading && carrito.length == 0) {
+          <div class="text-center table-empty">
+            <h4>Tu carrito está vacio.</h4>
+          </div>
+        } @else {
+          <!-- Product table  -->
+          <table class="table table-striped">
+            <!-- encabezados de la tabla -->
+            <thead>
+              <tr class="table-primary">
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+                <th>Más</th>
+              </tr>
+            </thead>
+            <!-- contenido de la tabla -->
+            <tbody>
+              @for(c of carrito; track c; let i = $index ) {
+                <tr>
+                  <td>
+                    <img src="{{ productsImgs[i].image !== '' ? productsImgs[i].image : 'assets/no-product-image.png'}}" class="d-block w-100" alt="...">
+                    {{ c.product.product }}
+                  </td>
+                  <td>{{ c.product.price}}</td>
+                  <td>{{ c.quantity }}</td>
+                  <td>{{ c.product.price * c.quantity }}</td>
+                  <td>
+                    <span class="icon-text-button" (click)="deleteProduct(c.cart_id)"> <i class="ph ph-trash"></i> </span>
+                    <span>Eliminar</span>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        }
+      </div>
+    </div>

@@ -10,16 +10,15 @@
             </button>
             
             <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                @for(item of navItems; track item) {
-                    <app-nav-item [item]="item">
-                    </app-nav-item>
-                }
-            </ul>
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    @for(item of navItems; track item) {
+                        <app-nav-item [item]="item"></app-nav-item>
+                    }
+                </ul>
             </div>
         </div>
         @if (rol == 'USER') {
-            <a class="nav-link" routerLink="#" role="button">
+            <a class="nav-link" routerLink="#" role="button" (click)="showCart()">
               <i class="ph ph-shopping-cart i-nav"></i>
             </a>
         }

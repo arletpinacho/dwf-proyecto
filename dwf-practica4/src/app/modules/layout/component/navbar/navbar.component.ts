@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { NavService } from '../../_service/nav.service';
-import { CommonModule } from '@angular/common';
 import { NavItem } from './nav-item/nav-item';
 import { adminNavItems, userNavItems } from './navbar-data';
-import { AppNavItemComponent } from "./nav-item/nav-item.component";
 import { AuthenticationService } from '../../../auth/_service/authentication.service';
+import { AppNavItemComponent } from './nav-item/nav-item.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule, AppNavItemComponent],
+  imports: [RouterModule, CommonModule ,AppNavItemComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -18,7 +18,8 @@ export class NavbarComponent {
 
   constructor (
     private navService: NavService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private router: Router
   ){}
   
   /** items de la barra de navegación a los que tiene 
@@ -58,10 +59,12 @@ export class NavbarComponent {
     }
   }
   
-
   ngOnChanges() {
     this.navService.currentUrl.subscribe((url: string) => { this.currentUrl = url});
   }
 
+  showCart() {
+    this.router.navigate(['cart']);
+  }
 }
 
