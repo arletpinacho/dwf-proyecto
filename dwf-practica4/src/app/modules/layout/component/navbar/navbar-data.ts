@@ -22,6 +22,6 @@ acceso un usuario con rol USER */
 export const userNavItems: NavItem[] = [
     {
         displayName: 'Productos',
-         route: '/',         
+         route: 'url actual',         
     }
 ]

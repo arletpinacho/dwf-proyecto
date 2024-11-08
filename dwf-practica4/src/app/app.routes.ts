@@ -24,7 +24,7 @@ export const routes: Routes = [
         canActivate: [adminGuard]
     },
     { 
-        path: "category/:id",
+        path: "category/:category_id",
         component: ProductByCategoryComponent
     },
     { 

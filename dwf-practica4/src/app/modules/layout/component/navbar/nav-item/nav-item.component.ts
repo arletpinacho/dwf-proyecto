@@ -45,7 +45,9 @@ export class AppNavItemComponent implements OnChanges {
   }
 
   onItemSelected(item: NavItem) {
+    if(item.route != 'url actual'){
       this.router.navigate([item.route]);
+    }      
   }
 
   onSubItemSelected(item: NavItem) {}
