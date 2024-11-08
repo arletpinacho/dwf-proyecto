@@ -22,9 +22,11 @@ export class CartService {
     return this.http.get(api_dwb_uri + this.source);
   }
 
-  /* REQUERIMIENTO 4. Implementar servicio Cart - función clearCart() */
-  clearCart() {}
+  clearCart(): Observable<any>{
+    return this.http.delete(api_dwb_uri + this.source);
+  }
 
-  /* REQUERIMIENTO 4. Implementar servicio Cart - función removeFromCart() */
-  removeFromCart() {}
+  removeFromCart(cart_id: number): Observable<any>{
+    return this.http.delete(api_dwb_uri + this.source + "/" + cart_id);
+  }
 }

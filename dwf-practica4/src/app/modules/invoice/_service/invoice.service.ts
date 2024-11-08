@@ -21,7 +21,8 @@ export class InvoiceService {
   getInvoices(): Observable<any> {
     return this.http.get(api_dwb_uri + this.source);
   }
-
-  /* REQUERIMIENTO 4. Implementar servicio Invoice - función generateInvoice() */
-  generateInvoice() {}
+  
+  generateInvoice(): Observable<any> {
+    return this.http.post(api_dwb_uri + this.source, null);
+  }
 }
