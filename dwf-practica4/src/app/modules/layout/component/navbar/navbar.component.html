@@ -3,8 +3,8 @@
     <nav class="navbar navbar-expand-lg bg-primary"  data-bs-theme="dark">
         <div class="container-fluid navbar-content">
 
-            <a class="navbar-brand" href="#">Desarrollo Web Frontend</a>
-
+            <a class="navbar-brand nvtitle" href="#">Desarrollo Web Frontend</a>
+            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -18,7 +18,7 @@
             </div>
         </div>
         @if (rol == 'USER') {
-            <a class="nav-link" routerLink="#" role="button" (click)="showCart()">
+            <a class="nav-link cart-icon" routerLink="#" role="button" (click)="showCart()">
               <i class="ph ph-shopping-cart i-nav"></i>
             </a>
         }

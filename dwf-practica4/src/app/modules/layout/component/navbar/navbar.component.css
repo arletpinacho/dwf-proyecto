@@ -1,0 +1,14 @@
+.cart-icon {
+    position: absolute;
+    right: 25px; /* Establece la distancia desde el borde derecho */
+    top: 50%; /* Centra verticalmente */
+    transform: translateY(-50%); /* Ajusta para que quede bien centrado */
+    font-size: 1.8rem; /* Tamaño inicial del icono */
+    transition: font-size 0.3s ease; /* Animación de transición */
+}
+
+@media (max-width: 768px) {
+    .cart-icon i-nav {
+        font-size: 1rem; /* Reduce el tamaño del icono en pantallas pequeñas */
+    }
+}
