@@ -10,6 +10,11 @@
     margin: auto;
   }
 
+  .btn-custom {
+    width: 50px;
+    height: 20px;
+  }
+
   /* Botón para editar producto */
   .modal-header {
     display: flex;
