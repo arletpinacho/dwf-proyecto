@@ -5,6 +5,9 @@ import { Product } from '../../_model/product';
 import { ProductService } from '../../_service/product.service';
 import { CategoryService } from '../../_service/category.service';
 import { Category } from '../../_model/category';
+import { ProductImage } from '../../_model/product-image';
+import { ProductImageService } from '../../_service/product-image.service';
+import { SwalMessages } from '../../../../shared/swal-messages';
 
 @Component({
   selector: 'app-product-by-category',
@@ -18,11 +21,14 @@ export class ProductByCategoryComponent {
   category_id = 0;
   category: Category = new Category();
   products: Product[] = [];
+  productImgs: { productId: number, images: ProductImage[] }[] = [];
+  swal: SwalMessages = new SwalMessages(); // swal messages
 
   constructor (
     private productService: ProductService,
     private categoryService: CategoryService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private productImageService: ProductImageService
   ){}
 
   ngOnInit(){
@@ -55,11 +61,28 @@ export class ProductByCategoryComponent {
         this.products = v;
         this.loading = false;
         console.log(v);
+        this.getProductImages();
       },
       error: (e) => {
         console.error(e.error.message);
         this.loading = false;
       }
+    });
+  }
+
+  getProductImages() {
+    this.productImgs = []; // Limpiamos la lista de imágenes antes de llenarla
+
+    this.products.forEach(product => {
+      this.productImageService.getProductImages(product.product_id).subscribe({
+        next: (images) => {
+          this.productImgs.push({ productId: product.product_id, images: images });
+        },
+        error: (e) => {
+          console.log(e);
+          this.swal.errorMessage(e);
+        }
+      });
     });
   }
 }
