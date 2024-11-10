@@ -4,17 +4,20 @@
             <i class="ph ph-arrow-circle-left icon-text-button"></i>
             Regresar
         </span>
+        @if (rol == 'ADMIN') {
         <button type="button" class="btn btn-noneb btn-info btn-new" (click)="updateProduct()">
             <i class="ph ph-note-pencil icon-text-button"></i>
             Editar producto
         </button>
+        }
     </div>
     <br>
 
     <div class="card-body">
         <div class="row">
 
-            <!-- product image  -->
+            <!-- product image ADIN -->
+            @if (rol == 'ADMIN') {
             <div class="col-md-4">
                 <div class="card">
                     <div *ngIf="productImgs.length > 1" id="carouselExampleIndicators" class="carousel slide"
@@ -72,8 +75,52 @@
                     </div>
                 </div>
             </div>
+            }
 
-            <!-- product data  -->
+            <!-- product image USER -->
+            @if (rol == 'USER') {
+                <div class="col-md-4">
+                    <div class="card">
+                        <div *ngIf="productImgs.length > 1" id="carouselExampleIndicators" class="carousel slide"
+                            data-bs-ride="true">
+                            <div class="carousel-indicators">
+                                <button *ngFor="let item of productImgs; let i = index" type="button" class="indicator"
+                                    data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="i"
+                                    [class.active]="i === 0" [attr.aria-current]="i === 0"
+                                    [attr.aria-label]="'Slide ' + i"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div *ngFor="let prod of productImgs; let i = index" class="carousel-item"
+                                    [class.active]="i === 0">
+                                    <img src="{{ prod.image !== '' ? prod.image : 'assets/no-product-image.png'}}"
+                                        class="d-block w-100" alt="...">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                        <div *ngIf="productImgs.length <= 1" id="carouselExampleIndicators" class="carousel slide"
+                            data-ride="carousel">                        
+                            <div class="carousel-inner">
+                                <div *ngIf="productImgs.length == 0" class="carousel-item active">
+                                    <img src="assets/no-product-image.png" class="d-block w-100" alt="...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+
+            <!-- product data admin -->
+            @if (rol == 'ADMIN') {
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body-product">
@@ -121,13 +168,50 @@
                     </div>
                 </div>
             </div>
+            }
 
+            <!-- product data user -->
+            @if (rol == 'USER') {
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body-product">
+    
+                            <!-- product -->
+                            <div class="product-title" style="margin-left: 8px;">
+                                {{ product.product }}
+                            </div>
+            
+                            <!-- price -->
+                            <div class="product-price">
+                                <strong>Precio:</strong> {{ product.price }}
+                            </div>
+            
+                            <!-- Add product actions (increment, decrement buttons) -->
+                            <div class="product-actions">
+                                <app-quantity-selector [maxQuantity]=product.stock></app-quantity-selector>
+                            </div>
+            
+                            <!-- Add to cart button -->
+                            @if (product.stock > 0) {
+                                <button class="add-to-cart-btn">Añadir a la cesta</button>
+                            } @else {
+                                <div class="out-of-stock">Agotado</div>
+                            }
+
+                            <!-- description -->
+                            <div class="product-description">
+                                <strong>Descripción:</strong> {{ product.description }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
         </div>
     </div>
 
 
     <!-- Modal form  -->
-
+    @if (rol == 'ADMIN') {
     <div class="modal fade" data-bs-backdrop="static" tabindex="-1" role="dialog" id="modalForm">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -246,4 +330,5 @@
             </div>
         </div>
     </div>
+    }
 </div>

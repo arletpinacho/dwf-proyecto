@@ -10,13 +10,16 @@ import { NgxPhotoEditorService } from 'ngx-photo-editor';
 import { SwalMessages } from '../../../../shared/swal-messages';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../../_model/category';
+import { CommonModule } from '@angular/common';
+import { AuthenticationService } from '../../../auth/_service/authentication.service';
+import { QuantitySelectorComponent } from '../../../layout/component/quantity-selector/quantity-selector.component';
 
 declare var $:any;
 
 @Component({
   selector: 'app-product-image',
   standalone: true,
-  imports: [SharedModule],
+  imports: [CommonModule, SharedModule, QuantitySelectorComponent],
   templateUrl: './product-image.component.html',
   styleUrl: './product-image.component.css'
 })
@@ -30,6 +33,7 @@ export class ProductImageComponent {
   product = new Product();
   gtin = "";
   swal: SwalMessages = new SwalMessages(); // swal messages
+  rol: String = '';
 
   form = this.formBuilder.group({
     product: ["", [Validators.required]],
@@ -43,12 +47,17 @@ export class ProductImageComponent {
   constructor (
     private formBuilder: FormBuilder,
     private productImageService: ProductImageService,
+    private authenticationService: AuthenticationService,
     private productService: ProductService,
     private categoryService: CategoryService,
     private ngxService: NgxPhotoEditorService,
     private route: ActivatedRoute,
     private router: Router
-  ){}
+  ){
+    this.authenticationService.rol.subscribe((role: string) => {
+      this.rol = role;
+    });   
+  }
 
   ngOnInit(){
     this.gtin = this.route.snapshot.paramMap.get('gtin')!;
