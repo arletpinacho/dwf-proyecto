@@ -8,6 +8,61 @@
   .navbar-content{
     max-width: 1280px;
     margin: auto;
+    position: relative;
+    width: 100%;
+  }
+
+  .navbar .nvtitle {
+    font-family: 'Sans-serif'; 
+    font-size: 1.6rem;
+    position: absolute; 
+    left: 50%; 
+    transform: translateX(-50%);
+    margin: 0;
+  }
+  
+  header nav.navbar {
+    background-color: #a0c8ff !important;  
+  }
+
+  /* Cambiar color de texto o de la navbar */
+  header nav.navbar .navbar-brand {
+    color: white;  
+  }
+
+  /* Establecer un fondo con gradiente */
+  header nav.navbar {
+    background: linear-gradient(to right, #ff7e5f, #feb47b) !important;
+  }
+
+  .navbar .navbar-brand:hover {
+    color: #ff5733 !important; /* Color al pasar el mouse */
+  }
+
+  /* Cambiar el color de fondo cuando pasas el mouse */
+  .navbar .nav-link:hover {
+      color: #ff5733 !important; 
+  }
+  .profile-icon i {
+    position: absolute;
+    right: 85px;
+    font-size: 1.3rem; 
+    top: 50%; /* Centra verticalmente */
+    transform: translateY(-50%); /* Ajusta para que quede bien centrado */
+}
+  .cart-icon i {
+    position: absolute;
+    right: 25px; /* Establece la distancia desde el borde derecho */
+    top: 50%; /* Centra verticalmente */
+    transform: translateY(-50%); /* Ajusta para que quede bien centrado */
+    font-size: 1.3rem; /* Tamaño inicial del icono */
+    transition: font-size 0.3s ease; /* Animación de transición */
+  }
+
+  @media (max-width: 768px) {
+      .cart-icon i-nav {
+          font-size: 1rem; /* Reduce el tamaño del icono en pantallas pequeñas */
+      }
   }
 
   .btn-custom {
@@ -71,6 +126,56 @@
     max-width: 1280px;
     margin: auto;
   }
+
+  #carouselHome {
+    height: 100vh;
+    width: 100%;
+    overflow: hidden; 
+    margin-bottom: 10px;
+  }
+
+  #carouselHome .carousel-item img {
+      object-fit: cover; 
+      height: 100%;
+      width: 100%;
+  }
+
+  .carousel-caption {
+      padding: 20px;
+  }
+
+  .carousel-item video {
+    pointer-events: none;
+  }
+
+  .carousel-item video {
+    width: 100%;
+    height: auto;
+}
+
+  .carousel-control-prev, .carousel-control-next {
+    z-index: 10;
+  }
+
+  .caption-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff; 
+    font-family: 'Roboto', Arial, sans-serif;
+    text-shadow: 5px 5px 8px rgba(0, 0, 0, 0.8);
+  }
+
+  .carousel-caption .caption-text {
+    font-size: 0.9rem; 
+    color: #fff;
+    line-height: 1.4; 
+    font-family: 'Roboto';
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  }
+
+.popular-section {
+  margin-top: 0; /* Remueve espacio entre el carrusel y la sección popular */
+}
 
   /* buttons */
   .btn i{
@@ -173,9 +278,7 @@
   footer {
     background: PapayaWhip;
   }
-  
-  
-  /* Trick: */
+
   body {
     position: relative;
   }
@@ -184,7 +287,6 @@
     content: '';
     display: block;
     height: 50px;
-    /* Set same as footer's height */
   }
   
   footer {
@@ -192,6 +294,97 @@
     bottom: 0;
     width: 100%;
     height: 50px;
+  }
+  
+
+  .product-container {
+    position: relative; 
+    display: inline-block;
+    width: 100%;
+  }
+
+  .product-container img {
+      width: 100%;
+      height: auto; 
+  }
+
+  .overlay {
+      position: absolute;
+      top: 0; /* Se alinea con la parte superior de la imagen */
+      left: 0;
+      width: 100%;
+      background: rgb(255, 255, 255); 
+      display: none;
+      flex-direction: column; 
+      padding-bottom: 10px; /* Espacio adicional en la parte inferior */
+      min-height: 100%; /* Se asegura de que el overlay no sea más pequeño que la altura de la imagen */
+      justify-content: flex-start; /* Asegura que el contenido comience desde la parte superior */
+      border: 0.5px solid black; 
+  }
+
+  /* Muestra el overlay al hacer hover */
+  .product-container:hover .overlay {
+      display: flex; 
+  }
+
+  /* Estilo para el carrusel dentro del overlay */
+  .carousel-inner {
+      flex-grow: 0.4; /* Hace que el carrusel ocupe todo el espacio disponible */
+      border-radius: 0; 
+  }
+
+  .carousel {
+    box-shadow: none
+  }
+
+  /* Ajustes para las imágenes dentro del carrusel */
+  .carousel-item img {
+      width: 100%;
+      height: auto;
+      border-radius:0; 
+  }
+
+  /* Estilo de los indicadores del carrusel */
+  .carousel-indicators button {
+      background-color: #fff;
+  }
+
+  .product-info {
+      margin-top: -2px; /* Espacio entre el carrusel y la información */
+      text-align: center;
+      color: white;
+  }
+
+  /* Aplicar mayúsculas, color negro, tamaño de fuente y ajuste de interlineado */
+  .product-name {
+    font-weight:bolder;
+    text-transform: uppercase; /* Pasa el texto a mayúsculas */
+    font-size: 0.7em; /* Ajusta el tamaño de la fuente */
+    margin-bottom: 0px;
+    color: black;
+  }
+
+  /* Estilo específico para el precio */
+  .product-price {
+    font-size: 0.7em; /* Ajusta el tamaño de la fuente */
+    margin-top: 1px;
+    color: black; /* Color negro para el precio */
+  }
+
+  /* Estilo opcional para el botón */
+  .product-button {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 0.7em; /* Ajusta el tamaño de la fuente en el botón */
+  }
+
+  .ver-detalles {
+    text-decoration: underline;  
+    font-weight: bolder;         
+    font-size: 0.7em;           
+    color: black;      
+    padding: 0;                  
+    margin: 0;       
   }
 
   

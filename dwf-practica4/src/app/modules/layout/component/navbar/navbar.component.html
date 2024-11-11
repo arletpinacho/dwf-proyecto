@@ -1,12 +1,12 @@
 <header>
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-lg bg-primary"  data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
         <div class="container-fluid navbar-content">
+            <!-- Nombre centrado -->
+            <a class="navbar-brand nvtitle" href="#">NAHARA</a>
 
-            <a class="navbar-brand nvtitle" href="#">Desarrollo Web Frontend</a>
-            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
             
             <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -19,8 +19,12 @@
         </div>
         @if (rol == 'USER') {
             <a class="nav-link cart-icon" routerLink="#" role="button" (click)="showCart()">
-              <i class="ph ph-shopping-cart i-nav"></i>
+                <i class="ph ph-shopping-cart i-nav" ></i>
             </a>
         }
+        <a class="nav-link profile-icon" routerLink="/profile" role="button">
+            <i class="ph ph-user i-nav"></i>
+        </a>
     </nav>
 </header>
+
