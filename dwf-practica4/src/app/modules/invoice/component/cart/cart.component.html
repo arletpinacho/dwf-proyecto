@@ -35,7 +35,7 @@
               @for(c of carrito; track c; let i = $index ) {
                 <tr>
                   <td>
-                    <img src="{{ productsImgs[i].image !== '' ? productsImgs[i].image : 'assets/no-product-image.png'}}" class="d-block w-100" alt="...">
+                    <img src="{{ productsImgs[i].image !== '' ? productsImgs[1].image : 'assets/no-product-image.png'}}" class="d-block w-100" alt="...">
                     {{ c.product.product }}
                   </td>
                   <td>{{ c.product.price}}</td>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
-
+import { Output } from '@angular/core';
+import {EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-quantity-selector',
@@ -11,12 +12,14 @@ import { Input } from '@angular/core';
 })
 export class QuantitySelectorComponent {
   @Input() maxQuantity: number = Infinity; // Límite máximo, por defecto es infinito
-  quantity: number = 0;
+  @Input() quantity: number = 0;
+  @Output() quantityChanged = new EventEmitter<number>();
 
   // Función para disminuir la cantidad
   decrease() {
     if (this.quantity > 0) {
       this.quantity--;
+      this.quantityChanged.emit(this.quantity); // Emite el cambio de cantidad
     }
   }
 
@@ -24,8 +27,10 @@ export class QuantitySelectorComponent {
   increase() {
     if (this.quantity < this.maxQuantity) { // Verifica que no se supere el límite
       this.quantity++;
+      this.quantityChanged.emit(this.quantity); // Emite el cambio de cantidad
     }
   }
+
 }
 
 

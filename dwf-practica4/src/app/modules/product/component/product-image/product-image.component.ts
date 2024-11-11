@@ -13,6 +13,8 @@ import { Category } from '../../_model/category';
 import { CommonModule } from '@angular/common';
 import { AuthenticationService } from '../../../auth/_service/authentication.service';
 import { QuantitySelectorComponent } from '../../../layout/component/quantity-selector/quantity-selector.component';
+import { CartService } from '../../../invoice/_service/cart.service';
+import { Cart } from '../../../invoice/_model/cart';
 
 declare var $:any;
 
@@ -34,6 +36,9 @@ export class ProductImageComponent {
   gtin = "";
   swal: SwalMessages = new SwalMessages(); // swal messages
   rol: String = '';
+  quantity = 0;
+  carrito: Cart[] = [];
+  cart_id = 0;
 
   form = this.formBuilder.group({
     product: ["", [Validators.required]],
@@ -41,7 +46,7 @@ export class ProductImageComponent {
     description: ["", [Validators.required]],
     price: [0, [Validators.required, Validators.pattern('^[0-9]*$')]],
     stock: [0, [Validators.required, Validators.pattern('^[0-9]*$')]],
-    category_id: [0, [Validators.required]],
+    category_id: [0, [Validators.required]]
   });
   
   constructor (
@@ -52,7 +57,8 @@ export class ProductImageComponent {
     private categoryService: CategoryService,
     private ngxService: NgxPhotoEditorService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private cartService: CartService
   ){
     this.authenticationService.rol.subscribe((role: string) => {
       this.rol = role;
@@ -213,5 +219,31 @@ export class ProductImageComponent {
   resetVariables() {
     this.form.reset();
     this.submitted = false;
+  }
+
+  onQuantityChanged(newQuantity: number) {
+    this.quantity = newQuantity;
+  }
+
+  addToCart(product: Product, quantity: number) {
+    // Crear el objeto de carrito con el producto y la cantidad
+    const newCartItem: Cart = {
+      cart_id: this.cart_id, 
+      gtin: product.gtin,
+      product: product,
+      quantity: this.quantity,
+      image: this.productImgs[1].image
+    };
+
+    // Llamar al servicio para agregar al carrito en el backend
+    this.cartService.addToCart(newCartItem).subscribe({
+      next: () => {
+        this.swal.successMessage(`Se agregó ${quantity} unidad(es) al carrito.`);
+      },
+      error: (error) => {
+        console.error("Error al agregar al carrito:", error);
+        this.swal.errorMessage("Ocurrió un error al agregar el producto al carrito.");
+      }
+    });
   }
 }

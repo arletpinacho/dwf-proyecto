@@ -187,16 +187,23 @@
                             </div>
             
                             <!-- Add product actions (increment, decrement buttons) -->
-                            <div class="product-actions">
-                                <app-quantity-selector [maxQuantity]=product.stock></app-quantity-selector>
+                            <app-quantity-selector
+                                [quantity]="quantity"
+                                [maxQuantity]="product.stock"
+                                (quantityChanged)="onQuantityChanged($event)">
+                             </app-quantity-selector>
+
+                            <button *ngIf="product.stock > 0" 
+                                class="btn btn-primary"
+                                [disabled]="quantity <= 0" 
+                                (click)="addToCart(product, quantity)">
+                                Agregar al Carrito
+                            </button>
+                            
+                            <!-- Agotado -->
+                            <div *ngIf="product.stock === 0" class="out-of-stock">
+                                Agotado
                             </div>
-            
-                            <!-- Add to cart button -->
-                            @if (product.stock > 0) {
-                                <button class="add-to-cart-btn">Añadir a la cesta</button>
-                            } @else {
-                                <div class="out-of-stock">Agotado</div>
-                            }
 
                             <!-- description -->
                             <div class="product-description">
@@ -208,7 +215,6 @@
                 }
         </div>
     </div>
-
 
     <!-- Modal form  -->
     @if (rol == 'ADMIN') {

@@ -4,6 +4,8 @@ import { Cart } from '../../_model/cart';
 import { SwalMessages } from '../../../../shared/swal-messages';
 import { ProductImageService } from '../../../product/_service/product-image.service';
 import { ProductImage } from '../../../product/_model/product-image';
+import { Product } from '../../../product/_model/product'; 
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -46,7 +48,6 @@ export class CartComponent {
         });
       }
     });
-    
   }
 
   getCarrito() {
@@ -92,6 +93,5 @@ export class CartComponent {
         this.productsImgs[i] = this.getProductImage(this.carrito[i].product.product_id);
       } 
     }
-  }
-
+  }  
 }
