@@ -6,11 +6,12 @@ import { adminNavItems, userNavItems } from './navbar-data';
 import { AuthenticationService } from '../../../auth/_service/authentication.service';
 import { AppNavItemComponent } from './nav-item/nav-item.component';
 import { CommonModule } from '@angular/common';
+import { SecuredComponent } from '../../../auth/component/secured/secured.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule, CommonModule ,AppNavItemComponent],
+  imports: [RouterModule, CommonModule ,AppNavItemComponent, SecuredComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -59,9 +60,9 @@ export class NavbarComponent {
     this.router.navigate(['cart']);
   }
 
-  onLogOut() {
+  logOut() {
     this.authenticationService.logOut();
     this.router.navigate(['/']);
-}
+  }
 }
 
