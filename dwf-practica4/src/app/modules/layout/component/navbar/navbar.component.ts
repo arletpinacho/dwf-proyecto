@@ -41,14 +41,6 @@ export class NavbarComponent {
   getItems() {
     // Elementos disponibles sin importar el rol.
     this.navItems = [
-      {
-        displayName: 'Login',
-        route: '/login',
-      },
-      {
-        displayName: 'Registro',
-        route: '/register',
-      },
     ];
 
     // Agrega los elementos según el rol
@@ -66,5 +58,10 @@ export class NavbarComponent {
   showCart() {
     this.router.navigate(['cart']);
   }
+
+  onLogOut() {
+    this.authenticationService.logOut();
+    this.router.navigate(['/']);
+}
 }
 

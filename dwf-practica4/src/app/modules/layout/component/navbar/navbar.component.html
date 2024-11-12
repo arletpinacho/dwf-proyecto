@@ -2,13 +2,15 @@
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
         <div class="container-fluid navbar-content">
-            <!-- Nombre centrado -->
-            <a class="navbar-brand nvtitle" href="#">NAHARA</a>
+            <!-- Primera fila: Nombre y elementos de la izquierda (íconos) -->
+            <div class="navbar-left">
+                <a class="navbar-brand nvtitle" href="#">NAHARA</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
+            <!-- Segunda fila: Los elementos de navegación (a la izquierda) -->
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     @for(item of navItems; track item) {
@@ -19,12 +21,35 @@
         </div>
         @if (rol == 'USER') {
             <a class="nav-link cart-icon" routerLink="#" role="button" (click)="showCart()">
-                <i class="ph ph-shopping-cart i-nav" ></i>
+                <i class="ph ph-shopping-bag i-nav" ></i>
             </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span> <!-- Icono de hamburguesa -->
+              </button>
         }
-        <a class="nav-link profile-icon" routerLink="/profile" role="button">
-            <i class="ph ph-user i-nav"></i>
-        </a>
+
+        @if (rol != 'USER' || rol != 'ADMIN') {
+            <div class="nav-item dropdown">
+                <a class="nav-link" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="ph ph-user i-nav"></i> <!-- Ícono de perfil -->
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown" data-bs-popper="true">
+                  <li><a class="dropdown-item"  routerLink="/login">Iniciar sesión</a></li>
+                  <li><a class="dropdown-item"  routerLink="/register">Registrarse</a></li>
+                </ul>
+            </div>
+        }
+        
+        @if (rol == 'USER' || rol == 'ADMIN') {
+            <div class="nav-item dropdown">
+                <a class="nav-link" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="ph ph-user i-nav"></i> <!-- Ícono de perfil -->
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown" data-bs-popper="true">
+                  <li><a class="dropdown-item" (click)="onLogOut()">Cerrar sesión</a></li>
+                </ul>
+            </div>
+        }
+        
     </nav>
 </header>
-
