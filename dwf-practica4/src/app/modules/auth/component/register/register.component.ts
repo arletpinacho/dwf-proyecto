@@ -7,6 +7,7 @@ import { User } from '../../_model/user';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { CustomIconModule } from '../../../../shared/custom-icon-module';
+import { SwalMessages } from '../../../../shared/swal-messages';
 
 @Component({
   selector: 'app-register',
@@ -16,6 +17,8 @@ import { CustomIconModule } from '../../../../shared/custom-icon-module';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+
+  swal: SwalMessages = new SwalMessages(); // swal messages
 
   registerForm = new FormGroup(
     {
@@ -57,10 +60,10 @@ export class RegisterComponent {
       this.authenticationService.register(usuario).subscribe(
         (response: {message: string}) => {
           this.showLoading = false;
-          alert(`${response.message}.`);
+          this.swal.successMessage("¡Tu cuenta ha sido creada exitosamente!");
         },
         (errorResponse: HttpErrorResponse) => {
-          alert(errorResponse.error.message);
+          this.swal.errorMessage(errorResponse.error.message);
           this.showLoading = false;
         }
       )
