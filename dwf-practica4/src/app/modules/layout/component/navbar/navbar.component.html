@@ -28,7 +28,7 @@
               </button>
         }
 
-        @if (rol != 'USER' || rol != 'ADMIN') {
+        @if (rol != 'USER' && rol != 'ADMIN') {
             <div class="nav-item dropdown">
                 <a class="nav-link" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <i class="ph ph-user i-nav"></i> <!-- Ícono de perfil -->
