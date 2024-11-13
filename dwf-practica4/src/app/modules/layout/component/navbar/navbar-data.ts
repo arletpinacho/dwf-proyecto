@@ -10,10 +10,6 @@ export const adminNavItems: NavItem[] = [
     {
         displayName: 'Categorías',
          route: '/category',         
-    },
-    {
-        displayName: 'Regiones',
-         route: '/region',         
     }
 ]
 

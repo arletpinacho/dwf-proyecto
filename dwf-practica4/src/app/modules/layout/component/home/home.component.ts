@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Product } from '../../../product/_model/product';
 import { ProductService } from '../../../product/_service/product.service';
 import { SwalMessages } from '../../../../shared/swal-messages';
@@ -11,13 +11,15 @@ import { ProductImage } from '../../../product/_model/product-image';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
   loading = false;
   popular: Product[] = [];
   productImgs: { productId: number, images: ProductImage[] }[] = [];
   swal: SwalMessages = new SwalMessages(); // swal messages
+
+  @ViewChild('videoElement') videoElement!: ElementRef<HTMLVideoElement>;
 
   constructor(
     private productService: ProductService,
@@ -27,14 +29,32 @@ export class HomeComponent {
   ngOnInit() {
     this.getPopular();
   }
-  
-  getPopular(){
+
+   // Método para iniciar la reproducción al presionar el botón
+   startVideo(event: MouseEvent) {
+    const video: HTMLVideoElement = this.videoElement.nativeElement;
+    video.play();
+  }
+
+  // Método para detener la reproducción y reiniciar el video cuando se suelta el botón
+  stopVideo(event: MouseEvent) {
+    const video: HTMLVideoElement = this.videoElement.nativeElement;
+    video.pause();
+    video.currentTime = 0; // Reinicia el video al inicio
+  }
+
+  // Método para manejar el mouseout (cuando el mouse se va del botón)
+  handleMouseOut(event: MouseEvent) {
+    this.stopVideo(event);
+  }
+
+  getPopular() {
     this.loading = true;
     this.productService.getProducts().subscribe({
       next: (v) => {
         let products = v;
         this.loading = false;
-        this.popular = products.length >= 5 ? this.shuffleArray(products).slice(0, 5): products;
+        this.popular = products.length >= 4 ? this.shuffleArray(products).slice(0, 4) : products;
         this.getProductImagesForPopular();
       },
       error: (e) => {
