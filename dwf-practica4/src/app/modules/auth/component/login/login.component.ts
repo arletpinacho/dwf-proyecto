@@ -33,7 +33,7 @@ export class LoginComponent {
 
   ngOnInit(): void {
     if (this.authenticationService.isUserLoggedIn()) {
-      this.router.navigateByUrl("");
+      this.router.navigateByUrl('');
     } else {
       this.router.navigateByUrl('/login');
     }
@@ -50,7 +50,7 @@ export class LoginComponent {
             const token = response.body.token;
             this.authenticationService.saveToken(token);
             this.authenticationService.addUserToLocalCache(response.body);
-            this.router.navigateByUrl('/secured');
+            this.router.navigateByUrl('');
             this.showLoading = false; 
           }else{
             if (response.body === null) {

@@ -40,7 +40,7 @@ export class RegisterComponent {
 
   ngOnInit(): void {
     if (this.authenticationService.isUserLoggedIn()) {
-      this.router.navigateByUrl('/secured');
+      this.router.navigateByUrl('');
     }
   }
 
