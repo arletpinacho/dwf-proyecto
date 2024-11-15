@@ -59,9 +59,8 @@ export class ProductByCategoryComponent {
     this.productService.getProductsByCategory(this.category_id).subscribe({
       next: (v) => {
         this.products = v;
-        this.loading = false;
-        console.log(v);
         this.getProductImages();
+        this.loading = false;
       },
       error: (e) => {
         console.error(e.error.message);
@@ -78,12 +77,10 @@ export class ProductByCategoryComponent {
       this.productImageService.getProductImages(product.product_id).subscribe({
         next: (images) => {
           this.productImgs[product.product_id] = images;
-          this.loading = false;
         },
         error: (e) => {
           console.log(e);
           this.swal.errorMessage(e);
-          this.loading = false;
         }
       });
     });

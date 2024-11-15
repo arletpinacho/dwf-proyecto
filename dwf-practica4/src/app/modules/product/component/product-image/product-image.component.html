@@ -83,7 +83,7 @@
             <!-- product image USER -->
             @if (rol == 'USER') {
                 <div class="col-md-4">
-                    <div class="card">
+                    <div class="card noneb">
                         <div *ngIf="productImgs.length > 1" id="carouselExampleIndicators" class="carousel slide"
                             data-bs-ride="true">
                             <div class="carousel-indicators">
@@ -116,11 +116,18 @@
                                 <div *ngIf="productImgs.length == 0" class="carousel-item active">
                                     <img src="assets/no-product-image.png" class="d-block w-100" alt="...">
                                 </div>
+                                <div *ngFor="let prod of productImgs" class="carousel-item active">
+                                    <div class="carousel-del">
+                                        <a (click)="deleteProductImage(prod.product_image_id)" class="trash"><i class="fas fa-trash-alt cursor-pointer"></i></a>
+                                    </div>
+                                    <img src="{{ prod.image !== '' ? prod.image : 'assets/no-product-image.png'}}"
+                                        class="d-block w-100" alt="...">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                }
+            }
 
             <!-- product data admin -->
             @if (rol == 'ADMIN') {
@@ -152,7 +159,7 @@
                                 <!-- price -->
                                 <tr>
                                     <th class="col-md-4">Precio</th>
-                                    <td>{{ product.price }}</td>
+                                    <td>{{ product.price | currency }}</td>
                                 </tr>
 
                                 <!-- stock -->
@@ -176,17 +183,17 @@
             <!-- product data user -->
             @if (rol == 'USER') {
                 <div class="col-md-8">
-                    <div class="card">
+                    <div class="card noneb">
                         <div class="card-body-product">
     
                             <!-- product -->
-                            <div class="product-title" style="margin-left: 8px;">
-                                {{ product.product }}
+                            <div class="product-title">
+                                <h4>{{ product.product }}</h4>
                             </div>
             
                             <!-- price -->
-                            <div class="product-price">
-                                <strong>Precio:</strong> {{ product.price }}
+                            <div class="product-price m-4">
+                                <strong>MXN</strong> {{ product.price | currency }}
                             </div>
             
                             <!-- Add product actions (increment, decrement buttons) -->
@@ -195,21 +202,21 @@
                                 [maxQuantity]="product.stock"
                                 (quantityChanged)="onQuantityChanged($event)">
                              </app-quantity-selector>
-
+                             
                             <button *ngIf="product.stock > 0" 
-                                class="btn btn-primary"
+                                class="btn noneb btn-primary mt-5"
                                 [disabled]="quantity <= 0" 
                                 (click)="addToCart(product, quantity)">
                                 Agregar al Carrito
                             </button>
                             
                             <!-- Agotado -->
-                            <div *ngIf="product.stock === 0" class="out-of-stock">
+                            <div *ngIf="product.stock === 0" class="out-of-stock m-5">
                                 Agotado
                             </div>
 
                             <!-- description -->
-                            <div class="product-description">
+                            <div class="product-description mt-4 mb-5">
                                 <strong>Descripción:</strong> {{ product.description }}
                             </div>
                         </div>
@@ -331,7 +338,7 @@
                         <!-- button  -->
 
                         <div class="form-button">
-                            <button type="submit" class="btn btn-primary btn-form">Guardar</button>
+                            <button type="submit" class="btn noneb btn-form">Guardar</button>
                         </div>
 
                     </form>

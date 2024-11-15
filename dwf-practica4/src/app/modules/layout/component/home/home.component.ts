@@ -53,9 +53,9 @@ export class HomeComponent {
     this.productService.getProducts().subscribe({
       next: (v) => {
         let products = v;
-        this.loading = false;
         this.popular = products.length >= 4 ? this.shuffleArray(products).slice(0, 4) : products;
         this.getProductImagesForPopular();
+        this.loading = false;
       },
       error: (e) => {
         this.loading = false;
@@ -73,12 +73,10 @@ export class HomeComponent {
       this.productImageService.getProductImages(product.product_id).subscribe({
         next: (images) => {
           this.productImgs[product.product_id] = images;
-          this.loading = false;
         },
         error: (e) => {
           console.log(e);
           this.swal.errorMessage(e);
-          this.loading = false;
         }
       });
     });

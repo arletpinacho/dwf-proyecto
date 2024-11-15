@@ -67,6 +67,7 @@ export class ProductImageComponent {
 
   ngOnInit(){
     this.gtin = this.route.snapshot.paramMap.get('gtin')!;
+    console.log(this.gtin);
     if(this.gtin){
       this.getProductImages();
       this.getProduct();
@@ -91,10 +92,12 @@ export class ProductImageComponent {
       title: "¿Quieres eliminar esta imagen del producto?",
     }).then((result) => {
       if (result.isConfirmed) {
+        this.loading = true;
         this.productImageService.deleteProductImage(product_image_id).subscribe({
           next: (v) => {
             this.swal.successMessage("La imagen ha sido eliminada.");
             this.getProductImages();
+            this.loading = false;
           }, error: (e) => {
             console.log(e);
             this.swal.errorMessage(e.error.message);
@@ -109,8 +112,8 @@ export class ProductImageComponent {
     this.productService.getProduct(this.gtin).subscribe({
       next: (v) => {
         this.product = v;
-        this.loading = false;
         this.getProductImages(); //Cargamos las imagenes que pueda tener el producto.
+        this.loading = false;
       },
       error: (e) => {
         console.error(e.error.message);
@@ -232,7 +235,7 @@ export class ProductImageComponent {
       gtin: product.gtin,
       product: product,
       quantity: this.quantity,
-      image: this.productImgs[1].image
+      image: this.productImgs[0] ? this.productImgs[0].image : ""
     };
 
     // Llamar al servicio para agregar al carrito en el backend

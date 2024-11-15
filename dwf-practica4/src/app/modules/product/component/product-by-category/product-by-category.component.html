@@ -16,12 +16,12 @@
                     <div class="col mb-5">
 
                         <div class="product-container">
-                            <img src="{{ productImgs[product.product_id].length > 0 ? productImgs[product.product_id][0].image: 'assets/no-product-image2.png' }}" class="d-block w-100" alt="..."> 
+                            <img src="{{ productImgs[product.product_id] && productImgs[product.product_id].length > 0 ? productImgs[product.product_id][0].image: 'assets/no-product-image2.png' }}" class="d-block w-100" alt="..."> 
                             
                             <div class="overlay">
                                 <div class="card product-container h-100">
                                     <div class="card border-0">
-                                        <div *ngIf="productImgs[product.product_id].length > 1" [id]="'carouselExampleIndicators' + j" class="carousel slide"
+                                        <div *ngIf="productImgs[product.product_id] && productImgs[product.product_id].length > 1" [id]="'carouselExampleIndicators' + j" class="carousel slide"
                                             data-bs-ride="true">
                                             <div class="carousel-indicators">
                                                 <button *ngFor="let img of productImgs[product.product_id]; let i = index" type="button" class="indicator"
@@ -47,7 +47,7 @@
                                                 <span class="visually-hidden">Next</span>
                                             </button>
                                         </div>
-                                        <div *ngIf="productImgs[product.product_id].length <= 1" [id]="'carouselExampleIndicators' + j" class="carousel slide"
+                                        <div *ngIf="productImgs[product.product_id] && productImgs[product.product_id].length <= 1" [id]="'carouselExampleIndicators' + j" class="carousel slide"
                                             data-ride="carousel">                        
                                             <div class="carousel-inner">
                                                 <div *ngIf="productImgs[product.product_id].length == 0" class="carousel-item active">
@@ -73,7 +73,7 @@
                                     <!--- Product price -->
                                     <p class="product-price">MXN {{ product.price.toFixed(2) }}</p>
                                     <div class="text-center">
-                                        <a class="btn btn-link ver-detalles text-uppercase" href="product/{{product.gtin}}" style="font-size: 0.7em; font-weight: bold; color: black;">Ver detalles</a>
+                                        <a class="btn btn-link ver-detalles text-uppercase" href="product/{{product.gtin}}" style="font-size: 0.7em; font-weight: bold;">Ver detalles</a>
                                     </div>
                                 </div>
                             </div>

@@ -33,17 +33,18 @@
             <!-- contenido de la tabla -->
             <tbody>
               @for(c of carrito; track c; let i = $index ) {
-                <tr>
+                <tr> 
                   <td>
-                    <img src="{{ productsImgs[i].image !== '' ? productsImgs[1].image : 'assets/no-product-image.png'}}" class="d-block w-100" alt="...">
-                    {{ c.product.product }}
-                  </td>
-                  <td>{{ c.product.price}}</td>
+                    <img src="{{ c.image != '' ? c.image : 'assets/no-product-image2.png' }}" class="d-block w-50" alt="..."> 
+                    {{ c.product.product }}</td>
+                  <td>{{ c.product.price }}</td>
                   <td>{{ c.quantity }}</td>
-                  <td>{{ c.product.price * c.quantity }}</td>
+                  <td>{{ c.product.price * c.quantity | currency }}</td>
+                  <td>
+                    <span>Eliminar</span>
+                  </td>
                   <td>
                     <span class="icon-text-button" (click)="deleteProduct(c.cart_id)"> <i class="ph ph-trash"></i> </span>
-                    <span>Eliminar</span>
                   </td>
                 </tr>
               }

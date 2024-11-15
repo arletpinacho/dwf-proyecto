@@ -6,29 +6,27 @@ import { ProductImageService } from '../../../product/_service/product-image.ser
 import { ProductImage } from '../../../product/_model/product-image';
 import { Product } from '../../../product/_model/product'; 
 import { Observable, of } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
 export class CartComponent {
 
   carrito: Cart[] = []; //si tenemos n productos, tendremos n elementos de tipo Cart en la lista (cada uno tiene un producto)
-  productsImgs: ProductImage[] = [];
   loading = false; // loading request
   swal: SwalMessages = new SwalMessages(); // swal messages
 
   constructor(
-    private cartService: CartService,
-    private productImageService: ProductImageService
+    private cartService: CartService
   ){}
 
   ngOnInit(){
     this.getCarrito();
-    this.getImages();
   }
 
   deleteProduct(cart_id: number){
@@ -38,11 +36,12 @@ export class CartComponent {
       if (result.isConfirmed) {
         this.cartService.removeFromCart(cart_id).subscribe({
           next: (v) => {
+            this.loading = false;
             this.swal.successMessage("El producto ha sido eliminado.");
             this.getCarrito();
-            this.getImages();
           }, error: (e) => {
             console.log(e);
+            this.loading = false;
             this.swal.errorMessage(e.error.message);
           }
         });
@@ -63,35 +62,4 @@ export class CartComponent {
       }
     });
   }
-
-  getProductImage(product_id: number): ProductImage {
-    this.loading = true;
-    let productImgs: ProductImage[] = [];
-    this.productImageService.getProductImages(product_id).subscribe({
-      next: (v) => {
-        productImgs = v;
-        this.loading = false;
-        if(productImgs.length > 0) {
-          return productImgs[0];
-        } else {
-          console.log("El producto no cuenta con imagenes.");
-          return new ProductImage();
-        }
-      },
-      error: (e) => {
-        console.log(e);
-        this.loading = false;
-        return new ProductImage();
-      }
-    });
-    return new ProductImage();
-  }
-
-  getImages() {
-    for (let i = 0; i < this.carrito.length; i++) {
-      if(this.getProductImage) {
-        this.productsImgs[i] = this.getProductImage(this.carrito[i].product.product_id);
-      } 
-    }
-  }  
 }
