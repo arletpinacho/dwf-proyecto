@@ -43,26 +43,21 @@
                 <ng-container *ngFor="let product of popular.slice(0, 4); let j = index"> <!-- Limitamos a solo 4 productos -->
                     <div class="col mb-5"> <!-- Cambié .product-container por .col mb-5 para que los productos se distribuyan en columnas -->
                         <div class="product-container h-100">
-                            <img src="{{ productImgs[j] && productImgs[j].images.length > 0 ? productImgs[j].images[0].image : 'assets/no-product-image2.png' }}"
-                                class="d-block w-100" alt="..."> 
+                            <img src="{{ productImgs[product.product_id].length > 0 ? productImgs[product.product_id][0].image: 'assets/no-product-image2.png' }}" class="d-block w-100" alt="...">
                             
                             <div class="overlay">
                                 <div class="card product-container h-100">
                                     <div class="card border-0">
-                                        @if (productImgs[j] && productImgs[j].images) {
-                                        <div *ngIf="productImgs[j].images.length > 1 && productImgs[j].images != undefined" [id]="'carouselExampleIndicators' + j" class="carousel slide"
+                                        <div *ngIf="productImgs[product.product_id].length > 1" [id]="'carouselExampleIndicators' + j" class="carousel slide"
                                             data-bs-ride="true">
                                             <div class="carousel-indicators">
-                                                <button *ngFor="let img of productImgs[j].images; let i = index" type="button" class="indicator"
+                                                <button *ngFor="let img of productImgs[product.product_id]; let i = index" type="button" class="indicator"
                                                     data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="i"
                                                     [class.active]="i === 0" [attr.aria-current]="i === 0"
                                                     [attr.aria-label]="'Slide ' + i"></button>
                                             </div>
                                             <div class="carousel-inner">
-                                                <div class="carousel-add">
-                                                  <!--   <a (click)="addToCart(product, 1)" class="ph ph-shopping-bag"></a> -->
-                                                </div>
-                                                <div *ngFor="let img of productImgs[j].images; let i = index" class="carousel-item"
+                                                <div *ngFor="let img of productImgs[product.product_id]; let i = index" class="carousel-item"
                                                     [class.active]="i === 0">
                                                     <img src="{{ img.image !== '' ? img.image : 'assets/no-product-image2.png'}}"
                                                         class="d-block w-100" alt="...">
@@ -79,19 +74,18 @@
                                                 <span class="visually-hidden">Next</span>
                                             </button>
                                         </div>
-                                        <div *ngIf="productImgs[j].images.length <= 1" [id]="'carouselExampleIndicators' + j" class="carousel slide"
+                                        <div *ngIf="productImgs[product.product_id].length <= 1" [id]="'carouselExampleIndicators' + j" class="carousel slide"
                                             data-ride="carousel">                        
                                             <div class="carousel-inner">
-                                                <div *ngIf="productImgs[j].images.length == 0" class="carousel-item active">
+                                                <div *ngIf="productImgs[product.product_id].length == 0" class="carousel-item active">
                                                     <img src="assets/no-product-image2.png" class="d-block w-100" alt="...">
                                                 </div>
-                                                <div *ngFor="let img of productImgs[j].images; let i = index" class="carousel-item active">
+                                                <div *ngFor="let img of productImgs[product.product_id]; let i = index" class="carousel-item active">
                                                     <img src="{{ img.image !== '' ? img.image : 'assets/no-product-image2.png'}}"
                                                         class="d-block w-100" alt="...">
                                                 </div>
                                             </div>
                                         </div>
-                                        }
                                     </div>
                                 </div>
 

@@ -16,7 +16,7 @@ import { ProductImage } from '../../../product/_model/product-image';
 export class HomeComponent {
   loading = false;
   popular: Product[] = [];
-  productImgs: { productId: number, images: ProductImage[] }[] = [];
+  productImgs: { [productId: number]: ProductImage[] } = {};
   swal: SwalMessages = new SwalMessages(); // swal messages
 
   @ViewChild('videoElement') videoElement!: ElementRef<HTMLVideoElement>;
@@ -66,16 +66,19 @@ export class HomeComponent {
   }
 
   getProductImagesForPopular() {
+    this.loading = true;
     this.productImgs = []; // Limpiamos la lista de imágenes antes de llenarla
 
     this.popular.forEach(product => {
       this.productImageService.getProductImages(product.product_id).subscribe({
         next: (images) => {
-          this.productImgs.push({ productId: product.product_id, images: images });
+          this.productImgs[product.product_id] = images;
+          this.loading = false;
         },
         error: (e) => {
           console.log(e);
           this.swal.errorMessage(e);
+          this.loading = false;
         }
       });
     });

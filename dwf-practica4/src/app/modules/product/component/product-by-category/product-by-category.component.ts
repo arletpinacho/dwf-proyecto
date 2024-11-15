@@ -21,7 +21,7 @@ export class ProductByCategoryComponent {
   category_id = 0;
   category: Category = new Category();
   products: Product[] = [];
-  productImgs: { productId: number, images: ProductImage[] }[] = [];
+  productImgs: { [productId: number]: ProductImage[] } = {};
   swal: SwalMessages = new SwalMessages(); // swal messages
 
   constructor (
@@ -71,16 +71,19 @@ export class ProductByCategoryComponent {
   }
 
   getProductImages() {
+    this.loading = true;
     this.productImgs = []; // Limpiamos la lista de imágenes antes de llenarla
 
     this.products.forEach(product => {
       this.productImageService.getProductImages(product.product_id).subscribe({
         next: (images) => {
-          this.productImgs.push({ productId: product.product_id, images: images });
+          this.productImgs[product.product_id] = images;
+          this.loading = false;
         },
         error: (e) => {
           console.log(e);
           this.swal.errorMessage(e);
+          this.loading = false;
         }
       });
     });
