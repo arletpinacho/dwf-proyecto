@@ -4,7 +4,7 @@
     <div class="card-header d-flex justify-content-between align-items-center">
       <h4>Listado de productos</h4>
       <button type="button" class="btn noneb btn-primary btn-new" style="float: right;" (click)="showModalForm()">
-        <i class="ph ph-plus-circle"></i> Agregar producto
+        <i class="ph ph-plus-circle"></i> Nuevo producto
       </button>
     </div>
 
@@ -84,6 +84,10 @@
           </tbody>
         </table>
       }
+    </div>
+    <!-- Pie de página de la tabla -->
+    <div class="card-footer text-end">
+      <small>{{ current_date | date: 'dd/MMM/yyyy, h:mm a' }}</small>
     </div>
   </div>
 

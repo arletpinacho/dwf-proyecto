@@ -6,12 +6,13 @@ import { RegionComponent } from './modules/customer/component/region/region.comp
 import { LoginComponent } from './modules/auth/component/login/login.component';
 import { RegisterComponent } from './modules/auth/component/register/register.component';
 import { SecuredComponent } from './modules/auth/component/secured/secured.component';
-import { adminGuard, authenticationGuard } from './modules/auth/authentication.guard';
+import { adminGuard, authenticationGuard, userGuard } from './modules/auth/authentication.guard';
 import { ProductComponent } from './modules/product/component/product/product.component';
 import { HomeComponent } from './modules/layout/component/home/home.component';
 import { InvoiceComponent } from './modules/invoice/component/invoice/invoice.component';
 import { CartComponent } from './modules/invoice/component/cart/cart.component';
 import { ProductByCategoryComponent } from './modules/product/component/product-by-category/product-by-category.component';
+import { InvoiceDetailComponent } from './modules/invoice/component/invoice-detail/invoice-detail.component';
 
 export const routes: Routes = [
     { 
@@ -56,11 +57,18 @@ export const routes: Routes = [
     },
     { 
         path: 'invoice',
-        component: InvoiceComponent
+        component: InvoiceComponent,
+        canActivate: [adminGuard]
     },
     {
         path: 'cart',
-        component: CartComponent
+        component: CartComponent,
+        canActivate: [userGuard]
     }
-
+    ,
+    { 
+        path: 'invoice/:id',
+        component: InvoiceDetailComponent,
+        canActivate: [userGuard]
+    }
 ];

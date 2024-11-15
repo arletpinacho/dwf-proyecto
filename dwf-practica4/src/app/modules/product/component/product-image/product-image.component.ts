@@ -67,7 +67,7 @@ export class ProductImageComponent {
 
   ngOnInit(){
     this.gtin = this.route.snapshot.paramMap.get('gtin')!;
-    console.log(this.gtin);
+
     if(this.gtin){
       this.getProductImages();
       this.getProduct();

@@ -32,8 +32,8 @@
                             <div *ngFor="let prod of productImgs; let i = index" class="carousel-item"
                                 [class.active]="i === 0">
                                 <div class="carousel-del">
-                                    <i class="ph ph-trash icon-text-button"></i>
-                                    <a (click)="deleteProductImage(prod.product_image_id)" class="ph ph-trash"></a>
+                                    <i class="ph ph-trash ph-trash-image icon-text-button"></i>
+                                    <a (click)="deleteProductImage(prod.product_image_id)" class="ph ph-trash ph-trash-image"></a>
                                 </div>
                                 <img src="{{ prod.image !== '' ? prod.image : 'assets/no-product-image.png'}}"
                                     class="d-block w-100" alt="...">
@@ -63,8 +63,8 @@
                                 <img src="{{ prod.image !== '' ? prod.image : 'assets/no-product-image.png'}}"
                                     class="d-block w-100" alt="...">
                                 <div class="carousel-del">
-                                    <i class="ph ph-trash icon-text-button"></i>
-                                    <a (click)="deleteProductImage(prod.product_image_id)" class="ph ph-trash"></a>
+                                    <i class="ph ph-trash ph-trash-image icon-text-button"></i>
+                                    <a (click)="deleteProductImage(prod.product_image_id)" class="ph ph-trash ph-trash-image"></a>
                                 </div>
                             </div>
                         </div>
@@ -117,9 +117,6 @@
                                     <img src="assets/no-product-image.png" class="d-block w-100" alt="...">
                                 </div>
                                 <div *ngFor="let prod of productImgs" class="carousel-item active">
-                                    <div class="carousel-del">
-                                        <a (click)="deleteProductImage(prod.product_image_id)" class="trash"><i class="fas fa-trash-alt cursor-pointer"></i></a>
-                                    </div>
                                     <img src="{{ prod.image !== '' ? prod.image : 'assets/no-product-image.png'}}"
                                         class="d-block w-100" alt="...">
                                 </div>

@@ -10,6 +10,10 @@ export const adminNavItems: NavItem[] = [
     {
         displayName: 'Categorías',
          route: '/category',         
+    },
+    {
+        displayName: 'Facturas',
+         route: '/invoice',         
     }
 ]
 

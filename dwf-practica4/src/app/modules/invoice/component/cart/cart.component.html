@@ -23,11 +23,11 @@
             <!-- encabezados de la tabla -->
             <thead>
               <tr class="table-primary">
-                <th>Producto</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>Total</th>
-                <th>Más</th>
+                <th class="text-center">Producto</th>
+                <th class="text-center">Precio</th>
+                <th class="text-center">Cantidad</th>
+                <th class="text-center">Total</th>
+                <th class="text-center">Eliminar</th>
               </tr>
             </thead>
             <!-- contenido de la tabla -->
@@ -35,16 +35,25 @@
               @for(c of carrito; track c; let i = $index ) {
                 <tr> 
                   <td>
-                    <img src="{{ c.image != '' ? c.image : 'assets/no-product-image2.png' }}" class="d-block w-50" alt="..."> 
-                    {{ c.product.product }}</td>
-                  <td>{{ c.product.price }}</td>
-                  <td>{{ c.quantity }}</td>
-                  <td>{{ c.product.price * c.quantity | currency }}</td>
-                  <td>
-                    <span>Eliminar</span>
+                    <div class="d-flex align-items-center">
+                      <div class="image-container">
+                        @if(c.image != "data:image/png;base64,"){
+                          <img src="{{ c.image }}" class="d-block image-cart w-50" alt="...">
+                        } @else {
+                          <img src="assets/no-product-image2.png" class="d-block image-cart w-50" alt="No product image">
+                        }
+                      </div>
+                      <div>
+                        <h6 class="product-name-cart">{{ c.product.product }}</h6>
+                      </div>
+                    </div>
                   </td>
-                  <td>
-                    <span class="icon-text-button" (click)="deleteProduct(c.cart_id)"> <i class="ph ph-trash"></i> </span>
+                  
+                  <td class="text-center align-middle">{{ c.product.price | currency }}</td>
+                  <td class="text-center align-middle">{{ c.quantity }}</td>
+                  <td class="text-center align-middle">{{ c.product.price * c.quantity | currency }}</td>
+                  <td class="text-center align-middle">
+                    <span class="icon-text-button" (click)="deleteProduct(c.cart_id)"> <i class="ph ph-trash ph-trash-product"></i> </span>
                   </td>
                 </tr>
               }

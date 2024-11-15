@@ -28,3 +28,18 @@ export const adminGuard: CanActivateFn = (route, state) => {
 
   return true; // Permite la navegación si el rol es admin
 };
+
+export const userGuard: CanActivateFn = (route, state) => {
+  const authenticationService = inject(AuthenticationService);
+  const router = inject(Router);
+
+  // Obtén el rol del usuario
+  const userRole = authenticationService.getUserRol();
+  console.log(userRole);
+  if (userRole != 'USER') {
+    console.log('No tiene acceso a esta ruta. Para acceder ingrese con una cuenta de cliente.');
+    return inject(Router).navigate(['/login']);
+  }
+
+  return true; // Permite la navegación si el rol es admin
+};
