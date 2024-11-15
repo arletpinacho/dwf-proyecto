@@ -181,8 +181,13 @@
   .btn i{
     margin-right: 10px;
   }
-  .btn-noneb {
+
+  .noneb {
     border: none !important;
+  }
+
+  .cursor-pointer:hover {
+    cursor: pointer;
   }
   
   /* save button (form)*/
@@ -362,6 +367,11 @@
     font-size: 0.7em; /* Ajusta el tamaño de la fuente */
     margin-bottom: 0px;
     color: black;
+  }
+
+  .product-title h4{
+    text-align: center;
+    font-weight: bold;
   }
 
   /* Estilo específico para el precio */

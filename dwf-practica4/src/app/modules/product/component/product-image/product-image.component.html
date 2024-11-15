@@ -5,7 +5,7 @@
             Regresar
         </span>
         @if (rol == 'ADMIN') {
-        <button type="button" class="btn btn-noneb btn-info btn-new" (click)="updateProduct()">
+        <button type="button" class="btn noneb btn-info btn-new" (click)="updateProduct()">
             <i class="ph ph-note-pencil icon-text-button"></i>
             Editar producto
         </button>
@@ -19,7 +19,7 @@
             <!-- product image ADIN -->
             @if (rol == 'ADMIN') {
             <div class="col-md-4">
-                <div class="card">
+                <div class="card noneb">
                     <div *ngIf="productImgs.length > 1" id="carouselExampleIndicators" class="carousel slide"
                         data-bs-ride="true">
                         <div class="carousel-indicators">
@@ -62,6 +62,10 @@
                                 </div>
                                 <img src="{{ prod.image !== '' ? prod.image : 'assets/no-product-image.png'}}"
                                     class="d-block w-100" alt="...">
+                                <div class="carousel-del">
+                                    <i class="ph ph-trash icon-text-button"></i>
+                                    <a (click)="deleteProductImage(prod.product_image_id)" class="ph ph-trash"></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -69,8 +73,7 @@
                         <label for="uploadImage" class="cursor-pointer">
                             <input type="file" (change)="fileChangeHandler($event)" id="uploadImage"
                                 style="display:none">
-                            <i class="ph ph-note-pencil icon-text-button"></i>
-                            <p class="item-txt"> Agregar imagen </p>
+                            <i class="ph ph-note-pencil icon-text-button"></i><p class="item-txt"> Agregar imagen </p>
                         </label>
                     </div>
                 </div>
@@ -127,8 +130,8 @@
 
                         <!-- product -->
 
-                        <div class="product-title" style="margin-left: 8px;">
-                            {{ product.product }}
+                        <div class="product-title">
+                            <h4>{{ product.product }}</h4>
                         </div>
 
                         <table class="table">

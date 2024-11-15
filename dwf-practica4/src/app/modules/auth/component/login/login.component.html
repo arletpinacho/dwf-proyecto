@@ -23,7 +23,7 @@
             <span class="help-block" style="color:red;" *ngIf="fg.password.invalid && fg.password.touched">Ingresa la
               contraseña.</span>
             <div class="d-flex justify-content-center mt-3 login_container">
-              <button type="submit" [disabled]="loginForm.invalid || showLoading" name="button" class="btn btn-noneb login_btn btn-info">
+              <button type="submit" [disabled]="loginForm.invalid || showLoading" name="button" class="btn noneb login_btn btn-info">
                 <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
                 <span *ngIf="showLoading">Cargando...</span>
                 <i class="ph ph-sign-in"></i> 

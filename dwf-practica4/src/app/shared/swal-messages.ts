@@ -38,8 +38,8 @@ export class SwalMessages{
         customClass: {
             title: 'swal-title',
             icon: 'swal-icon',
-            confirmButton: 'btn btn-noneb btn-primary swal-confirm-button',
-            cancelButton: 'btn  btn-noneb btn-danger swal-cancel-button',
+            confirmButton: 'btn noneb btn-primary swal-confirm-button',
+            cancelButton: 'btn  noneb btn-danger swal-cancel-button',
         },
     });
 }
