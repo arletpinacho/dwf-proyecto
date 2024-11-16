@@ -1,14 +1,14 @@
 <div class="card m-4">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <span class="btn-return" (click)="redirect('product')">
+        <span class="btn-return" (click)="regresar()">
             <i class="ph ph-arrow-circle-left icon-text-button"></i>
             Regresar
         </span>
         @if (rol == 'ADMIN') {
-        <button type="button" class="btn noneb btn-info btn-new" (click)="updateProduct()">
-            <i class="ph ph-note-pencil icon-text-button"></i>
-            Editar producto
-        </button>
+            <button type="button" class="btn noneb btn-info btn-new" (click)="updateProduct()">
+                <i class="ph ph-note-pencil icon-text-button"></i>
+                Editar producto
+            </button>
         }
     </div>
     <br>

@@ -15,6 +15,7 @@ import { AuthenticationService } from '../../../auth/_service/authentication.ser
 import { QuantitySelectorComponent } from '../../../layout/component/quantity-selector/quantity-selector.component';
 import { CartService } from '../../../invoice/_service/cart.service';
 import { Cart } from '../../../invoice/_model/cart';
+import { Location } from '@angular/common';
 
 declare var $:any;
 
@@ -58,7 +59,8 @@ export class ProductImageComponent {
     private ngxService: NgxPhotoEditorService,
     private route: ActivatedRoute,
     private router: Router,
-    private cartService: CartService
+    private cartService: CartService,
+    private location: Location
   ){
     this.authenticationService.rol.subscribe((role: string) => {
       this.rol = role;
@@ -241,6 +243,7 @@ export class ProductImageComponent {
     // Llamar al servicio para agregar al carrito en el backend
     this.cartService.addToCart(newCartItem).subscribe({
       next: () => {
+        product.stock = product.stock - quantity;
         this.swal.successMessage(`Se agregó ${quantity} unidad(es) al carrito.`);
       },
       error: (error) => {
@@ -248,5 +251,10 @@ export class ProductImageComponent {
         this.swal.errorMessage("Ocurrió un error al agregar el producto al carrito.");
       }
     });
+  }
+
+  regresar() {
+    // Regresa a la página anterior en el historial
+    this.location.back();
   }
 }
