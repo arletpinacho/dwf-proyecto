@@ -4,13 +4,14 @@ import { CategoryService } from '../../_service/category.service';
 import { SharedModule } from '../../../../shared/shared-module';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SwalMessages } from '../../../../shared/swal-messages';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 declare var $:any;
 
 @Component({
   selector: 'app-category',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, NgxPaginationModule],
   templateUrl: './category.component.html',
   styleUrl: './category.component.css'
 })
@@ -24,6 +25,8 @@ export class CategoryComponent {
   current_date = new Date(); // hora y fecha actual
   category_id = -1; // current category id
   update = 0;
+  p: number = 1; //pagination
+  itemsPerPage: number = 8;
 
   // form New Categories
   form = this.formBuilder.group({

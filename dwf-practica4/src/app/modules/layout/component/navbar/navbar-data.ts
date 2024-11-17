@@ -4,16 +4,20 @@ import { NavItem } from './nav-item/nav-item';
 acceso un usuario con rol ADMIN */
 export const adminNavItems: NavItem[] = [
     {
+        displayName: 'Clientes',
+         route: '/customer',         
+    },
+    {
+        displayName: 'Facturas',
+         route: '/invoice',         
+    },
+    {
         displayName: 'Productos',
          route: '/product',         
     },
     {
         displayName: 'Categorías',
          route: '/category',         
-    },
-    {
-        displayName: 'Facturas',
-         route: '/invoice',         
     }
 ]
 

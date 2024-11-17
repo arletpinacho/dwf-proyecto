@@ -13,6 +13,8 @@ import { InvoiceComponent } from './modules/invoice/component/invoice/invoice.co
 import { CartComponent } from './modules/invoice/component/cart/cart.component';
 import { ProductByCategoryComponent } from './modules/product/component/product-by-category/product-by-category.component';
 import { InvoiceDetailComponent } from './modules/invoice/component/invoice-detail/invoice-detail.component';
+import { CustomerComponent } from './modules/customer/component/customer/customer.component';
+import { CustomerImageComponent } from './modules/customer/component/customer-image/customer-image.component';
 
 export const routes: Routes = [
     { 
@@ -70,5 +72,13 @@ export const routes: Routes = [
         path: 'invoice/:id',
         component: InvoiceDetailComponent,
         canActivate: [userGuard]
+    },{
+        path: 'customer',
+        component: CustomerComponent,
+        canActivate: [adminGuard]
+    },
+    {
+        path: 'customer/:rfc',
+        component: CustomerImageComponent
     }
 ];

@@ -35,57 +35,53 @@
             </thead>
             <!-- contenido de la tabla -->
             <tbody>
-              @for (category of categories; track category.category_id; let i = $index) {
-                <tr>
-                  <th>{{ i+1 }}</th>
-                  <td>{{ category.category }}</td>
-                  <td>{{ category.tag }}</td>
-                  <td>
-                    @if (category.status == 1) {
-                      {{ "Disponible" }}
-                    }@else {
-                      {{ "Agotado" }}
-                    }
-                  </td>
-                  <td>
-                    <div class="dropdown">
-                      <!-- dots button  -->
-                      <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
-                      </button>
-                      <!-- options -->
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item edit-item" (click)="updateCategory(category)">
-                          <span class="icon-text-button margin-right-activar">
-                            <i class="ph ph-note-pencil icon-text-ul"></i>
-                          </span>
-                          <span>Editar</span>
-                        </a>
-                        @if (category.status == 0) {
-                          <a class="dropdown-item enable-item" (click)="activateCategory(category.category_id)">
-                            <span class="icon-text-button margin-right-activar">
-                              <i class="ph ph-check-circle icon-text-ul"></i>
-                            </span>
-                            <span>Activar</span>
-                          </a>
-                        }
-                        @if (category.status == 1) {
-                          <a class="dropdown-item disable-item" (click)="deleteCategory(category.category_id)">
-                            <span class="icon-text-button margin-right-activar">
-                              <i class="ph ph-x-circle icon-text-ul"></i>
-                            </span>
-                            <span>Desactivar</span>
-                          </a>
-                        }
-                      </div>
+              <!-- Using ngFor to loop over paginated categories -->
+              <tr *ngFor="let category of categories | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index">
+                <th>{{ (p - 1) * itemsPerPage + i + 1 }}</th> <!-- Dynamic row number based on page -->
+                <td>{{ category.category }}</td>
+                <td>{{ category.tag }}</td>
+                <td>
+                  <span *ngIf="category.status === 1">Disponible</span>
+                  <span *ngIf="category.status === 0">Agotado</span>
+                </td>
+                <td>
+                  <div class="dropdown">
+                    <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item edit-item" (click)="updateCategory(category)">
+                        <span class="icon-text-button margin-right-activar">
+                          <i class="ph ph-note-pencil icon-text-ul"></i>
+                        </span>
+                        <span>Editar</span>
+                      </a>
+                      <a class="dropdown-item enable-item" *ngIf="category.status === 0" (click)="activateCategory(category.category_id)">
+                        <span class="icon-text-button margin-right-activar">
+                          <i class="ph ph-check-circle icon-text-ul"></i>
+                        </span>
+                        <span>Activar</span>
+                      </a>
+                      <a class="dropdown-item disable-item" *ngIf="category.status === 1" (click)="deleteCategory(category.category_id)">
+                        <span class="icon-text-button margin-right-activar">
+                          <i class="ph ph-x-circle icon-text-ul"></i>
+                        </span>
+                        <span>Desactivar</span>
+                      </a>
                     </div>
-                  </td>
-                </tr>
-              }
-              </tbody>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
             </table>
           }
       </div>
+
+      <div *ngIf="categories.length > 8">
+        <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" 
+      nextLabel="Siguiente"></pagination-controls>  
+      </div>
+
       <!-- Pie de página de la tabla -->
       <div class="card-footer text-end">
         <small>{{ current_date | date: 'dd/MMM/yyyy, h:mm a' }}</small>

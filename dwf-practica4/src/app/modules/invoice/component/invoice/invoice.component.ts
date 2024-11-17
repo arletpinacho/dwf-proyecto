@@ -4,11 +4,12 @@ import { SwalMessages } from '../../../../shared/swal-messages';
 import { InvoiceService } from '../../_service/invoice.service';
 import { SharedModule } from '../../../../shared/shared-module';
 import { Router } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-invoice',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, NgxPaginationModule],
   templateUrl: './invoice.component.html',
   styleUrl: './invoice.component.css'
 })
@@ -19,6 +20,8 @@ export class InvoiceComponent {
   current_date = new Date(); // hora y fecha actual
   loading = false; // loading request 
   swal: SwalMessages = new SwalMessages(); // swal messages
+  p: number = 1; //pagination
+  itemsPerPage: number = 8;
 
   constructor(
     private invoiceService: InvoiceService,

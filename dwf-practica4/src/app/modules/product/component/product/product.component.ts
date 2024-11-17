@@ -7,13 +7,14 @@ import { SwalMessages } from '../../../../shared/swal-messages';
 import { CategoryService } from '../../_service/category.service';
 import { ProductService } from '../../_service/product.service';
 import { Router } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 declare var $: any; // JQuery
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, NgxPaginationModule],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
@@ -37,6 +38,8 @@ export class ProductComponent {
   loading = false; // loading request
   submitted = false; // Form submitted
   swal: SwalMessages = new SwalMessages(); // swal messages
+  p: number = 1; //pagination
+  itemsPerPage: number = 8;
 
   constructor(
     private categoryService: CategoryService,
