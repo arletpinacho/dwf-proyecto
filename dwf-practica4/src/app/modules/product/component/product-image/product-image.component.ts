@@ -244,11 +244,11 @@ export class ProductImageComponent {
     this.cartService.addToCart(newCartItem).subscribe({
       next: () => {
         product.stock = product.stock - quantity;
-        this.swal.successMessage(`Se agregó ${quantity} unidad(es) al carrito.`);
+        this.swal.successMessage(`Se agregó ${quantity} unidad(es) a tu bolsa.`);
       },
       error: (error) => {
         console.error("Error al agregar al carrito:", error);
-        this.swal.errorMessage("Ocurrió un error al agregar el producto al carrito.");
+        this.swal.errorMessage("Ocurrió un error al agregar el producto a tu bolsa.");
       }
     });
   }

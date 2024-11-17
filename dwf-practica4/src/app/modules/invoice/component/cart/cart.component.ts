@@ -7,6 +7,7 @@ import { ProductImage } from '../../../product/_model/product-image';
 import { Product } from '../../../product/_model/product'; 
 import { Observable, of } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { InvoiceService } from '../../_service/invoice.service';
 
 @Component({
   selector: 'app-cart',
@@ -22,11 +23,60 @@ export class CartComponent {
   swal: SwalMessages = new SwalMessages(); // swal messages
 
   constructor(
-    private cartService: CartService
+    private cartService: CartService,
+    private invoiceService: InvoiceService
   ){}
 
   ngOnInit(){
     this.getCarrito();
+  }
+
+  buy(){
+    this.swal.confirmMessage.fire({
+      title: "¿Quieres comprar todos los productos de tu bolsa?",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.invoiceService.generateInvoice().subscribe({
+          next: (v) => {
+            this.loading = false;
+            this.swal.successMessage("!Tu factura se ha generado exitosamente!");
+            this.getCarrito();
+          }, error: (e) => {
+            console.log(e);
+            this.loading = false;
+            this.swal.errorMessage(e.error.message);
+          }
+        }); 
+      }
+    });
+  }
+
+  clearCart(){
+    this.cartService.clearCart().subscribe({
+      next: (v) => {
+        this.swal.successMessage("Los productos han sido eliminados.");
+        this.getCarrito();
+      }, error: (e) => {
+        console.log(e);
+      }
+    });
+  }
+
+  deleteCart(){
+    this.swal.confirmMessage.fire({
+      title: "¿Quieres eliminar todos los productos de tu bolsa?",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.cartService.clearCart().subscribe({
+          next: (v) => {
+            this.swal.successMessage("Los productos han sido eliminados.");
+            this.getCarrito();
+          }, error: (e) => {
+            console.log(e);
+          }
+        });
+      }
+    });
   }
 
   deleteProduct(cart_id: number){
