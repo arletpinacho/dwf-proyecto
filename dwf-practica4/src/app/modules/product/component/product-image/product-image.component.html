@@ -82,49 +82,40 @@
 
             <!-- product image USER -->
             @if (rol == 'USER') {
-                <div class="col-md-4">
-                    <div class="card noneb">
-                        <div *ngIf="productImgs.length > 1" id="carouselExampleIndicators" class="carousel slide"
-                            data-bs-ride="true">
-                            <div class="carousel-indicators">
-                                <button *ngFor="let item of productImgs; let i = index" type="button" class="indicator"
-                                    data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="i"
-                                    [class.active]="i === 0" [attr.aria-current]="i === 0"
-                                    [attr.aria-label]="'Slide ' + i"></button>
+                <div class="col-md-7">
+                    <div class="card" style="border: none; background: transparent;">
+                        <div class="row custom-spacing">
+                            <!-- Si solo hay una imagen -->
+                            <div *ngIf="productImgs.length === 1" class="col-12">
+                                <img 
+                                    src="{{ productImgs[0].image !== '' ? productImgs[0].image : 'assets/no-product-image.png'}}" 
+                                    class="d-block w-100 product-img" 
+                                    alt="...">
                             </div>
-                            <div class="carousel-inner">
-                                <div *ngFor="let prod of productImgs; let i = index" class="carousel-item"
-                                    [class.active]="i === 0">
-                                    <img src="{{ prod.image !== '' ? prod.image : 'assets/no-product-image.png'}}"
-                                        class="d-block w-100" alt="...">
+            
+                            <!-- Si hay múltiples imágenes -->
+                            <ng-container *ngIf="productImgs.length > 1">
+                                <div *ngFor="let prod of productImgs" class="col-6 col-md-6">
+                                    <img 
+                                        src="{{ prod.image !== '' ? prod.image : 'assets/no-product-image.png'}}" 
+                                        class="d-block w-100 product-img" 
+                                        alt="...">
                                 </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                                data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                                data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                        <div *ngIf="productImgs.length <= 1" id="carouselExampleIndicators" class="carousel slide"
-                            data-ride="carousel">                        
-                            <div class="carousel-inner">
-                                <div *ngIf="productImgs.length == 0" class="carousel-item active">
-                                    <img src="assets/no-product-image.png" class="d-block w-100" alt="...">
-                                </div>
-                                <div *ngFor="let prod of productImgs" class="carousel-item active">
-                                    <img src="{{ prod.image !== '' ? prod.image : 'assets/no-product-image.png'}}"
-                                        class="d-block w-100" alt="...">
-                                </div>
+                            </ng-container>
+            
+                            <!-- Si no hay imágenes -->
+                            <div *ngIf="productImgs.length === 0" class="col-12">
+                                <img 
+                                    src="assets/no-product-image.png" 
+                                    class="d-block w-100 product-img" 
+                                    alt="No image available">
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="col-md-1"></div>
             }
+            
 
             <!-- product data admin -->
             @if (rol == 'ADMIN') {
@@ -177,49 +168,50 @@
             </div>
             }
 
-            <!-- product data user -->
-            @if (rol == 'USER') {
-                <div class="col-md-8">
-                    <div class="card noneb">
-                        <div class="card-body-product">
-    
-                            <!-- product -->
+             <!-- product data user -->
+             @if (rol == 'USER') {
+                <div class="col-md-4">
+                    <div class="card product-card" style="border: none; background: none; box-shadow: none;">
+                        <div class="card-body-product" >
+                            <!-- Título del producto -->
                             <div class="product-title">
-                                <h4>{{ product.product }}</h4>
+                                {{ product.product }}
                             </div>
-            
-                            <!-- price -->
-                            <div class="product-price m-4">
-                                <strong>MXN</strong> {{ product.price | currency }}
+                
+                            <!-- Precio del producto -->
+                            <div class="product-price">
+                                MXN {{ product.price | currency }}
                             </div>
-            
-                            <!-- Add product actions (increment, decrement buttons) -->
+                
+                            <!-- Selector de cantidad -->
                             <app-quantity-selector
                                 [quantity]="quantity"
                                 [maxQuantity]="product.stock"
                                 (quantityChanged)="onQuantityChanged($event)">
-                             </app-quantity-selector>
-                             
+                            </app-quantity-selector>
+                
+                            <!-- Botón para agregar al carrito -->
                             <button *ngIf="product.stock > 0" 
-                                class="btn noneb btn-primary mt-5"
+                                class="add-to-cart-btn"
                                 [disabled]="quantity <= 0" 
                                 (click)="addToCart(product, quantity)">
-                                Agregar a tu bolsa
+                                AÑADIR A LA CESTA
                             </button>
-                            
-                            <!-- Agotado -->
-                            <div *ngIf="product.stock === 0" class="out-of-stock m-5">
+                
+                            <!-- Mensaje de agotado -->
+                            <div *ngIf="product.stock === 0" class="out-of-stock">
                                 Agotado
                             </div>
-
-                            <!-- description -->
-                            <div class="product-description mt-4 mb-5">
-                                <strong>Descripción:</strong> {{ product.description }}
+                
+                            <!-- Descripción del producto -->
+                            <div class="product-description-title">
+                                <strong> Descripción </strong> 
                             </div>
+                            <div class="product-description">{{ product.description }} </div>
                         </div>
                     </div>
                 </div>
-                }
+            }
         </div>
     </div>
 

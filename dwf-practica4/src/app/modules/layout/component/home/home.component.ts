@@ -5,6 +5,7 @@ import { SwalMessages } from '../../../../shared/swal-messages';
 import { CommonModule } from '@angular/common';
 import { ProductImageService } from '../../../product/_service/product-image.service';
 import { ProductImage } from '../../../product/_model/product-image';
+import { AuthenticationService } from '../../../auth/_service/authentication.service';
 
 @Component({
   selector: 'app-home',
@@ -18,13 +19,19 @@ export class HomeComponent {
   popular: Product[] = [];
   productImgs: { [productId: number]: ProductImage[] } = {};
   swal: SwalMessages = new SwalMessages(); // swal messages
+  rol: String = '';
 
   @ViewChild('videoElement') videoElement!: ElementRef<HTMLVideoElement>;
 
   constructor(
     private productService: ProductService,
-    private productImageService: ProductImageService
-  ){}
+    private productImageService: ProductImageService,
+    private authenticationService: AuthenticationService
+  ){
+    this.authenticationService.rol.subscribe((role: string) => {
+      this.rol = role;
+    });   
+  }
 
   ngOnInit() {
     this.getPopular();

@@ -358,12 +358,22 @@
     font-weight: bold;
   }
 
+  /* Título del producto */
+  .product-title {
+    font-family: 'Sans-serif';
+    font-size: 1.7rem;
+    margin-bottom: 20px;
+  }
+
   /* Estilo específico para el precio */
   .product-price {
-    font-size: 1.2em; /* Ajusta el tamaño de la fuente */
+    font-family: 'Sans-serif';
+    font-size: 1.1rem;
+    font-weight: 200;
+    margin-bottom: 10px;
     margin-top: 1px;
-    text-align: center;
     color: var(--bs-body-color);
+    
   }
 
   /* Estilo opcional para el botón */
@@ -589,13 +599,6 @@
   background-color: #000000; /* Fondo oscuro */
   color: #ffffff !important; /* Texto blanco */
 }
-
-/* Asegurarse de que el menú se ajusta al contenido */
-.nav-item.dropdown .dropdown-menu {
-  display: block; /* Asegura que el menú se muestre correctamente */
-  min-width: 100%; /* Opción para asegurarse de que el menú se extienda correctamente */
-}
-
 
   /* Estilos del contenedor principal */
   .drawer-container {
@@ -934,6 +937,103 @@ section.py-5 .caption-link:hover {
     height: auto;
     border-radius:0 !important; 
   }
+
+
+  /**
+   * BOTÓN QUANTITY SELECTOR
+   */
+   app-quantity-selector {
+    margin-top: 10px;
+  }
+
+  .quantity-selector {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 110px;
+    height: 30px;
+    border: 0.5px solid #00000097;
+    border-radius: 0px;
+    padding: 5px;
+  }
+
+
+  .quantity-selector button {
+    color: inherit; /* Esto hace que el texto (+ o -) sea negro */
+    border: none !important; /* Elimina el borde del botón */
+    background: none !important; /* Asegura que el fondo sea transparente */
+    box-shadow: none; /* Elimina cualquier sombra */
+    padding: 0; /* Asegura que no haya relleno */
+    cursor: pointer; /* Opcional: agrega el cursor de mano */
+  }
+
+  .quantity {
+    font-size: 15px;
+    color: #000000f9;
+  } 
+
+  /**
+   * BOTÓN AGREGAR AL CARRITO 
+   */
+  .add-to-cart-btn {
+    width: 100%;
+    margin-top: 30px;
+    background-color: white; /* Fondo blanco */
+    color: black; /* Texto negro */
+    border: 1px solid black; /* Borde negro */
+    height: 40px;
+    font-size: 12px;
+    border-radius: 0; /* Esquinas cuadradas */
+    transition: background-color 0.3s, color 0.3s; /* Transición suave */
+  }
+  
+  .add-to-cart-btn:hover {
+    background-color: black; /* Fondo negro al pasar el mouse */
+    color: white; /* Texto blanco al pasar el mouse */
+  }
+  
+  .add-to-cart-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5; /* Opcional: agrega opacidad para indicar deshabilitado */
+  }
+
+  /* Mensaje de "Agotado" */
+  .out-of-stock {
+    margin-top: 15px;
+  }
+
+  /** 
+   * DESCRIPCIÓN PRODUCTO CLIENTE 
+   */
+   .product-description-title {
+    margin-top: 30px;
+  }
+
+  /* Descripción del producto */
+  .product-description {
+    font-size: 1rem;
+    color: #000000f5;
+    margin-top: 1px;
+    font: optional;
+    font-family: 'Sans-serif'; 
+    text-align: justify;
+  }
+
+  /** 
+   * IMÁGENES DESCRIPCIÓN PRODUCTO CLIENTE 
+   */
+   .product-img {
+    margin: 10px; 
+  }
+
+  /**
+   * MODAL HOME (LOGIN)
+   */
+   .modal-footer a:hover {
+      text-decoration: underline !important;
+      text-decoration-color: black;  /* Color negro para el subrayado */
+   }
+  
 
   
   /*!

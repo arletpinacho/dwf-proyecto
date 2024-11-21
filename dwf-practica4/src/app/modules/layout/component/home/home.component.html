@@ -91,7 +91,14 @@
 
                                 <div class="product-info">
                                     <div class="text-center">
-                                        <a class="btn btn-link ver-detalles text-uppercase" href="product/{{product.gtin}}" style="font-size: 0.7em; font-weight: bold; color: black;">Ver detalles</a>
+                                        @if (rol == 'USER' || rol == 'ADMIN') {
+                                            <a class="btn btn-link ver-detalles text-uppercase" href="product/{{product.gtin}}" style="font-size: 0.7em; font-weight: bold; color: black;">Ver detalles</a>
+                                        }
+                                        @if (rol != 'USER' && rol != 'ADMIN') {
+                                            <a class="btn btn-link ver-detalles text-uppercase" href="#" 
+                                               style="font-size: 0.7em; font-weight: bold; color: black;" 
+                                               data-bs-toggle="modal" data-bs-target="#loginModal">Ver detalles</a>
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -101,6 +108,32 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal para iniciar sesión -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0" style="font-family: 'Arial', sans-serif;">
+                <div class="modal-header border-0">
+                    <!-- Título centrado con texto en negritas y negro -->
+                    <h5 class="modal-title w-100 text-center" id="loginModalLabel" style="font-weight: bold; font-size: 1.5rem; color: black;">
+                        ¡Conéctate con nosotros!
+                    </h5>
+                    <!-- Botón de cerrar en la esquina superior derecha -->
+                    <button type="button" class="btn btn-close btn-sm" data-bs-dismiss="modal" aria-label="Cerrar" style="font-size: 0.75rem;"></button>
+                </div>
+                <div class="modal-body text-center" style="font-size: 1rem;">
+                    <p>¿Listo para explorar nuestra increíble selección de productos? Inicia sesión para acceder a todo lo que tenemos para ti.</p>
+                    <p>Si aún no tienes una cuenta, no te preocupes, ¡es fácil registrarse y empezar a disfrutar de nuestras ofertas exclusivas!</p>
+                </div>
+                <div class="modal-footer border-0 d-flex justify-content-between">
+                    <!-- Enlace subrayado para Iniciar sesión con margen -->
+                    <a href="/login" class="text-decoration-none" style="font-size: 1rem; color: #000000; margin-right: 20px; transition: text-decoration 0.3s ease;">Iniciar sesión ›</a>
+                    <!-- Enlace subrayado para Crear cuenta con margen -->
+                    <a href="/register" class="text-decoration-none" style="font-size: 1rem; color: #000000; margin-left: 20px; transition: text-decoration 0.3s ease;">Crear cuenta ›</a>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 
 
