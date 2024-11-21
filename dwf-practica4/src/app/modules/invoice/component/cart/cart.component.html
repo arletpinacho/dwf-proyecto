@@ -1,71 +1,102 @@
 <div class="body-content">
-    <div class="card m-4">
-      <!-- Card header -->
-      <div class="card-header d-flex justify-content-between align-items-center">
-        <h4>Mi bolsa</h4>
-        @if(carrito.length !== 0) {
-          <span class="icon-text-button" (click)="deleteCart()"> <i class="ph ph-trash ph-trash-product"></i> </span>
-        }
-      </div>
-  
-      <!-- Card body -->
-      <div class="card-body">
-        <!-- loading  -->
-        @if(loading) {
-          <div class="text-center" >
-            <img src="assets/loading.gif" class="img-loading" alt="">
-          </div>
-        }
-        @if(!loading && carrito.length == 0) {
-          <div class="text-center table-empty">
-            <h4>Tu bolsa aún está vacia.</h4>
-          </div>
-        } @else {
-          <!-- Product table  -->
-          <table class="table table-striped">
-            <!-- encabezados de la tabla -->
-            <thead>
-              <tr class="table-primary">
-                <th class="text-center">Producto</th>
-                <th class="text-center">Precio</th>
-                <th class="text-center">Cantidad</th>
-                <th class="text-center">Total</th>
-                <th class="text-center">Eliminar</th>
-              </tr>
-            </thead>
-            <!-- contenido de la tabla -->
-            <tbody>
-              @for(c of carrito; track c; let i = $index ) {
-                <tr> 
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div class="image-container">
-                        @if(c.image != "data:image/png;base64,"){
-                          <img src="{{ c.image }}" class="d-block image-cart w-50" alt="...">
-                        } @else {
-                          <img src="assets/no-product-image2.png" class="d-block image-cart w-50" alt="No product image">
-                        }
-                      </div>
-                      <div>
-                        <h6 class="product-name-cart">{{ c.product.product }}</h6>
+  <div class="row m-4">
+    <!-- Sección de productos y detalle dentro del mismo contenedor -->
+    <div class="col-md-12">
+      <div class="card">
+        <!-- Card header -->
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h4>Mi bolsa</h4>
+          @if(carrito.length !== 0) {
+            <span class="icon-text-button" (click)="deleteCart()"> <i class="ph ph-trash ph-trash-product"></i> </span>
+          }
+        </div>
+
+        <!-- Card body -->
+        <div class="card-body" style="overflow-y: auto;">
+          <!-- loading -->
+          @if(loading) {
+            <div class="text-center">
+              <img src="assets/loading.gif" class="img-loading" alt="">
+            </div>
+          }
+          @if(!loading && carrito.length == 0) {
+            <div class="text-center table-empty">
+              <h4>Tu bolsa aún está vacía.</h4>
+            </div>
+          } @else {
+            <div class="row">
+              <!-- Sección de tabla de productos -->
+              <div class="col-md-8">
+                <table class="table table">
+                  <thead>
+                    <tr class="table-primary">
+                      <th class="text-center">Producto</th>
+                      <th class="text-center">Precio</th>
+                      <th class="text-center">Cantidad</th>
+                      <th class="text-center">Total</th>
+                      <th class="text-center">Eliminar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for(c of carrito; track c; let i = $index ) {
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <div class="image-container">
+                              @if(c.image != "data:image/png;base64,"){
+                                <img src="{{ c.image }}" class="d-block image-cart w-50" alt="...">
+                              } @else {
+                                <img src="assets/no-product-image2.png" class="d-block image-cart w-50" alt="No product image">
+                              }
+                            </div>
+                            <div>
+                              <h6 class="product-name-cart">{{ c.product.product }}</h6>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="text-center align-middle">{{ c.product.price | currency }}</td>
+                        <td class="text-center align-middle">
+                          <app-quantity-selector
+                            [quantity]="c.quantity"
+                            [maxQuantity]="c.product.stock"
+                            (quantityChanged)="onQuantityChanged($event, c.cart_id)">
+                          </app-quantity-selector>
+                        </td>
+                        <td class="text-center align-middle">{{ c.product.price * c.quantity | currency }}</td>
+                        <td class="text-center align-middle">
+                          <span class="icon-text-button" (click)="deleteProduct(c.cart_id)"> <i class="ph ph-trash ph-trash-product"></i> </span>
+                        </td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Sección de detalle de compra -->
+              <div class="col-md-4">
+                <div class="card">
+                  <div class="card-header">
+                    <h5>Detalle de compra</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="subtotal">
+                      <h6>Subtotal: {{ getSubtotal() | currency }}</h6>
+                    </div>
+                    <div class="discount-code">
+                      <label for="discount-code">Código de descuento:</label>
+                      <div class="d-flex">
+                        <input type="text" id="discount-code" class="form-control" placeholder="Ingresa tu código" style="flex: 1;">
+                        <button class="btn btn-secondary ms-2" >Aplicar</button>
                       </div>
                     </div>
-                  </td>
-                  
-                  <td class="text-center align-middle">{{ c.product.price | currency }}</td>
-                  <td class="text-center align-middle">{{ c.quantity }}</td>
-                  <td class="text-center align-middle">{{ c.product.price * c.quantity | currency }}</td>
-                  <td class="text-center align-middle">
-                    <span class="icon-text-button" (click)="deleteProduct(c.cart_id)"> <i class="ph ph-trash ph-trash-product"></i> </span>
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-          <button class="btn noneb btn-primary mt-5"
-            (click)="buy()">
-            Finalizar compra
-          </button>
-        }
+                    <button class="btn btn-primary mt-3 w-100" (click)="buy()">Finalizar compra</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
       </div>
     </div>
+  </div>
+</div>

@@ -48,4 +48,9 @@ export class InvoiceDetailComponent {
       }
     });
   }
+
+  goBack() {
+    this.router.navigate(['/invoices']); // Regresa a la lista de facturas
+  }
+  
 }

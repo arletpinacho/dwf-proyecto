@@ -8,11 +8,12 @@ import { Product } from '../../../product/_model/product';
 import { Observable, of } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { InvoiceService } from '../../_service/invoice.service';
+import { QuantitySelectorComponent } from '../../../layout/component/quantity-selector/quantity-selector.component';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, QuantitySelectorComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
@@ -111,5 +112,28 @@ export class CartComponent {
         this.loading = false;
       }
     });
+  }
+
+  onQuantityChanged(newQuantity: number, cartId: number): void {
+    const productIndex = this.carrito.findIndex(product => product.cart_id === cartId);
+    if (productIndex !== -1) {
+      this.carrito[productIndex].quantity = newQuantity;
+      this.updateCartTotal();
+    }
+  }
+
+  updateCartTotal(): void {
+    let total = 0;
+    for (let item of this.carrito) {
+      total += item.product.price * item.quantity;
+    }
+  }
+
+  getSubtotal(): number {
+    let subtotal = 0;
+    for (let item of this.carrito) {
+      subtotal += item.product.price * item.quantity;
+    }
+    return subtotal;
   }
 }
