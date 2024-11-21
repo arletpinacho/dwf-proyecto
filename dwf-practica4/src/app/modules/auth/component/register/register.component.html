@@ -1,7 +1,10 @@
-<div class="container body-content">
+<div class="container body-content d-flex flex-column register-view">
     <div class="d-flex justify-content-center align-items-center min-vh-100">
-        <div class="user_card">
-            <div class="d-flex justify-content-center form_container">
+        <div class="row w-100">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <h2>Crear cuenta</h2> 
+                <p>Completa la información que se indica a continuación:</p>
                 <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
                     <div class="input-group mb-3">
                         <div class="input-group-append">
@@ -45,22 +48,28 @@
                         <input type="text" class="form-control" name="username" placeholder="Username" required
                             formControlName="username">
                     </div>
-                    <div class="d-flex justify-content-center mt-3 login_container">
+                    <div class="input-group mt-3 login_container">
                         <button [disabled]="registerForm.invalid || showLoading" type="submit" name="button"
-                            class="btn noneb login_btn btn-info">
+                            class="btn btn-noneb login_btn btn-full-width"
+                            style="margin-top: 20px !important;">
                             <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
                             <span *ngIf="showLoading">Cargando...</span>
-                            <i class="ph ph-user-plus"></i>
-                            <span *ngIf="!showLoading">Registrar</span>
+                            <span *ngIf="!showLoading">Crear cuenta</span>
                         </button>
                     </div>
                 </form>
-            </div>
-            <div class="mt-4">
-                <div class="d-flex justify-content-center links">
-                    ¿Ya tienes una cuenta? <a routerLink="/login" class="ml-2">&nbsp;Ingresa</a>
+
+                <div class="mt-4">
+                    <div class="d-flex justify-content-center links">
+                        ¿Ya tienes una cuenta? &nbsp;
+                        <a routerLink="/login" class="ml-2 custom-link">  Entrar ›</a>
+                    </div>
                 </div>
+
             </div>
+
+            <div class="col-md-2"></div>
+            
         </div>
     </div>
 </div>

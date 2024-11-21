@@ -23,6 +23,7 @@ export class AppNavItemComponent implements OnChanges {
   categories: Category[] = [];
   loading = false;
   rol: String = '';
+  isDrawerOpen = false;
 
   constructor( 
     private navService: NavService,
@@ -59,4 +60,11 @@ export class AppNavItemComponent implements OnChanges {
   }
 
   onSubItemSelected(item: NavItem) {}
+
+  toggleDrawer() {
+    this.isDrawerOpen = !this.isDrawerOpen;
+    if (this.isDrawerOpen) {
+      this.getCategories(); // Si se abre el drawer, obtenemos las categorías
+    }
+  }
 }

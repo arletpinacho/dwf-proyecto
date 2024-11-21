@@ -20,10 +20,6 @@
     transform: translateX(-50%);
     margin: 0;
   }
-  
-  header nav.navbar {
-    background-color: #a0c8ff !important;  
-  }
 
   /* Cambiar color de texto o de la navbar */
   header nav.navbar .navbar-brand {
@@ -43,6 +39,7 @@
   .navbar .nav-link:hover {
       color: #ff5733 !important; 
   }
+
   .profile-icon i {
     position: absolute;
     right: 85px;
@@ -133,12 +130,6 @@
     margin-left: auto;
   }
 
-  /* navbar */
-  .navbar-content{
-    max-width: 1280px;
-    margin: auto;
-  }
-
   #carouselHome {
     height: 100vh;
     width: 100%;
@@ -163,7 +154,7 @@
   .carousel-item video {
     width: 100%;
     height: auto;
-}
+  }
 
   .carousel-control-prev, .carousel-control-next {
     z-index: 10;
@@ -249,7 +240,7 @@
   }
   /* enable option*/
   .enable-item:hover{
-    background-color: #69da58 !important;
+    background-color: #9a0000 !important;
   }
   /* disable option*/
   .disable-item:hover{
@@ -279,38 +270,6 @@
   
   .d-flex.justify-content-center.align-items-center {
     flex-grow: 1; /* Permite que el formulario se expanda para ocupar el espacio disponible */
-  }
-
-  body {
-    min-height: 100vh;
-    margin: 0;
-    position: relative;
-  }
-  
-  header {
-    min-height: 50px;
-    background: lightcyan;
-  }
-  
-  footer {
-    background: PapayaWhip;
-  }
-
-  body {
-    position: relative;
-  }
-  
-  body::after {
-    content: '';
-    display: block;
-    height: 50px;
-  }
-  
-  footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 50px;
   }
 
   .product-container {
@@ -421,6 +380,559 @@
     color: var(--bs-body-color);      
     padding: 0;                  
     margin: 0;       
+  }
+
+
+  /**
+   * Footer 
+   */
+  main {
+    flex: 1; /* Hace que el contenido principal ocupe todo el espacio restante */
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  footer {
+    margin: 0;
+    position: relative;
+    height: 250px;
+    width: 100%;
+    margin-top: 0; /* Empuja el footer al fondo */
+    bottom: 0px;
+    border-top: 2px solid #000000bf;
+  }
+
+  footer p {
+    color: #6c757d; /* Texto más claro */
+    font-size: 11px;
+    line-height: 1;
+  }
+
+  /* Para hacer el texto del copyright más pequeño */
+  footer .text-center p {
+    font-size: 10px;
+    color: #888;
+  }
+
+  /* Estilo de los márgenes y padding para la columna */
+  .footer .col {
+    margin-bottom: 5px;
+  }
+
+  .footer-heading {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    color: #4e4e4e;
+    line-height: 2; /* Interlineado más pequeño en los encabezados */
+  }
+
+  /* Eliminar interlineado en la cuarta columna */
+  footer .col:last-child h6, 
+  footer .col:last-child p {
+      line-height: 1; /* Elimina el interlineado adicional */
+      margin-bottom: 5px; /* Opcional: ajustar margen inferior si es necesario */
+  }
+
+  .newsletter-form {
+    margin-top: 20px; /* Espacio adicional arriba */
+  }
+
+  .newsletter-form input {
+    width: 100%; /* El campo de correo ocupa todo el ancho de la columna */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .custom-link {
+    color: inherit;         /* Toma el color de texto actual o define otro color aquí */
+    text-decoration: none;  /* Sin subrayado por defecto */
+    font-weight: bold;      /* Si deseas que se vea en negrita */
+  }
+  
+  .custom-link:hover {
+    color: #3498db;         /* Cambia el color cuando el cursor pasa por encima */
+    text-decoration: underline; /* Agrega subrayado al pasar el cursor */
+  }
+  
+  footer.footer h6 {
+    font-family: 'Sans-serif';
+    font-weight: bold;
+    font-size: 13px;
+  }
+  
+  /* Modo día: color negro */
+  footer.footer h6 {
+    color: black;
+  }
+  
+  /* Modo noche: color blanco */
+  .dark-mode footer.footer h6 {
+    color: white;
+  }
+  
+  footer.footer .col:nth-child(1) h6, footer.footer .col:nth-child(2) h6 {
+      margin-bottom: 25px; 
+  }
+  
+  footer.footer {
+    padding-top: 0; /* Elimina cualquier espacio extra */
+    padding-bottom: 20px; /* Puedes ajustar este valor para el fondo */
+  }
+  
+  /* Opcional: Ajusta el padding superior de cada columna */
+  footer.footer .col {
+    padding-top: 0;
+  }
+  
+  .social-icons i {
+    font-size: 22px; /* Ajusta el tamaño según tu preferencia */
+    margin: 0 12px;  /* Espaciado entre los iconos */
+    color: #333;     /* Color de los iconos, puedes cambiarlo */
+    transition: color 0.3s; /* Efecto de transición para hover */
+  }
+  
+  .social-icons i:hover {
+    color: #007bff; /* Cambia el color cuando se pasa el mouse */
+  }
+  
+  .btn-transparent {
+    height: 28px;
+    width: 30%;
+    background-color: transparent; 
+    border: 1px solid black !important;    
+    font-size: 12px !important;    
+    border-radius: 0 !important;   
+    margin-top: 10px;
+    margin-bottom:20px;   
+    text-align: center!important;             /* Centrar el texto */
+    line-height: 1.2; 
+    display: flex;                  /* Usar flexbox para alinear el contenido */
+    align-items: center!important;            /* Centra el texto verticalmente */
+    justify-content: center !important; 
+  }
+  
+  footer a {
+    color: black;               /* El color de los enlaces será negro */
+    text-decoration: none;      /* Quitamos la subrayado */
+  }
+  
+  footer a:hover {
+    text-decoration: underline; /* Solo se subraya cuando el ratón pasa sobre el enlace */
+  }
+  
+  .custom-title {
+    font-family: 'Sans-serif'; 
+    color: #000000; 
+  }
+  
+  .custom-btn {
+    border: 1px solid black !important; /* Borde negro */
+    border-radius: 0 !important; /* Bordes rectos (sin redondear) */
+    background-color: transparent; /* Fondo transparente */
+    color: black; /* Texto negro */
+    padding: 8px 16px; /* Espaciado dentro del botón */
+    margin: 5px black !important; /* Margen superior e inferior de 5px */
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  .custom-btn:hover {
+    background-color: black  !important; /* Fondo negro al pasar el mouse */
+    color: white  !important; /* Texto blanco cuando el botón está en hover */
+  }
+
+  /**
+   * DRAWER
+   */
+   /* Estilos personalizados para el dropdown */
+  .custom-dropdown {
+    margin-top: 10px !important; /* Espacio superior para evitar que se pegue al navbar */
+    z-index: 1050; /* Asegurarse de que el menú esté sobre otros elementos */
+  }
+
+  /* Si el navbar tiene una altura específica, ajusta el margin-top para evitar que se pegue */
+  .navbar {
+    height: 80px;
+    text-align: center;
+    line-height: 2px;
+    position: relative;
+    z-index: 1040 !important; /* Ajustar el z-index si es necesario para no tapar el dropdown */
+  }
+
+ /* Cambiar el fondo y los bordes del dropdown */
+.nav-item.dropdown .dropdown-menu {
+  background-color: #ffffff; /* Fondo blanco */
+  border-radius: 0 !important; /* Bordes sin redondeo */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Sombra sutil */
+  padding: 0; /* Eliminar el relleno para que se ajuste al tamaño de los ítems */
+  margin: 15px; /* Agregar margen para evitar que toque el borde de la pantalla */
+}
+
+/* Cambiar el color de las opciones del menú */
+.nav-item.dropdown .dropdown-menu .dropdown-item {
+  color: #000000 !important; /* Color del texto */
+  padding: 20px 16px; /* Más espacio vertical para cada ítem */
+  font-size: 16px; /* Ajustar el tamaño de fuente si es necesario */
+}
+
+/* Cambiar el color de las opciones al pasar el mouse (hover) */
+.nav-item.dropdown .dropdown-menu .dropdown-item:hover {
+  background-color: #000000; /* Fondo oscuro */
+  color: #ffffff !important; /* Texto blanco */
+}
+
+/* Asegurarse de que el menú se ajusta al contenido */
+.nav-item.dropdown .dropdown-menu {
+  display: block; /* Asegura que el menú se muestre correctamente */
+  min-width: 100%; /* Opción para asegurarse de que el menú se extienda correctamente */
+}
+
+
+  /* Estilos del contenedor principal */
+  .drawer-container {
+    position: relative;
+  }
+
+  /* Botón que abre el drawer */
+  .drawer-button {
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+
+  /* El drawer en su estado inicial (oculto) */
+  .drawer {
+    position: fixed;
+    top: 0;
+    left: 0; /* Mueve el drawer a la izquierda */
+    width: 300px;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Cambia el box-shadow para que se vea desde la izquierda */
+    transform: translateX(-100%); /* Inicialmente el drawer está fuera de la vista a la izquierda */
+    transition: transform 0.3s ease; /* Transición para el efecto de deslizamiento */
+    z-index: 1000;
+  }
+
+
+  /* Estilo para el contenido del Drawer */
+  .drawer-content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-items: stretch; /* Asegura que los ítems se estiren a lo ancho */
+  }
+
+  /* Estilo para los ítems del Drawer */
+  .drawer-item {
+    display: block;
+    padding: 25px 20px; /* Mayor espacio vertical */
+    color: #000000;
+    text-decoration: none;
+    text-align: left; /* Alinear el texto a la izquierda */
+    width: 100%; /* Ocupar todo el ancho del drawer */
+    box-sizing: border-box; 
+    text-transform: uppercase;
+  }
+
+  /* Botón de cierre */
+  .close-button {
+    align-self: flex-end;
+    margin-bottom: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: black;
+  }
+
+  /* Cuando el drawer está abierto, lo movemos a la posición visible */
+  .drawer.open {
+    transform: translateX(0); /* Mueve el drawer a su posición visible */
+  }
+
+  /* Estilos para el header del drawer */
+  .drawer-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+  }
+
+  /* Estilos del cuerpo del drawer */
+  .drawer-body {
+    padding: 20px;
+    overflow-y: auto;
+  }
+
+  .drawer-item:hover {
+    background-color: black !important; /* Fondo negro */
+    color: white; /* Texto blanco */
+    width: 100%; /* Asegurar que el hover ocupe todo el ancho */
+  }
+
+  .drawer-button {
+    background-color: transparent; /* Fondo transparente */
+    border: none; /* Quitar el borde */
+    color: inherit; /* Hereda el color del texto (puedes especificar un color si lo prefieres) */
+    padding: 10px 15px; /* Mantener un padding adecuado */
+    font-size: 16px; /* Tamaño de fuente */
+    cursor: pointer; /* El puntero cambia cuando pasas el mouse sobre el botón */
+  }
+
+  .left-align {
+    display: flex !important; /* Usamos flexbox para controlar la alineación */
+    justify-content: flex-start !important; /* Alinea el contenido al inicio (izquierda) */
+  }
+
+  .drawer-button {
+    /* Aquí pueden ir los estilos adicionales que desees para el botón */
+    padding-left: 0 !important; /* Puedes ajustar el espaciado si lo deseas */
+    margin-left: 0 !important; /* Elimina cualquier margen que pueda estar afectando la alineación */
+  }
+
+  .drawer-button {
+    display: flex;
+    align-items: center;  /* Centra el contenido verticalmente */
+    justify-content: flex-start;  /* Alinea el contenido a la izquierda */
+    padding-left: 0;  /* Asegura que no haya margen innecesario */
+    margin-left: 0;   /* Elimina margen extra */
+  }
+
+  .drawer-button i {
+    margin-right: 8px;  /* Espacio entre el ícono y el texto */
+    font-size: 20px;  /* Ajusta el tamaño del ícono */
+  }
+
+/**
+ * TEXTO DEL CARRUSEL PRODCUTOS CORRESPONDIENTE AL VIDEO HOME
+ */
+ .title-product {
+  font-family: 'Sans-serif'; 
+  color: #000000c9; 
+  font-size: 16px;
+}
+
+.caption-product {
+  font-family: 'Sans-serif'; 
+  color: #747474; 
+  font-size: 13px;
+  margin-bottom: 10rem;
+} 
+
+.custom-caption {
+  bottom: 50%; /* Ajusta este valor para colocar el texto en la posición deseada */
+}
+
+
+/**
+ * TEXTO CATEGORÍA
+ */
+ section.py-5 .caption-link {
+  font-family: 'Sans-serif'; 
+  text-decoration: none;
+  color: inherit; 
+}
+
+section.py-5 .caption-link:hover {
+  text-decoration: underline;
+  text-decoration-color: inherit; /* Color del subrayado al pasar el mouse */
+}
+
+/**
+* ICONOS NAVBAR
+*/
+.cart-icon i {
+  position: absolute;
+  right: 70px; /* Establece la distancia desde el borde derecho */
+  top: 50%; /* Centra verticalmente */
+  transform: translateY(-50%); /* Ajusta para que quede bien centrado */
+  font-size: 1.3rem; /* Tamaño inicial del icono */
+  transition: font-size 0.3s ease; /* Animación de transición */
+}
+
+.porfile-icon i {
+  position: absolute;
+  right: 35px; /* Establece la distancia desde el borde derecho */
+  top: 50%; /* Centra verticalmente */
+  transform: translateY(-50%); /* Ajusta para que quede bien centrado */
+  font-size: 1.3rem; /* Tamaño inicial del icono */
+  transition: font-size 0.3s ease; /* Animación de transición */
+}
+
+
+/**
+ * LOGIN AND REGISTER STYLE
+ */
+ .form-control {
+  border: 1px solid #ccc;
+  }
+
+  /* Estilo para los botones activos */
+  .container .login_btn, .container .btn-dark {
+    background-color: black !important;  /* Fondo negro */
+    border: none !important;  /* Eliminar borde */
+    color: white !important;  /* Texto blanco */
+    box-shadow: none !important;  /* Eliminar sombra */
+    background-image: none !important;  /* Eliminar cualquier degradado */
+    margin: 0 !important;  /* Eliminar márgenes */
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 0 !important;  /* Eliminar bordes redondeados */
+  }
+
+  /* Estilo para los botones deshabilitados (cuando no se puede hacer uso de ellos) */
+  .container .login_btn:disabled {
+    cursor: not-allowed !important; 
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important; 
+  }
+
+  /* Eliminar cualquier cambio en hover, active y focus */
+  .container .login_btn:hover, .container .login_btn:active, .container .login_btn:focus,
+  .container .btn-dark:hover, .container .btn-dark:active, .container .btn-dark:focus {
+    background-color: black !important; /* Fondo negro */
+    color: white !important; /* Texto blanco */
+    border: 1px solid white !important; /* Eliminar borde */
+    box-shadow: none !important; /* Eliminar sombra */
+  }
+
+  /* Asegurar que el contenedor del botón no tenga márgenes o padding adicionales */
+  .login_container {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Mostrar el mensaje cuando el formulario no esté completo */
+  .help-block {
+    color: red;  /* Color rojo para el mensaje de ayuda */
+    font-size: 14px;  /* Tamaño de la fuente más pequeño */
+    margin-top: 10px;  /* Separación superior */
+  }
+
+  .login-register-view h2 {
+    font-family: 'Sans-serif';
+    color: black;
+  }
+
+  .register-view h2 {
+    font-family: 'Sans-serif';
+    color: black;
+    font-size: 2rem;
+  }
+
+  .register-view p {
+    margin-bottom: 2rem; /* Ajusta el valor según el espacio que desees */
+  }
+
+  .login-register-view p {
+    margin-bottom: 2rem; 
+  }
+
+  body.dark-mode .login-register-view h2 {
+    color: white;
+  }
+
+  .border-end {
+    border-right: 1px solid #e0e0e0;
+  }
+  .register-section {
+    margin-left: 50px; 
+  }
+
+  .login-register-view .input-group .form-control {
+    border-radius: 0;
+  }
+
+  .register-view .input-group .form-control {
+    border-radius: 0;
+  }
+
+  .login-register-view .input-group .form-control, .login-register-view .input-group .input-group-text {
+  border-radius: 0;
+  }
+
+  .register-view .input-group .input-group-text {
+    width: 2.5rem; /* Ajusta este tamaño para que coincida con la altura del campo */
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0; /* Quita el borde redondeado */
+    padding: 0; /* Elimina cualquier padding para centrar el ícono */
+  }
+
+  .register-view .login_btn {
+    width: 100%; /* Hace que el botón ocupe el ancho completo del contenedor */
+    max-width: 20rem; /* Ajusta el valor según el largo deseado */
+  }
+
+
+  .register-view .user_card .input-group, .register-view .user_card .login_container button {
+  width: 100%;
+  }
+
+  /* Ajusta el estilo del botón para que se vea igual a los inputs */
+  .register-view .user_card .login_container button {
+  height: 40px; 
+  font-size: 16px; 
+  text-align: center; 
+  }
+
+  /* Para centrar el texto debajo del botón */
+  .register-view .user_card .links {
+  text-align: center;
+  }
+
+  .btn-full-width {
+    width: 100%;          
+    max-width: 100%;     
+    display: block;      
+    box-sizing: border-box; 
+  }
+
+  .btn-full-width {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .custom-margin-top {
+    margin-top: 1.5rem;
+  }
+
+  .custom-link {
+    color: inherit;         /* Toma el color de texto actual o define otro color aquí */
+    text-decoration: none;  /* Sin subrayado por defecto */
+    font-weight: bold;      /* Si deseas que se vea en negrita */
+  }
+
+  .custom-link:hover {
+    color: #000000;         /* Cambia el color cuando el cursor pasa por encima */
+    text-decoration: underline; /* Agrega subrayado al pasar el cursor */
+  }
+
+  /**
+   * MAIN CARROUSEL
+   */ 
+  .carousel-item img {
+    width: 100%;
+    height: auto;
+    border-radius:0 !important; 
   }
 
   

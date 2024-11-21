@@ -9,22 +9,26 @@
       'cursor': 'pointer'
     }"
   >
-    <ng-container *ngIf="item.displayName == 'Productos' && rol == 'USER'; else showLink">
-      <div class="dropdown">
-        <!-- dots button  -->
-        <button class="dropdown-button" id="dropdownMenuButtonP" data-bs-toggle="dropdown" aria-expanded="false" (click)="getCategories()">
-          <span> MENU </span>
-        </button>
-        <!-- menu options -->
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <ng-container *ngIf="item.displayName == 'Productos' && rol == 'USER'; else showLink">
+    <div class="drawer-container left-align">
+      <button class="drawer-button left-align" (click)="toggleDrawer()">
+        <i class="fas fa-bars"></i> MENU
+      </button>
+      <!-- Drawer - Menú lateral -->
+      <div class="drawer" [class.open]="isDrawerOpen">
+        <div class="drawer-header">
+          <button class="btn-close" (click)="toggleDrawer()"></button>
+        </div>
+        <div class="drawer-body">
           <ng-container *ngFor="let category of categories">
-            <a class="dropdown-item" href="category/{{category.category_id}}">
+            <a class="drawer-item" href="category/{{category.category_id}}">
               <span>{{category.category}}</span>
             </a>
           </ng-container>
         </div>
       </div>
-    </ng-container>
+    </div>
+  </ng-container>
     <!-- This will be shown if the condition is not met -->
     <ng-template #showLink>
       <span>{{ item.displayName }}</span>

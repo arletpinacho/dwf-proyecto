@@ -29,7 +29,7 @@
         }
 
         @if (rol != 'USER' && rol != 'ADMIN') {
-            <div class="nav-item dropdown">
+            <div class="nav-item dropdown porfile-icon">
                 <a class="nav-link" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <i class="ph ph-user i-nav"></i> <!-- Ícono de perfil -->
                 </a>
@@ -41,7 +41,7 @@
         }
         
         @if (rol == 'USER' || rol == 'ADMIN') {
-            <div class="nav-item dropdown">
+            <div class="nav-item dropdown porfile-icon">
                 <a class="nav-link" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <i class="ph ph-user i-nav"></i> <!-- Ícono de perfil -->
                 </a>
