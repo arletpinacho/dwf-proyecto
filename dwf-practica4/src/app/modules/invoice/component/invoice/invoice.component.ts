@@ -5,6 +5,7 @@ import { InvoiceService } from '../../_service/invoice.service';
 import { SharedModule } from '../../../../shared/shared-module';
 import { Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AuthenticationService } from '../../../auth/_service/authentication.service';
 
 @Component({
   selector: 'app-invoice',
@@ -22,11 +23,17 @@ export class InvoiceComponent {
   swal: SwalMessages = new SwalMessages(); // swal messages
   p: number = 1; //pagination
   itemsPerPage: number = 8;
+  rol: String = '';
 
   constructor(
     private invoiceService: InvoiceService,
+    private authenticationService: AuthenticationService,
     private router: Router,
-  ){}
+  ){
+    this.authenticationService.rol.subscribe((role: string) => {
+      this.rol = role;
+    }); 
+  }
 
   ngOnInit(){
     this.getInvoices();

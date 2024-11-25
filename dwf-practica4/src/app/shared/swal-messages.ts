@@ -38,7 +38,7 @@ export class SwalMessages{
         customClass: {
             title: 'swal-title',
             icon: 'swal-icon',
-            confirmButton: 'btn noneb btn-primary swal-confirm-button',
+            confirmButton: 'btn noneb btn-success swal-confirm-button',
             cancelButton: 'btn  noneb btn-danger swal-cancel-button',
         },
     });

@@ -28,7 +28,8 @@ export const routes: Routes = [
     },
     { 
         path: "category/:category_id",
-        component: ProductByCategoryComponent
+        component: ProductByCategoryComponent,
+        canActivate: [authenticationGuard]
     },
     { 
         path: "product",
@@ -37,7 +38,8 @@ export const routes: Routes = [
     },
     { 
         path: "product/:gtin", 
-        component: ProductImageComponent
+        component: ProductImageComponent,
+        canActivate: [authenticationGuard]
     },
     {
         path: 'region',
@@ -60,7 +62,7 @@ export const routes: Routes = [
     { 
         path: 'invoice',
         component: InvoiceComponent,
-        canActivate: [adminGuard]
+        canActivate: [authenticationGuard]
     },
     {
         path: 'cart',
@@ -71,7 +73,7 @@ export const routes: Routes = [
     { 
         path: 'invoice/:id',
         component: InvoiceDetailComponent,
-        canActivate: [userGuard]
+        canActivate: [authenticationGuard]
     },{
         path: 'customer',
         component: CustomerComponent,
@@ -79,6 +81,7 @@ export const routes: Routes = [
     },
     {
         path: 'customer/:rfc',
-        component: CustomerImageComponent
+        component: CustomerImageComponent,
+        canActivate: [authenticationGuard]
     }
 ];
