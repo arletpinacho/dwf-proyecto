@@ -43,7 +43,7 @@
                                     <i class="ph ph-trash ph-trash-image icon-text-button"></i>
                                     <a (click)="deleteProductImage(prod.product_image_id)" class="ph ph-trash ph-trash-image"></a>
                                 </div>
-                                <img src="{{ prod.image !== '' ? prod.image : 'assets/no-product-image.png'}}"
+                                <img src="{{ prod.image !== '' ? prod.image : 'assets/no-product-image2.png'}}"
                                     class="d-block w-100" alt="...">
                             </div>
                         </div>
@@ -62,13 +62,13 @@
                         data-ride="carousel">                        
                         <div class="carousel-inner">
                             <div *ngIf="productImgs.length == 0" class="carousel-item active">
-                                <img src="assets/no-product-image.png" class="d-block w-100" alt="...">
+                                <img src="assets/no-product-image2.png" class="d-block w-100" alt="...">
                             </div>
                             <div *ngFor="let prod of productImgs" class="carousel-item active">
                                 <div class="carousel-del">
                                     <a (click)="deleteProductImage(prod.product_image_id)" class="trash"><i class="fas fa-trash-alt cursor-pointer"></i></a>
                                 </div>
-                                <img src="{{ prod.image !== '' ? prod.image : 'assets/no-product-image.png'}}"
+                                <img src="{{ prod.image !== '' ? prod.image : 'assets/no-product-image2.png'}}"
                                     class="d-block w-100" alt="...">
                                 <div class="carousel-del">
                                     <i class="ph ph-trash ph-trash-image icon-text-button"></i>
@@ -96,7 +96,7 @@
                             <!-- Si solo hay una imagen -->
                             <div *ngIf="productImgs.length === 1" class="col-12">
                                 <img 
-                                    src="{{ productImgs[0].image !== '' ? productImgs[0].image : 'assets/no-product-image.png'}}" 
+                                    src="{{ productImgs[0].image !== '' ? productImgs[0].image : 'assets/no-product-image2.png'}}" 
                                     class="d-block w-100 product-img" 
                                     alt="...">
                             </div>
@@ -105,7 +105,7 @@
                             <ng-container *ngIf="productImgs.length > 1">
                                 <div *ngFor="let prod of productImgs" class="col-6 col-md-6">
                                     <img 
-                                        src="{{ prod.image !== '' ? prod.image : 'assets/no-product-image.png'}}" 
+                                        src="{{ prod.image !== '' ? prod.image : 'assets/no-product-image2.png'}}" 
                                         class="d-block w-100 product-img" 
                                         alt="...">
                                 </div>
@@ -114,7 +114,7 @@
                             <!-- Si no hay imágenes -->
                             <div *ngIf="productImgs.length === 0" class="col-12">
                                 <img 
-                                    src="assets/no-product-image.png" 
+                                    src="assets/no-product-image2.png" 
                                     class="d-block w-100 product-img" 
                                     alt="No image available">
                             </div>

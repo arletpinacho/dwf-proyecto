@@ -22,12 +22,11 @@
 
 
                     <div class="card-body-customer text-center">
-                        <!-- @if (customer.image.image) {
+                        @if (customer.image.image != "") {
                             <img src="{{ customer.image.image }}" class="customer-image">  
                         }@else {
-                            <img src="assets/user-logo.png" class="customer-image">  
-                        } -->
-                        <img src="{{ customer.image.image ? customer.image.image: 'assets/user-logo.png' }}" class="customer-image">
+                            <img src="../../../../../assets/user-logo.png" class="customer-image">  
+                        } 
                     </div>
 
 
