@@ -1,0 +1,87 @@
+<div class="body-content">
+  <div class="card m-4">      
+      <!-- card header  -->
+      
+      <div class="card-header">
+        <div class="row">
+          <div class="col">
+            <h4>Listado de clientes</h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- card body  -->
+
+      <div class="card-body">     
+
+        <!-- loading  -->
+        
+        @if(loading) {
+          <div class="text-center" >
+            <img src="assets/loading.gif" class="img-loading" alt="">
+          </div>
+        }
+        
+        @if(!loading && customers.length == 0){
+          <div class="text-center table-empty">
+              <h4>No cuentas con clientes registrados</h4>
+          </div>
+        }@else {
+          <table class="table table-striped">
+            <thead>
+              <tr class="table-primary">
+                <th scope="col">No.</th>
+                <th scope="col">RFC</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Estatus</th>
+                <th scope="col">Más</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let customer of customers | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index">
+                <td>{{ (p - 1) * itemsPerPage + i + 1 }}</td> <!-- Display correct row number -->
+                <td>{{ customer.rfc }}</td>
+                <td>{{ customer.name + ' ' + customer.surname }}</td>
+                <td>
+                  <!-- Display customer status dynamically -->
+                  <span *ngIf="customer.status === 1">Activo</span>
+                  <span *ngIf="customer.status === 0" class="td-status-disable">Inactivo</span>
+                </td>
+                <td>
+                  <!-- Dropdown menu with options -->
+                  <div class="dropdown">
+                    <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <!-- View Details -->
+                      <a class="dropdown-item" (click)="showCustomer(customer.rfc)">
+                        <i class="ph ph-eye icon-text-ul"></i> Ver detalles
+                      </a>
+                      <!-- Enable or Disable customer based on status -->
+                      <a *ngIf="customer.status === 0" class="dropdown-item enable-item" (click)="enableCustomer(customer.customer_id)">
+                        <i class="ph ph-check-circle icon-text-ul"></i> Activar
+                      </a>
+                      <a *ngIf="customer.status === 1" class="dropdown-item disable-item" (click)="disableCustomer(customer.customer_id)">
+                        <i class="ph ph-x-circle icon-text-ul"></i> Desactivar
+                      </a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        }
+      </div>
+
+      <div *ngIf="customers.length > 8">
+        <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" 
+      nextLabel="Siguiente"></pagination-controls>  
+      </div>
+      
+      <!-- card footer  -->
+      <div class="card-footer text-end">
+        <small>{{ current_date | date: 'dd/MMM/yyyy, h:mm a' }}</small>
+      </div>
+    </div>
+  </div>

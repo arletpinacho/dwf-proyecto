@@ -1,0 +1,75 @@
+<div class="container body-content d-flex flex-column register-view">
+    <div class="d-flex justify-content-center align-items-center min-vh-100">
+        <div class="row w-100">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <h2>Crear cuenta</h2> 
+                <p>Completa la información que se indica a continuación:</p>
+                <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><fa-icon icon="user"></fa-icon></span>
+                        </div>
+                        <input type="text" class="form-control" name="name" placeholder="Nombre" required
+                            formControlName="name">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><fa-icon icon="user-plus"></fa-icon></span>
+                        </div>
+                        <input type="text" class="form-control" name="surname" placeholder="Apellido" required
+                            formControlName="surname">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><fa-icon icon="calculator"></fa-icon></span>
+                        </div>
+                        <input type="text" class="form-control" name="rfc" placeholder="RFC" required
+                            formControlName="rfc">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><fa-icon icon="mail-bulk"></fa-icon></span>
+                        </div>
+                        <input type="mail" class="form-control" name="mail" placeholder="Mail" required
+                            formControlName="mail">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><fa-icon icon="key"></fa-icon></span>
+                        </div>
+                        <input type="password" class="form-control" name="password" placeholder="Password" required
+                            formControlName="password">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><fa-icon icon="id-badge"></fa-icon></span>
+                        </div>
+                        <input type="text" class="form-control" name="username" placeholder="Username" required
+                            formControlName="username">
+                    </div>
+                    <div class="input-group mt-3 login_container">
+                        <button [disabled]="registerForm.invalid || showLoading" type="submit" name="button"
+                            class="btn btn-noneb login_btn btn-full-width"
+                            style="margin-top: 20px !important;">
+                            <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
+                            <span *ngIf="showLoading">Cargando...</span>
+                            <span *ngIf="!showLoading">Crear cuenta</span>
+                        </button>
+                    </div>
+                </form>
+
+                <div class="mt-4">
+                    <div class="d-flex justify-content-center links">
+                        ¿Ya tienes una cuenta? &nbsp;
+                        <a routerLink="/login" class="ml-2 custom-link">  Entrar ›</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-2"></div>
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,102 @@
+<div class="container mt-5 mb-3">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="d-flex flex-column text-center"> 
+                    <h4 class="text-center">Factura </h4>
+                    <h3>INV-{{invoice.invoice_id}}</h3>
+                </div>
+                <hr>
+                <div class="table-responsive p-2">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr class="add">
+                                <td>Cliente</td>
+                                <td></td>
+                            </tr>
+                            <tr class="content">
+                                <td class="font-weight-bold">
+                                    Nombre: {{customer.name}}<br>
+                                    RFC: {{customer.rfc}}<br>
+                                    @if(customer.address != ""){
+                                        Dirección: {{customer.address}}
+                                    } @else {
+                                        Región: {{customer.region}}
+                                    }<br>
+                                    {{customer.mail}}
+                                </td>
+                                <td class="font-weight-bold">
+                                    Fecha: {{invoice.created_at | date: 'dd/MMM/yyyy, h:mm a'}}
+                                    <br>
+                                    NaharaJewelry
+                                    <br>
+                                    México</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <div class="products p-2">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr class="add">
+                                <th>Producto</th>
+                                <th class="text-center">Precio por unidad</th>
+                                <th class="text-center">Cantidad</th>
+                                <th class="text-center">Subtotal</th>
+                                <th class="text-center">Impuestos</th>
+                                <th class="text-center">Total</th>
+                            </tr>
+                            <tr *ngFor="let product of invoice.items; let i = index">
+                              <td>{{ product.gtin }}</td>
+                              <td class="text-center">{{ product.unit_price | currency: 'USD' }}</td>
+                              <td class="text-center">{{ product.quantity }}</td>
+                              <td class="text-center">{{ product.subtotal | currency: 'USD' }}</td>
+                              <td class="text-center">{{ product.taxes | currency: 'USD' }}</td>
+                              <td class="text-center">{{ product.total | currency: 'USD' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <div class="products p-2">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr class="add">
+                                <td></td>
+                                <th>Subtotal</th>
+                                <th>Impuestos</th>
+                                <th class="text-center">Total</th>
+                            </tr>
+                            <tr class="content">
+                                <td></td>
+                                <td>{{ invoice.subtotal | currency: 'USD' }}</td>
+                                <td>{{ invoice.taxes | currency: 'USD' }}</td>
+                                <td class="text-center">{{ invoice.total | currency: 'USD' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <div class="address p-2">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr class="add">
+                                <td>Detalles de pago</td>
+                            </tr>
+                            <tr class="content">
+                                <td> Nombre del banco : BBS 
+                                <br> 
+                                Código Swift: ADS1234Q 
+                                <br> Titular de la cuenta : {{customer.name}}
+                                <br>
+                                Número de cuenta : 5454542WQR 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

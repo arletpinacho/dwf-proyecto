@@ -1,0 +1,249 @@
+<div id="carouselHome" class="carousel slide">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <video class="d-block w-100" autoplay loop muted>
+             <source src="../../../../../../assets/video1.mov" class="d-block w-100" alt="...">
+        </video>
+         <div class="carousel-caption d-none d-md-block">
+            <h5 class="caption-title">Cada joya cuenta una historia</h5>
+            <p class="caption-text">Nuestras manos artesanas dan vida a cada detalle<br> en este proceso de confección único para crear<br> verdaderas obras de arte.</p>
+        </div>
+        </div>
+      <div class="carousel-item">
+        <img src="../../../../../../assets/imagenprueba.png" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5 class="caption-title">NUEVA COLECCIÓN </h5>
+          <p class="caption-text">Nuestras manos artesanas dan vida a cada detalle en este proceso de confección único para crear verdaderas obras de arte..</p>
+        </div>
+      </div>
+      
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselHome" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselHome" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+<!-- Popular Section-->
+@if (popular.length > 0){
+    <section class="py-5">
+        <div>
+            <h3 class="text-center mt-0 mb-4" style="font-family: 'Sans-serif'; font-size:1.5rem; color: inherit;">Productos populares</h3>
+        </div>
+        <div class="container-fluid px-lg-5"> <!-- Cambié container a container-fluid -->
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-2 row-cols-lg-4 justify-content-center"> <!-- Cambié row-cols-xl-5 a row-cols-lg-4 para mostrar hasta 4 productos -->
+                <ng-container *ngFor="let product of popular.slice(0, 4); let j = index"> <!-- Limitamos a solo 4 productos -->
+                    <div class="col mb-5"> <!-- Cambié .product-container por .col mb-5 para que los productos se distribuyan en columnas -->
+                        <div class="product-container border bg-inherit">
+                            <img src="{{ productImgs[product.product_id] && productImgs[product.product_id].length > 0 ? productImgs[product.product_id][0].image: 'assets/no-product-image2.png' }}" class="d-block w-100" alt="..."> 
+                            <div class="product-info p-2">
+                                <!--- Product detail -->
+                                <div class="card-body">
+                                    <div class="text-center">
+                                        <!--- Product name -->
+                                        <h6 class="product-name">{{ product.product }}</h6>
+                                    </div>
+                                </div>    
+                                <!--- Product price -->
+                                <p class="product-price">MXN {{ product.price.toFixed(2) }}</p>
+                                
+                            </div>
+                            <div class="overlay">
+                                <div class="card product-container h-100 ">
+                                    <div class="card border-0">
+                                        <div *ngIf="productImgs[product.product_id] && productImgs[product.product_id].length > 1" [id]="'carouselExampleIndicators' + j" class="carousel slide"
+                                            data-bs-ride="true">
+                                            <div class="carousel-indicators">
+                                                <button *ngFor="let img of productImgs[product.product_id]; let i = index" type="button" class="indicator"
+                                                    data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="i"
+                                                    [class.active]="i === 0" [attr.aria-current]="i === 0"
+                                                    [attr.aria-label]="'Slide ' + i"></button>
+                                            </div>
+                                            <div class="carousel-inner">
+                                                <div *ngFor="let img of productImgs[product.product_id]; let i = index" class="carousel-item"
+                                                    [class.active]="i === 0">
+                                                    <img src="{{ img.image !== '' ? img.image : 'assets/no-product-image2.png'}}"
+                                                        class="d-block w-100" alt="...">
+                                                </div>
+                                            </div>
+                                            <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselExampleIndicators' + j"
+                                                data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselExampleIndicators' + j"
+                                                data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
+                                        </div>
+                                        <div *ngIf="productImgs[product.product_id] && productImgs[product.product_id].length <= 1" [id]="'carouselExampleIndicators' + j" class="carousel slide"
+                                            data-ride="carousel">                        
+                                            <div class="carousel-inner">
+                                                <div *ngIf="productImgs[product.product_id].length == 0" class="carousel-item active">
+                                                    <img src="assets/no-product-image2.png" class="d-block w-100" alt="...">
+                                                </div>
+                                                <div *ngFor="let img of productImgs[product.product_id]; let i = index" class="carousel-item active">
+                                                    <img src="{{ img.image !== '' ? img.image : 'assets/no-product-image2.png'}}"
+                                                        class="d-block w-100" alt="...">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="product-info">
+                                    <!--- Product detail -->
+                                    <div class="card-body">
+                                        <div class="text-center">
+                                            <!--- Product name -->
+                                            <h6 class="product-name">{{ product.product }}</h6>
+                                        </div>
+                                    </div>    
+                                    <!--- Product price -->
+                                    <p class="product-price">MXN {{ product.price.toFixed(2) }}</p>
+                                    <div class="text-center">
+                                        <a class="btn btn-link ver-detalles text-uppercase" href="product/{{product.gtin}}" style="font-size: 0.7em; font-weight: bold;">Ver detalles</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal para iniciar sesión -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0" style="font-family: 'Arial', sans-serif;">
+                <div class="modal-header border-0">
+                    <!-- Título centrado con texto en negritas y negro -->
+                    <h5 class="modal-title w-100 text-center" id="loginModalLabel" style="font-weight: bold; font-size: 1.5rem; color: inherit;">
+                        ¡Conéctate con nosotros!
+                    </h5>
+                    <!-- Botón de cerrar en la esquina superior derecha -->
+                    <button type="button" class="btn btn-close btn-sm" data-bs-dismiss="modal" aria-label="Cerrar" style="font-size: 0.75rem; color: inherit;"></button>
+                </div>
+                <div class="modal-body text-center" style="font-size: 1rem;">
+                    <p>¿Listo para explorar nuestra increíble selección de productos? Inicia sesión para acceder a todo lo que tenemos para ti.</p>
+                    <p>Si aún no tienes una cuenta, no te preocupes, ¡es fácil registrarse y empezar a disfrutar de nuestras ofertas exclusivas!</p>
+                </div>
+                <div class="modal-footer border-0 d-flex justify-content-between">
+                    <!-- Enlace subrayado para Iniciar sesión con margen -->
+                    <a href="/login" class="text-decoration-none" style="font-size: 1rem; color: inherit; margin-right: 20px; transition: text-decoration 0.3s ease;">Iniciar sesión ›</a>
+                    <!-- Enlace subrayado para Crear cuenta con margen -->
+                    <a href="/register" class="text-decoration-none" style="font-size: 1rem; color: inherit; margin-left: 20px; transition: text-decoration 0.3s ease;">Crear cuenta ›</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<div class="container my-5">
+    <div class="row">
+      <!-- Columna de video -->
+      <div class="col-md-6 position-relative">
+        <!-- Video oculto inicialmente -->
+        <video #videoElement class="d-block w-100" muted>
+          <source src="../../../../../../assets/video2.mov" class="d-block w-100" alt="Video">
+          Tu navegador no soporta el video.
+        </video>
+
+        <div class="position-absolute bottom-0 start-50 translate-middle" style="transform: translateY(-110%);">
+            <span class="text-muted fs-6">Pulsa y mantén apretado</span>
+          </div>
+  
+        <!-- Botón para reproducir el video -->
+        <button #playButton class="btn position-absolute bottom-0 start-50 translate-middle" 
+            (mousedown)="startVideo($event)" 
+            (mouseup)="stopVideo($event)" 
+            (mouseleave)="handleMouseOut($event)">
+            +
+          </button>
+      </div>
+      
+      <!-- Columna de carrusel de imágenes -->
+      <div class="col-md-6">
+        <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="../../../../../../assets/collar1.png" class="d-block w-100" alt="Imagen 1">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5 class="title-product">Colgante Idyllia, Caracola, Azul</h5>
+                        <p class="caption-product"> Recubrimiento en rodio, Cristales.</p>
+                    </div>  
+                </div>
+                <div class="carousel-item">
+                    <img src="../../../../../../assets/aretes1.png" class="d-block w-100" alt="Imagen 2">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5 class="title-product">Aretes Frivole, modelo pequeño</h5>
+                        <p class="caption-product">Oro blanco 750/100, Diamante.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="../../../../../../assets/aretes2.png" class="d-block w-100" alt="Imagen 3">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5 class="title-product">Pendientes Idyllia, Caracola Azules</h5>
+                            <p class="caption-product">Recubrimiento en rodio, Cristales.</p>
+                        </div>        
+                </div>
+            </div>
+            <!-- Controles del carrusel -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<section class="py-5">
+    <div>
+        <h3 class="text-center mt-0 mb-4" style="font-family: 'Sans-serif'; font-size:1.5rem; color: inherit;">
+            Compra por categoría
+        </h3>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Cada imagen ocupa automáticamente el mismo ancho con col -->
+            <div class="col text-center">
+                <img src="../../../../../../assets/collares.png" class="img-fluid w-100" alt="Categoría 1" style="max-width: 100%; height: auto;">
+                <p><a href="#" class="caption-link">Collares y colgantes</a></p>
+            </div>
+            <div class="col text-center">
+                <img src="../../../../../../assets/brazaletes.png" class="img-fluid w-100" alt="Categoría 2" style="max-width: 100%; height: auto;">
+                <p><a href="#" class="caption-link">Brazaletes</a></p>
+            </div>
+            <div class="col text-center">
+                <img src="../../../../../../assets/aretes.png" class="img-fluid w-100" alt="Categoría 3" style="max-width: 100%; height: auto;">
+                <p><a href="#" class="caption-link">Aretes</a></p>
+            </div>
+            <div class="col text-center">
+                <img src="../../../../../../assets/anillos.png" class="img-fluid w-100" alt="Categoría 4" style="max-width: 100%; height: auto;">
+                <p><a href="#" class="caption-link">Anillos</a></p>
+            </div>
+            <div class="col text-center">
+                <img src="../../../../../../assets/relojes.png" class="img-fluid w-100" alt="Categoría 5" style="max-width: 100%; height: auto;">
+                <p><a href="#" class="caption-link">Relojes</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+

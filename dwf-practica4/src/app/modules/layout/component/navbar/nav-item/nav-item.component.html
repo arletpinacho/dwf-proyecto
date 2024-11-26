@@ -1,0 +1,37 @@
+<li class="nav-item">
+  <a 
+    (click)="onItemSelected(item)" 
+    [ngClass]="{
+      'nav-link': true,
+      'active': (item.route ? router.url.includes(item.route) : false)        
+    }"
+    [ngStyle]="{
+      'cursor': 'pointer'
+    }"
+  >
+  <ng-container *ngIf="item.displayName == 'Productos' && rol == 'USER'; else showLink">
+    <div class="drawer-container left-align">
+      <button class="drawer-button left-align" (click)="toggleDrawer()">
+        <i class="fas fa-bars"></i> MENU
+      </button>
+      <!-- Drawer - Menú lateral -->
+      <div class="drawer" [class.open]="isDrawerOpen">
+        <div class="drawer-header">
+          <button class="btn-close" (click)="toggleDrawer()"></button>
+        </div>
+        <div class="drawer-body">
+          <ng-container *ngFor="let category of categories">
+            <a class="drawer-item" href="category/{{category.category_id}}">
+              <span>{{category.category}}</span>
+            </a>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+    <!-- This will be shown if the condition is not met -->
+    <ng-template #showLink>
+      <span>{{ item.displayName }}</span>
+    </ng-template>
+  </a>
+</li>

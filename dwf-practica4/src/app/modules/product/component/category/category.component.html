@@ -1,0 +1,131 @@
+<!-- Contenido -->
+<div class="body-content">
+    <!-- Tabla categorías -->
+    <div class="card m-4"> 
+      <!-- header tabla -->
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="m-0">Listado de categorías</h4>
+        <button type="button" class="btn noneb btn-primary btn-new" (click)="showModalForm()">
+          <i class="ph ph-plus-circle"></i> Nueva categoría
+        </button>
+      </div>
+      <!-- tabla -->
+      <div class="card-body">
+        <!-- loading  -->
+        @if(loading) {
+          <div class="text-center" >
+            <img src="assets/loading.gif" class="img-loading" alt="">
+          </div>
+        }
+        @if(!loading && categories.length == 0) {
+          <div class="text-center table-empty">
+            <h4>No cuentas con categorías registradas</h4>
+          </div>
+        } @else {
+          <table class="table table-striped">
+            <!-- encabezados de la tabla -->
+            <thead>
+              <tr class="table-primary">
+                <th scope="col" >No.</th>
+                <th scope="col">Categoría</th>
+                <th scope="col">Tag</th>
+                <th scope="col">Estatus</th>
+                <th scope="col">Opciones</th>
+              </tr>
+            </thead>
+            <!-- contenido de la tabla -->
+            <tbody>
+              <!-- Using ngFor to loop over paginated categories -->
+              <tr *ngFor="let category of categories | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index">
+                <th>{{ (p - 1) * itemsPerPage + i + 1 }}</th> <!-- Dynamic row number based on page -->
+                <td>{{ category.category }}</td>
+                <td>{{ category.tag }}</td>
+                <td>
+                  <span *ngIf="category.status === 1">Disponible</span>
+                  <span *ngIf="category.status === 0">Agotado</span>
+                </td>
+                <td>
+                  <div class="dropdown">
+                    <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item edit-item" (click)="updateCategory(category)">
+                        <span class="icon-text-button margin-right-activar">
+                          <i class="ph ph-note-pencil icon-text-ul"></i>
+                        </span>
+                        <span>Editar</span>
+                      </a>
+                      <a class="dropdown-item enable-item" *ngIf="category.status === 0" (click)="activateCategory(category.category_id)">
+                        <span class="icon-text-button margin-right-activar">
+                          <i class="ph ph-check-circle icon-text-ul"></i>
+                        </span>
+                        <span>Activar</span>
+                      </a>
+                      <a class="dropdown-item disable-item" *ngIf="category.status === 1" (click)="deleteCategory(category.category_id)">
+                        <span class="icon-text-button margin-right-activar">
+                          <i class="ph ph-x-circle icon-text-ul"></i>
+                        </span>
+                        <span>Desactivar</span>
+                      </a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            </table>
+          }
+      </div>
+
+      <div *ngIf="categories.length > 8">
+        <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" 
+      nextLabel="Siguiente"></pagination-controls>  
+      </div>
+
+      <!-- Pie de página de la tabla -->
+      <div class="card-footer text-end">
+        <small>{{ current_date | date: 'dd/MMM/yyyy, h:mm a' }}</small>
+      </div>
+    </div>
+</div>
+
+<!-- Modal para agregar categorías -->
+<div class="modal fade" id="addCategoryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addCategoryModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <!-- header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="categoryModalLabel">Agregar categoría</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!-- body-->
+      <div class="modal-body">
+        <!-- form -->
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <!-- input for the new category name -->
+          <div class="mb-3">
+            <label for="inputCategory" class="form-label">Categoría<span class="input-required">*</span></label>
+            <input type="text" class="form-control" id="inputCategory" formControlName="category" placeholder="Nombre de la categoría"
+            [ngClass]="{'is-invalid': form.controls['category'].errors && submitted}">
+            @if (form.controls['category'].errors && submitted) {
+              <small class="input-error-message">Favor de ingresar un nombre de categoría válido</small>
+            }
+          </div>
+          <!-- input for the new tag -->
+          <div class="mb-3">
+            <label for="inputTag" class="form-label">Tag<span class="input-required">*</span></label>
+            <input type="text" class="form-control" id="inputTag" formControlName="tag" placeholder="Acrónimo para la categoría"
+            [ngClass]="{'is-invalid': form.controls['tag'].errors && submitted}">
+            
+            @if (form.controls['tag'].errors && submitted) {
+              <small class="input-error-message">Favor de ingresar un código de categoría válido</small>
+            }
+          </div>
+          <div class="form-button">
+          <button type="submit" class="btn noneb btn-primary bt-save">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
