@@ -14,7 +14,7 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     @for(item of navItems; track item) {
-                        <app-nav-item [item]="item"></app-nav-item>
+                        <app-nav-item [item]="item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"></app-nav-item>
                     }
                 </ul>
             </div>

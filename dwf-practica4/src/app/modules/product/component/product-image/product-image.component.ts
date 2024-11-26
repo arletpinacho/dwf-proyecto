@@ -40,6 +40,7 @@ export class ProductImageComponent {
   quantity = 0;
   carrito: Cart[] = [];
   cart_id = 0;
+  temp_stock= this.product.stock;
 
   form = this.formBuilder.group({
     product: ["", [Validators.required]],
@@ -114,6 +115,7 @@ export class ProductImageComponent {
     this.productService.getProduct(this.gtin).subscribe({
       next: (v) => {
         this.product = v;
+        this.temp_stock = this.product.stock;
         this.getProductImages(); //Cargamos las imagenes que pueda tener el producto.
         this.loading = false;
       },
@@ -167,6 +169,7 @@ export class ProductImageComponent {
     this.form.controls['stock'].setValue(this.product.stock);
     this.form.controls['category_id'].setValue(this.product.category_id);
     this.form.controls['description'].setValue(this.product.description);
+    this.temp_stock = this.product.stock;
   }
 
   uploadProductImage(image: string) {
@@ -256,5 +259,9 @@ export class ProductImageComponent {
   regresar() {
     // Regresa a la página anterior en el historial
     this.location.back();
+  }
+
+  updateLocalStock(i : number) {
+    this.temp_stock -= i;
   }
 }

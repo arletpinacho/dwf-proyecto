@@ -1,15 +1,23 @@
 <div class="card m-4">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <span class="btn-return" (click)="regresar()">
-            <i class="ph ph-arrow-circle-left icon-text-button"></i>
-            Regresar
-        </span>
+        
         @if (rol == 'ADMIN') {
-            <button type="button" class="btn noneb btn-info btn-new" (click)="updateProduct()">
+            <span class="btn-return" (click)="redirect('product')">
+                <i class="ph ph-arrow-circle-left icon-text-button"></i>
+                Regresar
+            </span>
+            <button type="button" class="btn custom-btn" (click)="updateProduct()">
                 <i class="ph ph-note-pencil icon-text-button"></i>
                 Editar producto
             </button>
-        }
+            }
+    
+            @if (rol == 'USER') {
+                <span class="btn-return" (click)="regresar()">
+                    <i class="ph ph-arrow-circle-left icon-text-button"></i>
+                    Regresar
+                </span>
+            }
     </div>
     <br>
 
@@ -186,22 +194,22 @@
                             <!-- Selector de cantidad -->
                             <app-quantity-selector
                                 [quantity]="quantity"
-                                [maxQuantity]="product.stock"
+                                [maxQuantity]="temp_stock"
                                 (quantityChanged)="onQuantityChanged($event)">
                             </app-quantity-selector>
                 
                             <!-- Botón para agregar al carrito -->
-                            <button *ngIf="product.stock > 0" 
+                            <button *ngIf="temp_stock > 0" 
                                 class="add-to-cart-btn"
                                 [disabled]="quantity <= 0" 
-                                (click)="addToCart(product, quantity)">
+                                (click)="addToCart(product, quantity); updateLocalStock(quantity)">
                                 AÑADIR A LA CESTA
                             </button>
                 
                             <!-- Mensaje de agotado -->
-                            <div *ngIf="product.stock === 0" class="out-of-stock">
-                                Agotado
-                            </div>
+                            <button *ngIf="product.stock === 0 || temp_stock === 0" class="out-of-stock" disabled>
+                                AGOTADO
+                            </button>
                 
                             <!-- Descripción del producto -->
                             <div class="product-description-title">

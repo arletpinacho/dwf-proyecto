@@ -1,94 +1,102 @@
-<!-- Contenido -->
 <div class="body-content">
-    <div class="card m-4" style="border: none;"> 
-      <!-- header -->
-      <div class="card-header d-flex justify-content-center align-items-center" 
-           style="background-color: transparent;"> <!-- Eliminar fondo y agregar línea negra ( border-bottom: 1px solid black;) -->
-        <h4 class="m-0" style="text-align: center;">{{category.category}}</h4>
-      </div>
-      <!-- productos -->
-      <div class="card-body">
-        @if(products.length > 0) {
-          <section class="pb-5">
-            <div class="container px-lg-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-lg-4 justify-content-center">
-                  <ng-container *ngFor="let product of products; let j = index">
-                    <div class="col mb-5">
-
-                        <div class="product-container">
-                            <img src="{{ productImgs[product.product_id] && productImgs[product.product_id].length > 0 ? productImgs[product.product_id][0].image: 'assets/no-product-image2.png' }}" class="d-block w-100" alt="..."> 
-                            
-                            <div class="overlay">
-                                <div class="card product-container h-100">
-                                    <div class="card border-0">
-                                        <div *ngIf="productImgs[product.product_id] && productImgs[product.product_id].length > 1" [id]="'carouselExampleIndicators' + j" class="carousel slide"
-                                            data-bs-ride="true">
-                                            <div class="carousel-indicators">
-                                                <button *ngFor="let img of productImgs[product.product_id]; let i = index" type="button" class="indicator"
-                                                    data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="i"
-                                                    [class.active]="i === 0" [attr.aria-current]="i === 0"
-                                                    [attr.aria-label]="'Slide ' + i"></button>
+    <div class="card" style="border: none;">
+        <!-- Header -->
+        <div class="card-header d-flex justify-content-center align-items-center" style="background-color: transparent;">
+            <h4 class="m-0" style="text-align: center; font-family: 'Sans-serif'; color: inherit;">{{category.category}}</h4>
+        </div>
+        <!-- Productos -->
+        <div class="card-body">
+            @if(products.length > 0) {
+            <section class="pb-5">
+                <div class="container px-0">
+                    <div class="row g-3 row-cols-2 row-cols-md-3 row-cols-lg-4">
+                        <ng-container *ngFor="let product of products; let j = index">
+                            <div class="col d-flex">
+                                <div class="product-container border bg-inherit">
+                                    <img src="{{ productImgs[product.product_id] && productImgs[product.product_id].length > 0 ? productImgs[product.product_id][0].image: 'assets/no-product-image2.png' }}" class="d-block w-100" alt="..."> 
+                                    <div class="product-info p-2">
+                                        <!--- Product detail -->
+                                        <div class="card-body">
+                                            <div class="text-center">
+                                                <!--- Product name -->
+                                                <h6 class="product-name">{{ product.product }}</h6>
                                             </div>
-                                            <div class="carousel-inner">
-                                                <div *ngFor="let img of productImgs[product.product_id]; let i = index" class="carousel-item"
-                                                    [class.active]="i === 0">
-                                                    <img src="{{ img.image !== '' ? img.image : 'assets/no-product-image2.png'}}"
-                                                        class="d-block w-100" alt="...">
-                                                </div>
-                                            </div>
-                                            <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselExampleIndicators' + j"
-                                                data-bs-slide="prev">
-                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                <span class="visually-hidden">Previous</span>
-                                            </button>
-                                            <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselExampleIndicators' + j"
-                                                data-bs-slide="next">
-                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                <span class="visually-hidden">Next</span>
-                                            </button>
-                                        </div>
-                                        <div *ngIf="productImgs[product.product_id] && productImgs[product.product_id].length <= 1" [id]="'carouselExampleIndicators' + j" class="carousel slide"
-                                            data-ride="carousel">                        
-                                            <div class="carousel-inner">
-                                                <div *ngIf="productImgs[product.product_id].length == 0" class="carousel-item active">
-                                                    <img src="assets/no-product-image2.png" class="d-block w-100" alt="...">
-                                                </div>
-                                                <div *ngFor="let img of productImgs[product.product_id]; let i = index" class="carousel-item active">
-                                                    <img src="{{ img.image !== '' ? img.image : 'assets/no-product-image2.png'}}"
-                                                        class="d-block w-100" alt="...">
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </div>    
+                                        <!--- Product price -->
+                                        <p class="product-price">MXN {{ product.price.toFixed(2) }}</p>
+                                        
                                     </div>
-                                </div>
-
-                                <div class="product-info">
-                                    <!--- Product detail -->
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <!--- Product name -->
-                                            <h6 class="product-name">{{ product.product }}</h6>
+                                    <div class="overlay">
+                                        <div class="card product-container h-100 ">
+                                            <div class="card border-0">
+                                                <div *ngIf="productImgs[product.product_id] && productImgs[product.product_id].length > 1" [id]="'carouselExampleIndicators' + j" class="carousel slide"
+                                                    data-bs-ride="true">
+                                                    <div class="carousel-indicators">
+                                                        <button *ngFor="let img of productImgs[product.product_id]; let i = index" type="button" class="indicator"
+                                                            data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="i"
+                                                            [class.active]="i === 0" [attr.aria-current]="i === 0"
+                                                            [attr.aria-label]="'Slide ' + i"></button>
+                                                    </div>
+                                                    <div class="carousel-inner">
+                                                        <div *ngFor="let img of productImgs[product.product_id]; let i = index" class="carousel-item"
+                                                            [class.active]="i === 0">
+                                                            <img src="{{ img.image !== '' ? img.image : 'assets/no-product-image2.png'}}"
+                                                                class="d-block w-100" alt="...">
+                                                        </div>
+                                                    </div>
+                                                    <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselExampleIndicators' + j"
+                                                        data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </button>
+                                                    <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselExampleIndicators' + j"
+                                                        data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </button>
+                                                </div>
+                                                <div *ngIf="productImgs[product.product_id] && productImgs[product.product_id].length <= 1" [id]="'carouselExampleIndicators' + j" class="carousel slide"
+                                                    data-ride="carousel">                        
+                                                    <div class="carousel-inner">
+                                                        <div *ngIf="productImgs[product.product_id].length == 0" class="carousel-item active">
+                                                            <img src="assets/no-product-image2.png" class="d-block w-100" alt="...">
+                                                        </div>
+                                                        <div *ngFor="let img of productImgs[product.product_id]; let i = index" class="carousel-item active">
+                                                            <img src="{{ img.image !== '' ? img.image : 'assets/no-product-image2.png'}}"
+                                                                class="d-block w-100" alt="...">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>    
-                                    <!--- Product price -->
-                                    <p class="product-price">MXN {{ product.price.toFixed(2) }}</p>
-                                    <div class="text-center">
-                                        <a class="btn btn-link ver-detalles text-uppercase" href="product/{{product.gtin}}" style="font-size: 0.7em; font-weight: bold;">Ver detalles</a>
+        
+                                        <div class="product-info">
+                                            <!--- Product detail -->
+                                            <div class="card-body">
+                                                <div class="text-center">
+                                                    <!--- Product name -->
+                                                    <h6 class="product-name">{{ product.product }}</h6>
+                                                </div>
+                                            </div>    
+                                            <!--- Product price -->
+                                            <p class="product-price">MXN {{ product.price.toFixed(2) }}</p>
+                                            <div class="text-center">
+                                                <a class="btn btn-link ver-detalles text-uppercase" href="product/{{product.gtin}}" style="font-size: 0.7em; font-weight: bold;">Ver detalles</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                       
+                        </ng-container>
                     </div>
-                </ng-container>
-              </div>
-            </div>
-        </section>
-        } @else {
+                </div>
+            </section>
+            } @else {
             <div class="text-center table-empty">
-                <h5>Lo sentimos, por el momento no contamos con productos de esta categoría. </h5>
+                <h5>Lo sentimos, por el momento no contamos con productos de esta categoría.</h5>
             </div>
-        }
-      </div>
+            }
+        </div>
     </div>
 </div>
+
