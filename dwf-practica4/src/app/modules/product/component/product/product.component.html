@@ -1,0 +1,195 @@
+<div class="body-content">
+  <div class="card m-4">
+    <!-- Card header -->
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h4>Listado de productos</h4>
+      <button type="button" class="btn noneb btn-primary btn-new" style="float: right;" (click)="showModalForm()">
+        <i class="ph ph-plus-circle"></i> Nuevo producto
+      </button>
+    </div>
+
+    <!-- Card body -->
+    <div class="card-body">
+      <!-- loading  -->
+      @if(loading) {
+        <div class="text-center" >
+          <img src="assets/loading.gif" class="img-loading" alt="">
+        </div>
+      }
+      @if(!loading && products.length == 0) {
+        <div class="text-center table-empty">
+          <h4>No existen productos registrados</h4>
+        </div>
+      } @else {
+        <!-- Product table  -->
+        <table class="table table-striped">
+          <!-- encabezados de la tabla -->
+          <thead>
+            <tr class="table-primary">
+              <th>Id</th>
+              <th>Gtin</th>
+              <th>Producto</th>
+              <th>Precio</th>
+              <th>Estatus</th>
+              <th>Más</th>
+            </tr>
+          </thead>
+          <!-- contenido de la tabla -->
+          <tbody>
+            <tr *ngFor="let product of products | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index">
+              <td>{{ (p - 1) * itemsPerPage + i + 1 }}</td> <!-- Dynamic row number -->
+              <td>{{ product.gtin }}</td>
+              <td>{{ product.product }}</td>
+              <td>{{ product.price | currency: 'USD' }}</td>
+              <td>
+                <!-- Conditional class and status text -->
+                <div class="td-status" [ngClass]="{'td-status-enable': product.status === 1, 'td-status-disable': product.status === 0}">
+                  {{ product.status === 0 ? "Inactivo" : "Activo" }}
+                </div>
+              </td>
+              <td>
+                <!-- Dropdown menu with actions -->
+                <div class="dropdown">
+                  <button class="dropdown-button" id="dropdownMenuButtonP" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <!-- View Details -->
+                    <a class="dropdown-item edit-item" (click)="showProduct(product.gtin)">
+                      <span class="icon-text-button margin-right-ver-detalles">
+                        <i class="ph ph-eye"></i>
+                      </span>
+                      <span>Ver detalles</span>
+                    </a>
+                    <!-- Disable/Enable product based on its status -->
+                    <a class="dropdown-item disable-item" *ngIf="product.status !== 0" (click)="disableProduct(product.product_id)">
+                      <span class="icon-text-button margin-right-activar">
+                        <i class="ph ph-x-circle icon-text-ul"></i>
+                      </span>
+                      <span>Desactivar</span>
+                    </a>
+                    <a class="dropdown-item enable-item" *ngIf="product.status === 0" (click)="enableProduct(product.product_id)">
+                      <span class="icon-text-button margin-right-activar">
+                        <i class="ph ph-check-circle icon-text-ul"></i>
+                      </span>
+                      <span>Activar</span>
+                    </a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      }
+    </div>
+
+    <div *ngIf="products.length > 8">
+      <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" 
+    nextLabel="Siguiente"></pagination-controls>  
+    </div>
+
+    <!-- Pie de página de la tabla -->
+    <div class="card-footer text-end">
+      <small>{{ current_date | date: 'dd/MMM/yyyy, h:mm a' }}</small>
+    </div>
+  </div>
+
+  <!-- Modal form  -->
+  <div class="modal fade" tabindex="-1" data-bs-backdrop="static" aria-labelledby="addProductModal" id="modalForm">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <!-- header -->
+        <div class="modal-header">
+          <h5 class="modal-title">Agregar producto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+      <!-- body -->
+        <div class="modal-body">
+          <!-- Product form  -->
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <!-- gtin  -->
+              <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="gtin">GTIN <span class="input-required">*</span> </label>
+                    <input type="text" class="form-control" formControlName="gtin" id="gtin" placeholder="Código GTIN del producto..." 
+                        [ngClass]="{'is-invalid': form.controls['gtin'].errors && submitted}" >
+                    @if (form.controls['gtin'].errors && submitted) {
+                      <small class="input-error-message">Favor de ingresar un código gtin válido</small>
+                    }
+                  </div>
+              </div>
+    
+              <!-- product  -->
+              <div class="col-md-6"> 
+                  <div class="mb-3">
+                    <label for="product">Producto <span class="input-required">*</span> </label>
+                    <input type="text" class="form-control" formControlName="product" id="product" placeholder="Nombre del producto..." 
+                        [ngClass]="{'is-invalid': form.controls['product'].errors && submitted}" >
+                    @if (form.controls['product'].errors && submitted) {
+                      <small class="input-error-message">Favor de ingresar un nombre de producto válido</small>
+                    }
+                  </div>
+              </div>
+    
+              <!-- price  -->
+              <div class="col-md-6"> 
+                  <div class="mb-3">
+                    <label for="price">Precio <span class="input-required">*</span> </label>
+                    <input type="text" class="form-control" formControlName="price" id="price" placeholder="Precio del producto..." 
+                        [ngClass]="{'is-invalid': form.controls['price'].errors && submitted}" >
+                    @if (form.controls['price'].errors && submitted) {
+                      <small class="input-error-message">Favor de ingresar un precio válido</small>
+                    }
+                  </div>
+              </div>
+    
+              <!-- stock  -->
+              <div class="col-md-6"> 
+                  <div class="mb-3">
+                    <label for="stock">Cantidad de productos <span class="input-required">*</span> </label>
+                    <input type="text" class="form-control" formControlName="stock" id="stock" placeholder="Número de stock del producto..." 
+                        [ngClass]="{'is-invalid': form.controls['stock'].errors && submitted}" >
+                    @if (form.controls['stock'].errors && submitted) {
+                      <small class="input-error-message">Favor de ingresar un número de stock válido</small>
+                    }
+                  </div>
+              </div>  
+    
+              <!-- category_id  -->
+              <div class="col-md-6"> 
+                  <div class="mb-3">
+                    <label for="category_id">Categoría <span class="input-required">*</span> </label>
+                    <select class="form-select" formControlName="category_id" id="category_id"
+                        [ngClass]="{'is-invalid': form.controls['category_id'].errors && submitted}">
+                      <option [ngValue]=null hidden>Selecciona una categoría...</option>
+                      @for(category of categories; track category) {
+                        <option [ngValue]="category.category_id">{{ category.category }}</option>
+                      }
+                    </select>
+                    @if (form.controls['category_id'].errors && submitted) {
+                      <small class="input-error-message">Favor de seleccionar válida</small>
+                    }
+                  </div>
+              </div>
+    
+              <!-- description  -->
+              <div class="mb-3">
+                <label for="description">Descripción <span class="input-required">*</span> </label>
+                <textarea rows="2" class="form-control" formControlName="description" id="description" placeholder="Descripción del producto..." 
+                  [ngClass]="{'is-invalid': form.controls['description'].errors && submitted}" >
+                </textarea>
+                @if (form.controls['description'].errors && submitted) {
+                  <small class="input-error-message">Favor de ingresar una descripción válida</small>
+                }
+              </div>
+          </div>
+          <!-- button  -->
+          <div class="form-button">
+            <button type="submit" class="btn noneb btn-save">Guardar</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
